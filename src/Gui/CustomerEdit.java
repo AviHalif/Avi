@@ -3,7 +3,6 @@ package Gui;
 import Client.Client;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -15,7 +14,7 @@ public class CustomerEdit extends JFrame {
 
     private Client client;
     private JSONObject jsonObject;
-// Hellooooooooooooooooooo
+
     private JFrame jFramePrev, twoBackFrame;
     private JPanel jPanelMain;
     private JLabel label_message;
@@ -120,17 +119,24 @@ public class CustomerEdit extends JFrame {
         CustomerEditDetails.setLocationRelativeTo(null);
     }
 
-    private String GetResponseCustomerDetailsFromServer() throws IOException, ParseException {
+    private String GetResponseCustomerDetailsFromServer(){
 
-        String line = client.getInputStream().readUTF();
-        JSONObject jsonObjectResponse;
-        JSONParser jsonParser = new JSONParser();
-        jsonObjectResponse = (JSONObject) jsonParser.parse(line);
-        String response = (String) jsonObjectResponse.get("Failed");
-        custId = (String) jsonObjectResponse.get("customer id");
-        custName = (String) jsonObjectResponse.get("customer name");
-        custTel = (String) jsonObjectResponse.get("customer tel");
-        custType = (String) jsonObjectResponse.get("customer type");
+        String response="";
+
+        try {
+            String line = client.getInputStream().readUTF();
+            JSONObject jsonObjectResponse;
+            JSONParser jsonParser = new JSONParser();
+            jsonObjectResponse = (JSONObject) jsonParser.parse(line);
+            response = (String) jsonObjectResponse.get("Failed");
+            custId = (String) jsonObjectResponse.get("customer id");
+            custName = (String) jsonObjectResponse.get("customer name");
+            custTel = (String) jsonObjectResponse.get("customer tel");
+            custType = (String) jsonObjectResponse.get("customer type");
+        }
+        catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
 
         return response;
     }

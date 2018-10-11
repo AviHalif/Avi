@@ -96,7 +96,12 @@ public class CustomerEditDetails extends JFrame {
 
                         PrepareAndSendJsonUpdateCustomerDataToServer();
 
-                        String response = GetResponseUpdateCustomerFromServer();
+                        String response="";
+
+                        try {
+                            response = GetResponseUpdateCustomerFromServer();
+                        }
+                        catch (Exception ex){}
 
                         if (!response.equals("")) {
                             JOptionPane.showMessageDialog(null, response);

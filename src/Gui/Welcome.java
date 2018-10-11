@@ -98,7 +98,6 @@ public class Welcome extends JFrame { //extends Application {
                     jPanelData.setBackground(new Color(colorIdx, colorIdx, colorIdx));
                     jButtonEnter.setBackground(new Color(colorIdx, colorIdx, colorIdx));
                     colorIdx--;
-
             }
         });
 

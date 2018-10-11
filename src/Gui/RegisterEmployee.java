@@ -3,19 +3,21 @@ package Gui;
 import Classes.Employee;
 import Classes.PasswordUtils;
 import Client.Client;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 public class RegisterEmployee extends Register {
 
@@ -61,11 +63,10 @@ public class RegisterEmployee extends Register {
         propFileName = "config.properties";
         inStream = RegisterEmployee.class.getClassLoader().getResourceAsStream(propFileName);
         properties.load(inStream);
-        String LogPath = properties.getProperty("LogPath");
-        FileHandler fileHandler = new FileHandler(LogPath);
-        logger.addHandler(fileHandler);
-        SimpleFormatter simpleFormatter = new SimpleFormatter();
-        fileHandler.setFormatter(simpleFormatter);
+
+        String log4jConfigFile = System.getProperty("user.dir")+ File.separator+"src"+
+                                 File.separator + "log4j.properties";
+        PropertyConfigurator.configure(log4jConfigFile);
     }
 
     private void SetObjectsComponents() {

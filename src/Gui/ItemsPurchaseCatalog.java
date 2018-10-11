@@ -4,6 +4,8 @@ import Classes.Customer;
 import Classes.Item;
 import Client.Client;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -12,12 +14,10 @@ import org.json.simple.parser.ParseException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 public class ItemsPurchaseCatalog extends JFrame {
 
@@ -86,11 +86,10 @@ public class ItemsPurchaseCatalog extends JFrame {
         propFileName = "config.properties";
         inStream = RegisterEmployee.class.getClassLoader().getResourceAsStream(propFileName);
         properties.load(inStream);
-        String LogPath = properties.getProperty("LogPath");
-        FileHandler fileHandler = new FileHandler(LogPath);
-        logger.addHandler(fileHandler);
-        SimpleFormatter simpleFormatter = new SimpleFormatter();
-        fileHandler.setFormatter(simpleFormatter);
+
+        String log4jConfigFile = System.getProperty("user.dir")+ File.separator+"src"+
+                                 File.separator + "log4j.properties";
+        PropertyConfigurator.configure(log4jConfigFile);
     }
 
     private void SetGUIComponents(JFrame oneBackFrame) {

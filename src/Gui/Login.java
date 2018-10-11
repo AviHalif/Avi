@@ -17,10 +17,10 @@ import java.util.Collections;
 
 public class Login extends JFrame {
 
+    public static final String LABEL_ID_NAME = "/src/images/enterLogo.png";
     public static final String CASTRO_ICON = "/src/images/icon.png";
     public static final String CASTRO_TAG_LOGIN = "/src/images/tagLogIn.png";
     public static final String FRAME_NAME = "CASTRO - LOG IN";
-    public static final String LABEL_ID_NAME = "Employee ID :";
     public static final String LABEL_PASSWORD_NAME = "Password :";
     public static final String LABEL_BRANCH_NAME = "Branch Name :";
     public static final String BUTTON_LOGIN_NAME = "Log in";
@@ -41,12 +41,12 @@ public class Login extends JFrame {
     private JFrame prevFrame;
     private JPanel jPanelData;
     private SpringLayout springLayout;
-    private JLabel jLabelId, jLabelPass, jLabelBranch, tagLogInLabel;
+    private JLabel jLabelPass, jLabelBranch, tagLogInLabel, jLabelIdName;
     private JTextField jTextFieldId;
     private JPasswordField jTextFieldPass;
     private JComboBox<String> jComboBoxBranch;
     private JButton jButtonLogin, jButtonCancel;
-    private ImageIcon tagLogInJPG;
+    private ImageIcon tagLogInJPG, label_id_name;
     private Client client;
 
     public Login(JFrame prevFrame) {
@@ -71,7 +71,9 @@ public class Login extends JFrame {
         jPanelData = new JPanel();
         springLayout = new SpringLayout();
 
-        jLabelId = new JLabel(LABEL_ID_NAME);
+        label_id_name = new ImageIcon(getClass().getResource(LABEL_ID_NAME));
+        jLabelIdName = new JLabel(label_id_name);
+
         jTextFieldId = new JTextField(JTEXTFIELD_ֹSIZE);
         jTextFieldId.setText("333333");
 
@@ -282,16 +284,16 @@ public class Login extends JFrame {
     private void GUIPlacePasswordLabelAndTextField() {
 
         springLayout.putConstraint(SpringLayout.WEST, jLabelPass, 300, SpringLayout.WEST, jPanelData);
-        springLayout.putConstraint(SpringLayout.NORTH, jLabelPass, 30, SpringLayout.SOUTH, jLabelId);
+        springLayout.putConstraint(SpringLayout.NORTH, jLabelPass, 30, SpringLayout.SOUTH, jLabelIdName);
         springLayout.putConstraint(SpringLayout.WEST, jTextFieldPass, 10, SpringLayout.EAST, jLabelPass);
         springLayout.putConstraint(SpringLayout.NORTH, jTextFieldPass, 30, SpringLayout.SOUTH, jTextFieldId);
     }
 
     private void GUIPlaceIDLabelAndTextField() {
 
-        springLayout.putConstraint(SpringLayout.WEST, jLabelId, 300, SpringLayout.WEST, jPanelData);
-        springLayout.putConstraint(SpringLayout.NORTH, jLabelId, 300, SpringLayout.NORTH, jPanelData);
-        springLayout.putConstraint(SpringLayout.WEST, jTextFieldId, 10, SpringLayout.EAST, jLabelId);
+        springLayout.putConstraint(SpringLayout.WEST, jLabelIdName, 300, SpringLayout.WEST, jPanelData);
+        springLayout.putConstraint(SpringLayout.NORTH, jLabelIdName, 300, SpringLayout.NORTH, jPanelData);
+        springLayout.putConstraint(SpringLayout.WEST, jTextFieldId, 10, SpringLayout.EAST, jLabelIdName);
         springLayout.putConstraint(SpringLayout.NORTH, jTextFieldId, 300, SpringLayout.NORTH, jPanelData);
     }
 
@@ -304,7 +306,7 @@ public class Login extends JFrame {
     private void GUIDefineLayoutAndAddComponentsOnJPanel() {
 
         jPanelData.setLayout(springLayout);
-        jPanelData.add(jLabelId);
+        jPanelData.add(jLabelIdName);
         jPanelData.add(jTextFieldId);
         jPanelData.add(jLabelPass);
         jPanelData.add(jTextFieldPass);
