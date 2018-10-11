@@ -16,7 +16,6 @@ public class CustomerEdit extends JFrame {
     private Client client;
     private JSONObject jsonObject;
 
-    // fgdfgdfgdfgdfgdfgdfgfdffgf
     private JFrame jFramePrev, twoBackFrame;
     private JPanel jPanelMain;
     private JLabel label_message;

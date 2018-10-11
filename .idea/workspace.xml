@@ -73,10 +73,10 @@
           <entry key="project.open.time.76" value="1" />
           <entry key="project.open.time.87" value="1" />
           <entry key="project.open.time.89" value="1" />
-          <entry key="project.open.time.9" value="1" />
+          <entry key="project.open.time.9" value="2" />
           <entry key="project.open.time.91" value="1" />
           <entry key="project.open.time.92" value="1" />
-          <entry key="project.opened" value="72" />
+          <entry key="project.opened" value="73" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -85,7 +85,7 @@
           <entry key="form" value="49" />
           <entry key="fxml" value="1" />
           <entry key="iml" value="1" />
-          <entry key="java" value="883" />
+          <entry key="java" value="884" />
           <entry key="jks" value="1" />
           <entry key="properties" value="8" />
           <entry key="sql" value="3" />
@@ -99,7 +99,7 @@
           <entry key="DBN-SQL" value="3" />
           <entry key="GUI_DESIGNER_FORM" value="49" />
           <entry key="IDEA_MODULE" value="1" />
-          <entry key="JAVA" value="882" />
+          <entry key="JAVA" value="883" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="Properties" value="8" />
           <entry key="Scratch" value="1" />
@@ -109,14 +109,15 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="28" />
-          <entry key="java" value="78003" />
+          <entry key="java" value="78030" />
           <entry key="properties" value="89" />
+          <entry key="txt" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="78003" />
-          <entry key="PLAIN_TEXT" value="28" />
+          <entry key="JAVA" value="78030" />
+          <entry key="PLAIN_TEXT" value="32" />
           <entry key="Properties" value="89" />
         </counts>
       </usages-collector>
@@ -126,7 +127,30 @@
     <favorites_list name="Avi" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Gui/CustomerEdit.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="18" column="30" lean-forward="true" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
+              <folding>
+                <element signature="method#SetObjectsComponents#0;class#CustomerEdit#0" />
+                <element signature="method#SetGUIComponents#0;class#CustomerEdit#0" />
+                <element signature="method#DrawCustomerEditDetailsMenu#0;class#CustomerEdit#0" />
+                <element signature="method#GetResponseCustomerDetailsFromServer#0;class#CustomerEdit#0" />
+                <element signature="method#PrepareAndSendJsonDataToServer#0;class#CustomerEdit#0" />
+                <element signature="method#DrawCustomerEdit#0;class#CustomerEdit#0" />
+                <element signature="method#GUISettingForJPanel#0;class#CustomerEdit#0" />
+                <element signature="method#GUIPlaceComponentsOnJPanel#0;class#CustomerEdit#0" />
+                <element signature="method#GUISettingForJFrame#0;class#CustomerEdit#0" />
+                <element signature="method#CheckCustomerId#0;class#CustomerEdit#0" />
+                <element signature="method#main#0;class#CustomerEdit#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -212,7 +236,6 @@
         <option value="$PROJECT_DIR$/src/Gui/Storage.java" />
         <option value="$PROJECT_DIR$/src/log4j.properties" />
         <option value="$PROJECT_DIR$/src/Server.java" />
-        <option value="$PROJECT_DIR$/src/Gui/CustomerEdit.java" />
         <option value="$PROJECT_DIR$/src/Gui/CustomerEditDetails.java" />
         <option value="$PROJECT_DIR$/src/Gui/CustomerList.java" />
         <option value="$PROJECT_DIR$/src/Gui/CustomerListManagement.java" />
@@ -230,6 +253,7 @@
         <option value="$PROJECT_DIR$/src/Gui/RegisterEmployee.java" />
         <option value="$PROJECT_DIR$/src/Gui/Reports.java" />
         <option value="$PROJECT_DIR$/src/Gui/Welcome.java" />
+        <option value="$PROJECT_DIR$/src/Gui/CustomerEdit.java" />
       </list>
     </option>
   </component>
@@ -250,6 +274,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -273,7 +298,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -418,6 +442,14 @@
       <option name="presentableId" value="Default" />
       <updated>1532620951725</updated>
     </task>
+    <task id="LOCAL-00001" summary="ffgd">
+      <created>1539262118047</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1539262118047</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TodoView">
@@ -431,8 +463,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49556214" visible="true" weight="0.19127516" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49556214" visible="true" weight="0.19395973" />
       <window_info id="Structure" order="1" sideWeight="0.50443786" side_tool="true" weight="0.17919463" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -465,6 +498,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="ffgd" />
+    <option name="LAST_COMMIT_MESSAGE" value="ffgd" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -625,14 +662,7 @@
     <entry file="file://$PROJECT_DIR$/src/Gui/EmployeeListManagement.form">
       <provider selected="true" editor-type-id="ui-designer" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/log4j.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="32" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/log4j.fxml" />
     <entry file="file://$PROJECT_DIR$/src/log4j.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -654,16 +684,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="11" column="21" lean-forward="true" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Client.java" />
     <entry file="file://$PROJECT_DIR$/src/config.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -716,15 +737,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ServerThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-884">
-          <folding>
-            <element signature="e#0#15475#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ServerThread.java" />
     <entry file="file://$PROJECT_DIR$/src/ImageSlide.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -739,26 +752,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Gui/CustomerEdit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="9" column="27" lean-forward="true" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
-          <folding>
-            <element signature="method#SetObjectsComponents#0;class#CustomerEdit#0" />
-            <element signature="method#SetGUIComponents#0;class#CustomerEdit#0" />
-            <element signature="method#DrawCustomerEditDetailsMenu#0;class#CustomerEdit#0" />
-            <element signature="method#GetResponseCustomerDetailsFromServer#0;class#CustomerEdit#0" />
-            <element signature="method#PrepareAndSendJsonDataToServer#0;class#CustomerEdit#0" />
-            <element signature="method#DrawCustomerEdit#0;class#CustomerEdit#0" />
-            <element signature="method#GUISettingForJPanel#0;class#CustomerEdit#0" />
-            <element signature="method#GUIPlaceComponentsOnJPanel#0;class#CustomerEdit#0" />
-            <element signature="method#GUISettingForJFrame#0;class#CustomerEdit#0" />
-            <element signature="method#CheckCustomerId#0;class#CustomerEdit#0" />
-            <element signature="method#main#0;class#CustomerEdit#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Gui/CustomerEditDetails.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1921">
@@ -770,19 +763,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="21" column="30" lean-forward="true" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
-          <folding>
-            <element signature="method#CustomerList#0;class#CustomerList#0" />
-            <element signature="method#SetGUIComponents#0;class#CustomerList#0" />
-            <element signature="method#SetObjectsComponents#0;class#CustomerList#0" />
-            <element signature="method#DrawTheCustomersTable#0;class#CustomerList#0" />
-            <element signature="method#GUISettingForJTable#0;class#CustomerList#0" />
-            <element signature="method#GUISettingForJPanel#0;class#CustomerList#0" />
-            <element signature="method#GUISettingForJFrame#0;class#CustomerList#0" />
-            <element signature="method#InitializeActions#0;class#CustomerList#0" />
-            <element signature="method#GetCustomersListResponseFromServer#0;class#CustomerList#0" />
-            <element signature="method#SeparateJsonArrayToSinglesAndConvertToStrings#0;class#CustomerList#0" />
-            <element signature="method#PrepareAndSendJsonCustomersListDataToServer#0;class#CustomerList#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -829,17 +809,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="58" selection-start-line="10" selection-start-column="58" selection-end-line="10" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#EmployeeListManagement#0;class#EmployeeListManagement#0" />
-            <element signature="method#DrawEmployee#0;class#EmployeeListManagement#0" />
-            <element signature="method#GUISettingForJPanel#0;class#EmployeeListManagement#0" />
-            <element signature="method#GUIPlaceComponentsOnJPanel#0;class#EmployeeListManagement#0" />
-            <element signature="method#GUIDefineLayoutAndAddComponentsOnJPanel#0;class#EmployeeListManagement#0" />
-            <element signature="method#GUISettingForJFrame#0;class#EmployeeListManagement#0" />
-            <element signature="method#InitializeActions#0;class#EmployeeListManagement#0" />
-            <element signature="method#main#0;class#EmployeeListManagement#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -847,9 +816,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="82" column="58" lean-forward="true" selection-start-line="82" selection-start-column="58" selection-end-line="82" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -857,9 +823,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="51" column="28" selection-start-line="51" selection-start-column="28" selection-end-line="51" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -867,13 +830,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-          <folding>
-            <element signature="method#DrawTheReportsMenu#0;class#MainMenuAdmin#0" />
-            <element signature="method#DrawMainMenu#0;class#MainMenuAdmin#0" />
-            <element signature="method#GUISettingForJPanel#0;class#MainMenuAdmin#0" />
-            <element signature="method#GUIPlaceComponentsOnJPanel#0;class#MainMenuAdmin#0" />
-            <element signature="method#GUIDefineLayoutAndAddComponentsOnJPanel#0;class#MainMenuAdmin#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -881,14 +837,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="17" column="49" selection-start-line="17" selection-start-column="49" selection-end-line="17" selection-end-column="49" />
-          <folding>
-            <element signature="method#DrawTheCustomersMenu#0;class#MainMenuCashier#0" />
-            <element signature="method#DrawTheSellMenu#0;class#MainMenuCashier#0" />
-            <element signature="method#DrawMainMenu#0;class#MainMenuCashier#0" />
-            <element signature="method#GUISettingForJPanel#0;class#MainMenuCashier#0" />
-            <element signature="method#GUIDefineLayoutAndAddComponentsOnJPanel#0;class#MainMenuCashier#0" />
-            <element signature="method#GUIPlaceComponentsOnJPanel#0;class#MainMenuCashier#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -903,17 +851,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
-          <folding>
-            <element signature="e#1493#1661#0" />
-            <element signature="e#1667#2230#0" />
-            <element signature="e#2236#2619#0" />
-            <element signature="e#2625#3532#0" />
-            <element signature="e#3538#4019#0" />
-            <element signature="e#4025#4950#0" />
-            <element signature="e#4956#5520#0" />
-            <element signature="e#5526#6051#0" />
-            <element signature="e#6057#6385#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -921,21 +858,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#DefineLogAndConfig#0;class#RegisterCustomer#0" />
-            <element signature="method#SetObjectsComponents#0;class#RegisterCustomer#0" />
-            <element signature="method#SetGUIComponents#0;class#RegisterCustomer#0" />
-            <element signature="method#GUISettingForComponents#0;class#RegisterCustomer#0" />
-            <element signature="method#GUISettingForJFrame#0;class#RegisterCustomer#0" />
-            <element signature="method#SetGUIComponentsToEdit#0;class#RegisterCustomer#0" />
-            <element signature="method#DrawCustomersList#0;class#RegisterCustomer#0" />
-            <element signature="method#PrepareAndSendJsonDataIdForCheckingToServer#0;class#RegisterCustomer#0" />
-            <element signature="method#GetRegisterCustomerResponseFromServer#0;class#RegisterCustomer#0" />
-            <element signature="method#CheckCustomerFields#0;class#RegisterCustomer#0" />
-            <element signature="method#OnlyLettersSpaces#0;class#RegisterCustomer#0" />
-            <element signature="method#main#0;class#RegisterCustomer#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -943,9 +865,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="782">
           <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -967,10 +886,25 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="29" column="67" selection-start-line="29" selection-start-column="67" selection-end-line="29" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Gui/CustomerEdit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="18" column="30" lean-forward="true" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
           <folding>
-            <element signature="method#SetGUIComponents#0;class#Welcome#0" />
-            <element signature="method#DrawWelcome#0;class#Welcome#0" />
-            <element signature="method#SetFrameVisibleAndStartTimer#0;class#Welcome#0" />
+            <element signature="method#SetObjectsComponents#0;class#CustomerEdit#0" />
+            <element signature="method#SetGUIComponents#0;class#CustomerEdit#0" />
+            <element signature="method#DrawCustomerEditDetailsMenu#0;class#CustomerEdit#0" />
+            <element signature="method#GetResponseCustomerDetailsFromServer#0;class#CustomerEdit#0" />
+            <element signature="method#PrepareAndSendJsonDataToServer#0;class#CustomerEdit#0" />
+            <element signature="method#DrawCustomerEdit#0;class#CustomerEdit#0" />
+            <element signature="method#GUISettingForJPanel#0;class#CustomerEdit#0" />
+            <element signature="method#GUIPlaceComponentsOnJPanel#0;class#CustomerEdit#0" />
+            <element signature="method#GUISettingForJFrame#0;class#CustomerEdit#0" />
+            <element signature="method#CheckCustomerId#0;class#CustomerEdit#0" />
+            <element signature="method#main#0;class#CustomerEdit#0" />
           </folding>
         </state>
       </provider>
