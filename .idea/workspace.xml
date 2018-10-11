@@ -2,44 +2,39 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28e01829-941a-4903-97c8-9759c5096ef1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/log4j_1_2_17.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/log4j_1_2_17.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log.txt.1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEdit$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEdit$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEdit$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEdit$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEdit$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEdit$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEdit$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEdit$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEdit.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEdit.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEditDetails$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEditDetails$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEditDetails$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEditDetails$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEditDetails$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEditDetails$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEditDetails$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEditDetails$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEditDetails$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEditDetails$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEditDetails$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEditDetails$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEditDetails$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEditDetails$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEditDetails$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEditDetails$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEditDetails$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEditDetails$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEditDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/CustomerEditDetails.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Login$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Login$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Login$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Login$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Login$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Login$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Login$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Login$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Login$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Login$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Login$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Login$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Login.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Welcome$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Welcome$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Welcome.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Welcome.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Gui/CustomerEdit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gui/CustomerEdit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Gui/CustomerEditDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gui/CustomerEditDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Gui/ItemsPurchaseCatalog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gui/ItemsPurchaseCatalog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Gui/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gui/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Gui/RegisterCustomer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gui/RegisterCustomer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Gui/RegisterEmployee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gui/RegisterEmployee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Gui/Welcome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gui/Welcome.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/log4j.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/log4j.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterCustomer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterCustomer$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterCustomer$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterCustomer$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterCustomer$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterCustomer$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterCustomer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterCustomer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/log4j.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/log4j.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/src/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/src/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/src/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/src/log4j.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/src/log4j.xml" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -171,7 +166,7 @@
         <entry file="file://$PROJECT_DIR$/src/Gui/Welcome.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
-              <caret line="54" column="8" lean-forward="true" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="49" />
+              <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="49" />
               <folding>
                 <element signature="method#DrawWelcome#0;class#Welcome#0" />
                 <element signature="method#SetFrameVisibleAndStartTimer#0;class#Welcome#0" />
@@ -184,7 +179,7 @@
         <entry file="file://$PROJECT_DIR$/src/Gui/Login.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="274">
-              <caret line="314" column="37" lean-forward="true" selection-start-line="314" selection-start-column="37" selection-end-line="314" selection-end-column="37" />
+              <caret line="314" column="37" selection-start-line="314" selection-start-column="37" selection-end-line="314" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -196,7 +191,7 @@
         <entry file="file://$PROJECT_DIR$/src/log4j.properties">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
-              <caret line="6" column="42" lean-forward="true" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
+              <caret line="6" column="42" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -204,8 +199,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Gui/ItemsPurchaseCatalog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1836">
-              <caret line="16" column="16" lean-forward="true" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+            <state relative-caret-position="102">
+              <caret line="6" column="31" lean-forward="true" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -214,7 +209,7 @@
         <entry file="file://$PROJECT_DIR$/src/Gui/RegisterCustomer.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="357">
-              <caret line="54" column="8" lean-forward="true" selection-start-line="54" selection-start-column="8" selection-end-line="56" selection-end-column="56" />
+              <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="56" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#RegisterCustomer#0;class#RegisterCustomer#0" />
@@ -359,7 +354,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
     <option name="width" value="980" />
     <option name="height" value="1040" />
@@ -390,27 +385,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Gui" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Avi" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Avi" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Gui" type="462c0819:PsiDirectoryNode" />
-              <item name="ItemsPurchaseCatalog" type="e9f4de52:FormNode" />
-            </path>
-            <path>
-              <item name="Avi" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Avi" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Gui" type="462c0819:PsiDirectoryNode" />
-              <item name="RegisterCustomer" type="e9f4de52:FormNode" />
-            </path>
-            <path>
-              <item name="Avi" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Avi" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Gui" type="462c0819:PsiDirectoryNode" />
-              <item name="RegisterEmployee" type="e9f4de52:FormNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -423,9 +397,9 @@
     <property name="Repository.Attach.JavaDocs" value="true" />
     <property name="Repository.Attach.Sources" value="true" />
     <property name="SearchEverywhereHistoryKey" value="resultSet&#9;PSI&#9;JAVA://java.sql.ResultSet&#10;create new&#9;PSI&#9;JAVA://sun.nio.fs.WindowsChannelFactory.Flags#createNew&#10;preferences&#9;PSI&#9;JAVA://java.util.prefs.Preferences" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539267974247" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539269190786" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JAVA" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/log4j-1.2.17.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/log4j-1.2.17.jar!/" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -587,7 +561,14 @@
       <option name="project" value="LOCAL" />
       <updated>1539264694180</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="ffgd">
+      <created>1539267989473</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1539267989473</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView">
@@ -622,7 +603,7 @@
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32907802" />
       <window_info anchor="bottom" id="DB Execution Console" order="10" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.15602838" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.50496453" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="1" weight="0.25" />
       <window_info anchor="right" id="Palette" order="2" />
@@ -1079,7 +1060,7 @@
     <entry file="file://$PROJECT_DIR$/src/Gui/Welcome.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
-          <caret line="54" column="8" lean-forward="true" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="49" />
+          <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="49" />
           <folding>
             <element signature="method#DrawWelcome#0;class#Welcome#0" />
             <element signature="method#SetFrameVisibleAndStartTimer#0;class#Welcome#0" />
@@ -1114,14 +1095,14 @@
     <entry file="file://$PROJECT_DIR$/src/log4j.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
-          <caret line="6" column="42" lean-forward="true" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
+          <caret line="6" column="42" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Gui/Login.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="274">
-          <caret line="314" column="37" lean-forward="true" selection-start-line="314" selection-start-column="37" selection-end-line="314" selection-end-column="37" />
+          <caret line="314" column="37" selection-start-line="314" selection-start-column="37" selection-end-line="314" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1131,7 +1112,7 @@
     <entry file="file://$PROJECT_DIR$/src/Gui/RegisterCustomer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
-          <caret line="54" column="8" lean-forward="true" selection-start-line="54" selection-start-column="8" selection-end-line="56" selection-end-column="56" />
+          <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="56" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#RegisterCustomer#0;class#RegisterCustomer#0" />
@@ -1152,8 +1133,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Gui/ItemsPurchaseCatalog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1836">
-          <caret line="16" column="16" lean-forward="true" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+        <state relative-caret-position="102">
+          <caret line="6" column="31" lean-forward="true" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
         </state>
       </provider>
     </entry>
