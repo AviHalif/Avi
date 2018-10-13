@@ -1136,7 +1136,7 @@ class Server implements Runnable  {
 
         String branchNum = (String) jsonObject.get("branch");
         statement = conn.createStatement();
-        String query = String.format("select * from store.Storage where item_branch='%s' ", branchNum);
+        String query = String.format("select item_type, item_size, item_amount, item_part_number from store.Storage where item_branch='%s' ", branchNum);
         ResultSet branchStorageFromDB = statement.executeQuery(query);
 
         return branchStorageFromDB;

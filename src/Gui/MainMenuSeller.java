@@ -7,30 +7,36 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Collections;
 
 public class MainMenuSeller extends JFrame {
 
-    public static final String FRAME_NAME = "SELLER";
-    public static final String LABEL_TITLE = "Employee Details";
-    public static final String LABEL_SN = "Employee S/N:";
-    public static final String LABEL_NAME = "Employee Name:";
-    public static final String LABEL_BRANCH = "Employee Branch:";
-    public static final String LABEL_ROLE = "Employee Role:";
-    public static final String BUTTON_STORAGE = "Branch Storage";
-    public static final String BUTTON_SIGNOUT = "SIGN OUT";
-    public static final String BUTTON_CHAT = "Chat";
+    public static final String LOG_OUT_BUTTON = "/src/images/LOGOUT.png";
+    public static final String BACK_PHOTO = "/src/images/back_photo.png";
+    public static final String BACK_LEFT_PHOTO = "/src/images/back_photo_left.png";
+    public static final String FRAME_NAME = "CASTRO - MAIN MENU";
+    public static final String LABEL_SN = "/src/images/employee_sn.png";
+    public static final String LABEL_NAME = "/src/images/employee_name.png";
+    public static final String LABEL_TYPE = "/src/images/employee_type.png";
+    public static final String LABEL_BRANCH = "/src/images/employee_branch.png";
+    public static final String BUTTON_STORAGE = "/src/images/view_branch_storage.png";
+    public static final String CASTRO_ICON = "/src/images/icon.png";
+    public static final String CASTRO_LOGO = "/src/images/title_castro.png";
+    public static final String BUTTON_CHAT = "/src/images/chat.png";
     public static final String JOPTIONPANE_MESSAGE = "Are you sure you want to sign out?";
     public static final String JOPTIONPANE_TITLE = "CASTRO - SIGN OUT";
     public static final String NO_PHOTO = "/src/images/No_Image_Available.png";
-
-    public static final int FRAMEֹֹ_WIDTH_ֹSIZE = 900;
-    public static final int FRAMEֹֹ_HEIGHT_ֹSIZE = 400;
-    public static final int PANELֹֹ_WIDTH_ֹSIZE = 300;
-    public static final int PANELֹֹ_HEIGHT_ֹSIZE = 400;
+    public static final int BUTTON_WIDTH = 403;
+    public static final int BUTTON_HEIGHT = 80;
+    public static final int LEFT_PANELֹֹ_WIDTH_ֹSIZE = 740;
+    public static final int LEFT_PANELֹֹ_HEIGHT_ֹSIZE = 800;
+    public static final int UP_PANELֹֹ_HEIGHT_ֹSIZE = 195;
 
     private Employee employee;
     private byte[] decoded;
@@ -38,11 +44,13 @@ public class MainMenuSeller extends JFrame {
 
     private JSONObject jsonObject;
 
-    private JPanel jPanelMain, jPanelLeft;
-    private SpringLayout springLayout;
-    private JLabel photoLabel, jLabelEmpDetails, jLabelUserNum, jLabelUserName, jLabelBranchNum, jLabelUserType;
-    private ImageIcon photoLabelJPG;
+    private JPanel jPanelMain, jPanelMid, jPanelUp;
+    private SpringLayout springLayout,springLayoutUpPanel, springLayoutPanels;
+    private JLabel photoLabel, jLabelUserNum, jLabelUserName, jLabelBranchName, jLabelUserType, castroLogoLabel, jLabeName, jLabelSn, jLabelType, jLabelBranch, jLabelBackPhoto, jLabelBackLeftPhoto;
+    private ImageIcon photoLabelJPG, label_name, label_sn, label_type, label_branch, storageLogoJPG, chatLogoJPG, signOutLogoJPG, backPhoto, backLeftPhoto;
     private JButton jButtonStorage, jButtonChat, jButtonSignOut;
+    private Dimension screenSize;
+    private ImageIcon castroLogoJPG;
 
     public MainMenuSeller(Employee employee) {
 
@@ -59,25 +67,95 @@ public class MainMenuSeller extends JFrame {
 
     private void SetGUIComponents() {
 
+        screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
         jPanelMain = new JPanel();
-        jPanelLeft = new JPanel();
+        jPanelMain.setBackground(Color.white);
+        jPanelMid = new JPanel();
+        jPanelMid.setBackground(Color.black); // green
+        jPanelUp = new JPanel();
+        jPanelUp.setBackground(Color.lightGray); // lightGray
 
         springLayout = new SpringLayout();
-        jPanelLeft.setPreferredSize(new Dimension(PANELֹֹ_WIDTH_ֹSIZE, PANELֹֹ_HEIGHT_ֹSIZE));
+        springLayoutPanels = new SpringLayout();
+        springLayoutUpPanel = new SpringLayout();
 
-        jLabelEmpDetails = new JLabel(LABEL_TITLE);
-        jLabelUserNum = new JLabel( LABEL_SN + employee.getEmpSn());
-        jLabelUserName = new JLabel(LABEL_NAME + employee.getEmpName());
-        jLabelBranchNum = new JLabel( LABEL_BRANCH + employee.getEmpBranch());
-        jLabelUserType = new JLabel( LABEL_ROLE + employee.getEmpType());
-        jButtonStorage = new JButton(BUTTON_STORAGE);
-        jButtonSignOut = new JButton(BUTTON_SIGNOUT);
-        jButtonChat = new JButton(BUTTON_CHAT);
+        jPanelMid.setPreferredSize(new Dimension(LEFT_PANELֹֹ_WIDTH_ֹSIZE, LEFT_PANELֹֹ_HEIGHT_ֹSIZE));
+        jPanelUp.setPreferredSize(new Dimension(screenSize.width, UP_PANELֹֹ_HEIGHT_ֹSIZE));
+
+
+        backLeftPhoto = new ImageIcon(getClass().getResource(BACK_LEFT_PHOTO));
+        jLabelBackLeftPhoto = new JLabel(backLeftPhoto);
+        jPanelMain.add(jLabelBackLeftPhoto);
+
+        backPhoto = new ImageIcon(getClass().getResource(BACK_PHOTO));
+        jLabelBackPhoto = new JLabel(backPhoto);
+        jPanelMain.add(jLabelBackPhoto);
+
+        castroLogoJPG = new ImageIcon(getClass().getResource(CASTRO_LOGO));
+        castroLogoLabel = new JLabel(castroLogoJPG);
+        jPanelUp.add(castroLogoLabel);
+
+        SetLabelsOnLeftPanel();
+
+        SetButtonsOnLeftPanel();
 
         photoLabelJPG = new ImageIcon(getClass().getResource(NO_PHOTO));
         photoLabel = new JLabel(photoLabelJPG);
-        photoLabel.setPreferredSize(new Dimension(200, 200)); // לשנות שיהיה ריסאייזבאל כמו שמציג את התמונות ברגע שבוחר אותם מהמחשב
-        jPanelLeft.add(photoLabel);
+        photoLabel.setPreferredSize(new Dimension(270, 300)); // לשנות שיהיה ריסאייזבאל כמו שמציג את התמונות ברגע שבוחר אותם מהמחשב
+        jPanelMid.add(photoLabel);
+    }
+
+    private void SetButtonsOnLeftPanel() {
+
+        storageLogoJPG = new ImageIcon(getClass().getResource(BUTTON_STORAGE));
+        jButtonStorage = new JButton(storageLogoJPG);
+        jButtonStorage.setBorderPainted(true);
+        jButtonStorage.setBackground(Color.BLACK);
+        jButtonStorage.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        jButtonStorage.setBorder(new LineBorder(Color.red));
+
+        chatLogoJPG = new ImageIcon(getClass().getResource(BUTTON_CHAT));
+        jButtonChat = new JButton(chatLogoJPG);
+        jButtonChat.setBorderPainted(true);
+        jButtonChat.setBackground(Color.white);
+        jButtonChat.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        jButtonChat.setBorder(new LineBorder(Color.red));
+
+
+        signOutLogoJPG = new ImageIcon(getClass().getResource(LOG_OUT_BUTTON));
+        jButtonSignOut = new JButton(signOutLogoJPG);
+        jButtonSignOut.setBorderPainted(false);
+        jButtonSignOut.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
+    }
+
+    private void SetLabelsOnLeftPanel() {
+
+        Font font = new Font("Urban Sketch", Font.PLAIN, 30);
+
+        label_name = new ImageIcon(getClass().getResource(LABEL_NAME));
+        jLabeName = new JLabel(label_name);
+        jLabelUserName = new JLabel( employee.getEmpName());
+        jLabelUserName.setFont(font);
+        jLabelUserName.setForeground (Color.white);
+
+        label_sn = new ImageIcon(getClass().getResource(LABEL_SN));
+        jLabelSn = new JLabel(label_sn);
+        jLabelUserNum = new JLabel( employee.getEmpSn());
+        jLabelUserNum.setFont(font);
+        jLabelUserNum.setForeground (Color.white);
+
+        label_type = new ImageIcon(getClass().getResource(LABEL_TYPE));
+        jLabelType = new JLabel(label_type);
+        jLabelUserType = new JLabel( employee.getEmpType());
+        jLabelUserType.setFont(font);
+        jLabelUserType.setForeground (Color.red);
+
+        label_branch = new ImageIcon(getClass().getResource(LABEL_BRANCH));
+        jLabelBranch = new JLabel(label_branch);
+        jLabelBranchName = new JLabel( employee.getEmpBranch());
+        jLabelBranchName.setFont(font);
+        jLabelBranchName.setForeground (Color.white);
     }
 
     protected void resizePhotoInMenu(){
@@ -90,7 +168,7 @@ public class MainMenuSeller extends JFrame {
 
         PlaceTheEmployeePhoto();
 
-        jPanelLeft.add(photoLabel);
+        jPanelMid.add(photoLabel);
     }
 
     private void PutTheResizePhotoOnLabel() {
@@ -113,8 +191,8 @@ public class MainMenuSeller extends JFrame {
 
     private void PlaceTheEmployeePhoto() {
 
-        springLayout.putConstraint(SpringLayout.WEST, photoLabel, 30, SpringLayout.WEST, jPanelLeft);
-        springLayout.putConstraint(SpringLayout.NORTH, photoLabel, 50, SpringLayout.NORTH, jPanelLeft);
+        springLayout.putConstraint(SpringLayout.WEST, photoLabel, 30, SpringLayout.WEST, jPanelMid);
+        springLayout.putConstraint(SpringLayout.NORTH, photoLabel, 50, SpringLayout.NORTH, jPanelMid);
     }
 
     protected void InitializeActions() {
@@ -125,6 +203,7 @@ public class MainMenuSeller extends JFrame {
 
                 Storage storage = new Storage(employee.getEmpBranch());
                 setEnabled(false); // Disable edit this window when you open the next window
+                storage.setUndecorated(true);
 
                 try {
                     storage.DrawStorage(getJFrame());
@@ -135,7 +214,6 @@ public class MainMenuSeller extends JFrame {
                 }
 
                 storage.setVisible(true);
-                storage.setLocationRelativeTo(null);
             }
         });
 
@@ -166,6 +244,24 @@ public class MainMenuSeller extends JFrame {
 
         GUIDefineLayoutAndAddComponentsOnJPanel();
         GUIPlaceComponentsOnJPanel();
+
+        springLayoutPanels.putConstraint(SpringLayout.WEST, jLabelBackLeftPhoto, -5, SpringLayout.WEST, jPanelMain);
+        springLayoutPanels.putConstraint(SpringLayout.NORTH, jLabelBackLeftPhoto, 200, SpringLayout.NORTH, jPanelMain);
+
+        springLayoutUpPanel.putConstraint(SpringLayout.WEST, castroLogoLabel, -120, SpringLayout.WEST, jPanelUp);
+        springLayoutUpPanel.putConstraint(SpringLayout.NORTH, castroLogoLabel, -10, SpringLayout.NORTH, jPanelUp);
+
+        springLayoutPanels.putConstraint(SpringLayout.NORTH, jPanelUp, 0, SpringLayout.NORTH, jPanelMain);
+        springLayoutPanels.putConstraint(SpringLayout.WEST, jPanelUp, 0, SpringLayout.WEST, jPanelMain);
+        springLayoutPanels.putConstraint(SpringLayout.WEST, jPanelMid, 370, SpringLayout.WEST, jPanelMain);
+        springLayoutPanels.putConstraint(SpringLayout.NORTH, jPanelMid, 200, SpringLayout.NORTH, jPanelMain);
+
+        springLayoutPanels.putConstraint(SpringLayout.EAST, jButtonSignOut, 0, SpringLayout.EAST, jPanelMain);
+        springLayoutPanels.putConstraint(SpringLayout.SOUTH, jButtonSignOut, 0, SpringLayout.SOUTH, jPanelMain);
+
+        springLayoutPanels.putConstraint(SpringLayout.EAST, jLabelBackPhoto, 0, SpringLayout.EAST, jPanelMain);
+        springLayoutPanels.putConstraint(SpringLayout.NORTH, jLabelBackPhoto, 450, SpringLayout.NORTH, jPanelMain);
+
     }
 
     private void GUIPlaceComponentsOnJPanel() {
@@ -176,10 +272,10 @@ public class MainMenuSeller extends JFrame {
 
     private void GUIPlaceLogInButton() {
 
-        springLayout.putConstraint(SpringLayout.WEST, jButtonStorage, 10, SpringLayout.WEST, jPanelLeft);
-        springLayout.putConstraint(SpringLayout.NORTH, jButtonStorage, 25, SpringLayout.NORTH, jLabelUserType);
-        springLayout.putConstraint(SpringLayout.WEST, jButtonChat, 10, SpringLayout.WEST, jPanelLeft);
-        springLayout.putConstraint(SpringLayout.NORTH, jButtonChat, 25, SpringLayout.NORTH, jButtonStorage);
+        springLayout.putConstraint(SpringLayout.WEST, jButtonStorage, 30, SpringLayout.EAST, photoLabel);
+        springLayout.putConstraint(SpringLayout.NORTH, jButtonStorage, 50, SpringLayout.NORTH, jPanelMid);
+        springLayout.putConstraint(SpringLayout.WEST, jButtonChat, 30, SpringLayout.EAST, photoLabel);
+        springLayout.putConstraint(SpringLayout.NORTH, jButtonChat, 50, SpringLayout.SOUTH, jButtonStorage);
     }
 
     private void GUIPlaceLabels() {
@@ -187,43 +283,71 @@ public class MainMenuSeller extends JFrame {
         // מיקום התמונה
         PlaceTheEmployeePhoto();
 
-        springLayout.putConstraint(SpringLayout.WEST, jLabelEmpDetails, 10, SpringLayout.WEST, jPanelLeft);
-        springLayout.putConstraint(SpringLayout.NORTH, jLabelEmpDetails, 15, SpringLayout.NORTH, jPanelLeft);
-        springLayout.putConstraint(SpringLayout.WEST, jLabelUserNum, 10, SpringLayout.WEST, jPanelLeft);
-        springLayout.putConstraint(SpringLayout.NORTH, jLabelUserNum, 25, SpringLayout.NORTH, jLabelEmpDetails);
-        springLayout.putConstraint(SpringLayout.WEST, jLabelUserName, 10, SpringLayout.WEST, jPanelLeft);
-        springLayout.putConstraint(SpringLayout.NORTH, jLabelUserName, 15, SpringLayout.NORTH, jLabelUserNum);
-        springLayout.putConstraint(SpringLayout.WEST, jLabelBranchNum, 10, SpringLayout.WEST, jPanelLeft);
-        springLayout.putConstraint(SpringLayout.NORTH, jLabelBranchNum, 15, SpringLayout.NORTH, jLabelUserName);
-        springLayout.putConstraint(SpringLayout.WEST, jLabelUserType, 10, SpringLayout.WEST, jPanelLeft);
-        springLayout.putConstraint(SpringLayout.NORTH, jLabelUserType, 15, SpringLayout.NORTH, jLabelBranchNum);
+        springLayout.putConstraint(SpringLayout.WEST, jLabeName, 10, SpringLayout.WEST, jPanelMid);
+        springLayout.putConstraint(SpringLayout.NORTH, jLabeName, 25, SpringLayout.SOUTH, photoLabel);
+        springLayout.putConstraint(SpringLayout.WEST, jLabelUserName, 5, SpringLayout.EAST, jLabeName);
+        springLayout.putConstraint(SpringLayout.NORTH, jLabelUserName, 55, SpringLayout.SOUTH, photoLabel);
+
+        springLayout.putConstraint(SpringLayout.WEST, jLabelSn, 22, SpringLayout.WEST, jPanelMid);
+        springLayout.putConstraint(SpringLayout.NORTH, jLabelSn, -20, SpringLayout.SOUTH, jLabeName);
+        springLayout.putConstraint(SpringLayout.WEST, jLabelUserNum, 5, SpringLayout.EAST, jLabelSn);
+        springLayout.putConstraint(SpringLayout.NORTH, jLabelUserNum, 28, SpringLayout.SOUTH, jLabelUserName);
+
+
+        springLayout.putConstraint(SpringLayout.WEST, jLabelType, 20, SpringLayout.WEST, jPanelMid);
+        springLayout.putConstraint(SpringLayout.NORTH, jLabelType, -20, SpringLayout.SOUTH, jLabelSn);
+        springLayout.putConstraint(SpringLayout.WEST, jLabelUserType, 5, SpringLayout.EAST, jLabelType);
+        springLayout.putConstraint(SpringLayout.NORTH, jLabelUserType, 28, SpringLayout.SOUTH, jLabelUserNum);
+
+
+        springLayout.putConstraint(SpringLayout.WEST, jLabelBranch, 10, SpringLayout.WEST, jPanelMid);
+        springLayout.putConstraint(SpringLayout.NORTH, jLabelBranch, -20, SpringLayout.SOUTH, jLabelType);
+        springLayout.putConstraint(SpringLayout.WEST, jLabelBranchName, 5, SpringLayout.EAST, jLabelBranch);
+        springLayout.putConstraint(SpringLayout.NORTH, jLabelBranchName, 28, SpringLayout.SOUTH, jLabelUserType);
     }
 
     private void GUIDefineLayoutAndAddComponentsOnJPanel() {
 
-        jPanelLeft.setLayout(springLayout);
+        jPanelMid.setLayout(springLayout);
+        jPanelMain.setLayout(springLayoutPanels);
+        jPanelUp.setLayout(springLayoutUpPanel);
 
-        jPanelLeft.add(jLabelUserNum);
-        jPanelLeft.add(jLabelEmpDetails);
-        jPanelLeft.add(jLabelUserName);
-        jPanelLeft.add(jLabelBranchNum);
-        jPanelLeft.add(jLabelUserType);
+        jPanelMid.add(jLabeName);
+        jPanelMid.add(jLabelUserName);
 
-        jPanelLeft.add(jButtonSignOut);
-        jPanelLeft.add(jButtonStorage);
-        jPanelLeft.add(jButtonChat);
+        jPanelMid.add(jLabelSn);
+        jPanelMid.add(jLabelUserNum);
 
-        jPanelMain.add(jPanelLeft);
+        jPanelMid.add(jLabelType);
+        jPanelMid.add(jLabelUserType);
+
+        jPanelMid.add(jLabelBranch);
+        jPanelMid.add(jLabelBranchName);
+
+        jPanelMid.add(jButtonStorage);
+        jPanelMid.add(jButtonChat);
+
+        jPanelMain.add(jButtonSignOut);
+
+        jPanelMain.add(jPanelMid);
+        jPanelMain.add(jPanelUp);
     }
+
 
     private void GUISettingForJFrame() {
 
         setTitle(FRAME_NAME);
-        setSize(FRAMEֹֹ_WIDTH_ֹSIZE, FRAMEֹֹ_HEIGHT_ֹSIZE);
+        setIconImages(Collections.singletonList(Toolkit.getDefaultToolkit().getImage(getClass().getResource(CASTRO_ICON))));
+        setSize(screenSize.width, screenSize.height);
         this.setResizable(false);
 
         setContentPane(jPanelMain);
     }
+
+
+
+
+
 
     private  void askUserBeforeCloseWindow(JFrame currentFrame){
 
@@ -271,6 +395,22 @@ public class MainMenuSeller extends JFrame {
         welcomeWindow.setLocationRelativeTo(null);
     }
 
+    public JPanel getjPanelMid() {
+        return jPanelMid;
+    }
+
+    public JLabel getjLabelBackPhoto() {
+        return jLabelBackPhoto;
+    }
+
+    public JButton getjButtonSignOut() {
+        return jButtonSignOut;
+    }
+
+    public SpringLayout getSpringLayoutPanels() {
+        return springLayoutPanels;
+    }
+
     public JFrame getJFrame(){
 
         return this;
@@ -289,6 +429,10 @@ public class MainMenuSeller extends JFrame {
     public void setEmployee(Employee employee) {
 
         this.employee = employee;
+    }
+
+    public JLabel getjLabelBackLeftPhoto() {
+        return jLabelBackLeftPhoto;
     }
 
     public static void main(String[] args) {

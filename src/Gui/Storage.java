@@ -7,6 +7,10 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,10 +30,15 @@ public class Storage extends JFrame {
     public static final String COLUMN_PART_NUMBER = "Part Number";
     public static final String BUTTON_BACK_NAME = "BACK";
 
+    public static final int TABLE_COLUMN_SIZE = 300;
+    public static final int ROW_HEIGHT = 50;
+    public static final int  NUM_OF_COLUMNS = 4;
     public static final int TABLE_PANELֹֹ_WIDTH_ֹSIZE = 700;
     public static final int TABLE_PANELֹֹ_HEIGHT_ֹSIZE = 800;
-    public static final int FRAMEֹֹ_WIDTH_ֹSIZE = 800;
-    public static final int FRAMEֹֹ_HEIGHT_ֹSIZE = 800;
+    public static final int FRAMEֹֹ_POSITION_X = 7;
+    public static final int FRAMEֹֹ_POSITION_Y = 230;
+    public static final int FRAMEֹֹ_WIDTH_ֹSIZE = 1520;
+    public static final int FRAMEֹֹ_HEIGHT_ֹSIZE = 630;
 
     private String branchName;
     private Vector<String> columnNames;
@@ -41,6 +50,7 @@ public class Storage extends JFrame {
 
     private JPanel jPanelMain;
     private JPanel jPanelTable;
+    private SpringLayout springLayout;
     private JTable table;
     private JButton jButtonBack;
 
@@ -62,6 +72,7 @@ public class Storage extends JFrame {
 
         jPanelMain = new JPanel();
         jPanelTable = new JPanel();
+        jPanelTable.setBackground(Color.white);
         jPanelTable.setPreferredSize(new Dimension(TABLE_PANELֹֹ_WIDTH_ֹSIZE, TABLE_PANELֹֹ_HEIGHT_ֹSIZE));
 
         jButtonBack = new JButton(BUTTON_BACK_NAME);
@@ -96,6 +107,8 @@ public class Storage extends JFrame {
 
         GUISettingForJPanel();
 
+        GUIPlaceComponentsOnJPanel();
+
         PrepareAndSendJsonStorageDataToServer();
 
         Vector<Vector<String>> dataList = GetStorageResponseFromServer();
@@ -105,6 +118,15 @@ public class Storage extends JFrame {
         DrawTheStorageTable(dataList);
 
         InitializeActions(prevFrame);
+    }
+
+    private void GUIPlaceComponentsOnJPanel() {
+
+        springLayout = new SpringLayout();
+        jPanelMain.setLayout(springLayout);
+
+        springLayout.putConstraint(SpringLayout.WEST,jPanelTable,400,SpringLayout.WEST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.NORTH,jPanelTable,170,SpringLayout.NORTH,jPanelMain);
     }
 
     private void GUISettingForJPanel() {
@@ -118,19 +140,49 @@ public class Storage extends JFrame {
         columnNames = new Vector<>();
         columnNames.add(COLUMN_TYPE);
         columnNames.add(COLUMN_SIZE);
-        columnNames.add(COLUMN_BRANCH);
         columnNames.add(COLUMN_AMOUNT);
-        columnNames.add(COLUMN_PRICE);
         columnNames.add(COLUMN_PART_NUMBER);
 
         // Insert the Strings list into the table with the columns name
-        table = new JTable(dataList, columnNames);
+        table = new JTable(dataList, columnNames){
+            @Override // Set values position in the center of the columns
+            public Component prepareRenderer(TableCellRenderer renderer, int row,
+                                             int col) {
+                Component comp = super.prepareRenderer(renderer, row, col);
+                ((JLabel) comp).setHorizontalAlignment(JLabel.CENTER);
+                return comp;
+            }
+        };
+
         JScrollPane tableContainer = new JScrollPane(table);
         jPanelTable.add(tableContainer, BorderLayout.CENTER);
 
+
+        setColumnWidths(table,TABLE_COLUMN_SIZE,NUM_OF_COLUMNS);
+        table.setRowHeight(ROW_HEIGHT);
+        table.setFont(new Font("Urban Sketch", Font.BOLD, 20));
+        Dimension d = table.getPreferredSize();
+        d.width = 700;
+        d.height = 375;
+        table.setPreferredScrollableViewportSize(d);
+        tableContainer.setPreferredSize(new Dimension(d));
+
+        JTableHeader anHeader = table.getTableHeader();
+        anHeader.setForeground(new Color(0).white);
+        anHeader.setBackground(new Color(0).black);
+        table.getTableHeader().setFont(new Font("Urban Sketch", Font.PLAIN, 25));
+
+
+        table.setOpaque(false); // אם יש שקיפות אז אי אפשר לסמן שורה שלמה בכחול
+        ((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setOpaque(false);
+        tableContainer.setOpaque(false);
+        tableContainer.getViewport().setOpaque(false);
+
+
+
         table.setAutoCreateRowSorter(true);
         table.getTableHeader().setReorderingAllowed(false); // Disable moving columns position
-        table.setEnabled(false);
+        table.setDefaultEditor(Object.class, null);
     }
 
     private Vector<Vector<String>> SeparateJsonArrayToSinglesAndConvertToStrings() {
@@ -151,17 +203,10 @@ public class Storage extends JFrame {
             data.add((String)jsonObject.get("item_size"));
 
             jsonObject = (JSONObject)jsonObjectResponseArray.get(i++);
-            data.add((String)jsonObject.get("item_branch"));
-
-            jsonObject = (JSONObject)jsonObjectResponseArray.get(i++);
             data.add((String)jsonObject.get("item_amount"));
 
             jsonObject = (JSONObject)jsonObjectResponseArray.get(i++);
-            data.add((String)jsonObject.get("item_price"));
-
-            jsonObject = (JSONObject)jsonObjectResponseArray.get(i++);
             data.add((String)jsonObject.get("item_part_number"));
-
 
             dataList.add(data);
         }
@@ -172,6 +217,7 @@ public class Storage extends JFrame {
 
         this.setTitle(FRAME_NAME);
         this.setSize(FRAMEֹֹ_WIDTH_ֹSIZE,FRAMEֹֹ_HEIGHT_ֹSIZE);
+        this.setLocation(FRAMEֹֹ_POSITION_X,FRAMEֹֹ_POSITION_Y);
         this.setResizable(false);
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -208,6 +254,18 @@ public class Storage extends JFrame {
     public JPanel getjPanelMain() {
         return jPanelMain;
     }
+
+    public static void setColumnWidths(JTable table, int width, int numOfColumns) {
+
+        TableColumnModel columnModel = table.getColumnModel();
+
+        for (int i = 0; i < numOfColumns; i++) {
+
+                columnModel.getColumn(i).setMaxWidth(width);
+            }
+
+        }
+
 
     public static void main(String[] args) throws IOException, ParseException {
 

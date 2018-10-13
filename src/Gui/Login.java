@@ -7,6 +7,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,14 +18,16 @@ import java.util.Collections;
 
 public class Login extends JFrame {
 
-    public static final String LABEL_ID_NAME = "/src/images/enterLogo.png";
+
+    public static final String BACK_BUTTON = "/src/images/back.png";
+    public static final String LOG_IN_BUTTON = "/src/images/logIn.png";
     public static final String CASTRO_ICON = "/src/images/icon.png";
+    public static final String PHOTO = "/src/images/photo.png";
     public static final String CASTRO_TAG_LOGIN = "/src/images/tagLogIn.png";
+    public static final String LABEL_PASSWORD = "/src/images/password.png";
+    public static final String LABEL_ID = "/src/images/id_number.png";
+    public static final String BRANCH_NAME = "/src/images/branch.png";
     public static final String FRAME_NAME = "CASTRO - LOG IN";
-    public static final String LABEL_PASSWORD_NAME = "Password :";
-    public static final String LABEL_BRANCH_NAME = "Branch Name :";
-    public static final String BUTTON_LOGIN_NAME = "Log in";
-    public static final String BUTTON_CANCEL = "Cancel";
     public static final String DEFAULT_BRANCH_NAME = "Jerusalem";
     public static final String BRANCH_NAME1 = "Tel Aviv";
     public static final String BRANCH_NAME2 = "Jerusalem";
@@ -33,7 +36,8 @@ public class Login extends JFrame {
     public static final int FRAMEֹֹ_HEIGHT_ֹSIZE = 565;
     public static final int FRAMEֹֹ_POSITION_X = 133;
     public static final int FRAMEֹֹ_POSITION_Y = 250;
-    public static final int JTEXTFIELD_ֹSIZE = 15;
+    public static final int JTEXTFIELD_WIDTH = 250;
+    public static final int JTEXTFIELD_HEIGHT = 50;
 
     private Employee employee;
     private JSONObject jsonObject;
@@ -41,13 +45,15 @@ public class Login extends JFrame {
     private JFrame prevFrame;
     private JPanel jPanelData;
     private SpringLayout springLayout;
-    private JLabel jLabelPass, jLabelBranch, tagLogInLabel, jLabelIdName;
+    private JLabel jLabelBranch, tagLogInLabel, jLabelId, jLabelPassword, jLabelPhoto;
     private JTextField jTextFieldId;
     private JPasswordField jTextFieldPass;
     private JComboBox<String> jComboBoxBranch;
     private JButton jButtonLogin, jButtonCancel;
-    private ImageIcon tagLogInJPG, label_id_name;
+    private ImageIcon tagLogInJPG, label_id, label_password, label_branch, label_photo, logInLogoJPG;
     private Client client;
+
+
 
     public Login(JFrame prevFrame) {
 
@@ -71,25 +77,64 @@ public class Login extends JFrame {
         jPanelData = new JPanel();
         springLayout = new SpringLayout();
 
-        label_id_name = new ImageIcon(getClass().getResource(LABEL_ID_NAME));
-        jLabelIdName = new JLabel(label_id_name);
+        label_password = new ImageIcon(getClass().getResource(LABEL_PASSWORD));
+        jLabelPassword = new JLabel(label_password);
 
-        jTextFieldId = new JTextField(JTEXTFIELD_ֹSIZE);
-        jTextFieldId.setText("333333");
+        label_id = new ImageIcon(getClass().getResource(LABEL_ID));
+        jLabelId= new JLabel(label_id);
 
-        jLabelPass = new JLabel(LABEL_PASSWORD_NAME);
-        jTextFieldPass = new JPasswordField(JTEXTFIELD_ֹSIZE);
-        jTextFieldPass.setText("SSSsss333");
-        employee.setEmpPass("SSSsss333");
+        label_branch = new ImageIcon(getClass().getResource(BRANCH_NAME));
+        jLabelBranch = new JLabel(label_branch);
 
-        jLabelBranch = new JLabel(LABEL_BRANCH_NAME);
+        jTextFieldId = new JTextField();
+        jTextFieldId.setText("111111");  ////////// למחוקקקקקקקקקק
+
+        jTextFieldPass = new JPasswordField();
+        jTextFieldPass.setText("AAAaaa111"); /////////// למחוקקקקקקקקקקקקק
+        employee.setEmpPass("AAAaaa111");
+
         jComboBoxBranch = new JComboBox<>(new String[]{BRANCH_NAME1, BRANCH_NAME2});
 
-        jButtonLogin = new JButton(BUTTON_LOGIN_NAME);
-        jButtonCancel = new JButton(BUTTON_CANCEL);
+        logInLogoJPG = new ImageIcon(getClass().getResource(LOG_IN_BUTTON));
+        jButtonLogin = new JButton(logInLogoJPG);
+        jButtonLogin.setBorderPainted(false);
+        jButtonLogin.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
+
+        logInLogoJPG = new ImageIcon(getClass().getResource(BACK_BUTTON));
+        jButtonCancel = new JButton(logInLogoJPG);
+        jButtonCancel.setBorderPainted(false);
+        jButtonCancel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
 
         tagLogInJPG = new ImageIcon(getClass().getResource(CASTRO_TAG_LOGIN));
         tagLogInLabel = new JLabel(tagLogInJPG);
+        tagLogInLabel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.white));
+
+        label_photo = new ImageIcon(getClass().getResource(PHOTO));
+        jLabelPhoto = new JLabel(label_photo);
+
+        DefineTextFieldsAndComboSizeAndDecorations();
+    }
+
+    private void DefineTextFieldsAndComboSizeAndDecorations() {
+
+        jTextFieldPass.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
+        jTextFieldPass.setHorizontalAlignment(JTextField.CENTER);
+        jTextFieldPass.setFont(new Font("Urban Sketch", Font.BOLD, 20));
+        jTextFieldPass.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.black));
+        jTextFieldPass.setForeground (Color.white);
+        jTextFieldPass.setOpaque(false);
+
+        jTextFieldId.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
+        jTextFieldId.setHorizontalAlignment(JTextField.CENTER);
+        jTextFieldId.setFont(new Font("Urban Sketch", Font.BOLD, 20));
+        jTextFieldId.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.black));
+        jTextFieldId.setForeground (Color.white);
+        jTextFieldId.setOpaque(false);
+
+        jComboBoxBranch.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
+        jComboBoxBranch.setFont(new Font("Urban Sketch", Font.BOLD, 20));
+        jComboBoxBranch.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.black));
+        jComboBoxBranch.setOpaque(false);
     }
 
     private void InitializeActions() {
@@ -259,42 +304,46 @@ public class Login extends JFrame {
     GUIPlaceBranchLabelAndTextField();
     GUIPlaceLogInButton();
     GUIPlaceCancelButton();
+
+        springLayout.putConstraint(SpringLayout.WEST, jLabelPhoto, -200, SpringLayout.WEST, jPanelData);
+        springLayout.putConstraint(SpringLayout.NORTH, jLabelPhoto, 0, SpringLayout.NORTH, jPanelData);
+
     }
 
     private void GUIPlaceLogInButton() {
 
-        springLayout.putConstraint(SpringLayout.WEST, jButtonLogin, 400, SpringLayout.WEST, jPanelData);
-        springLayout.putConstraint(SpringLayout.NORTH, jButtonLogin, 500, SpringLayout.NORTH, jPanelData);
+        springLayout.putConstraint(SpringLayout.WEST, jButtonLogin, 270, SpringLayout.WEST, jPanelData);
+        springLayout.putConstraint(SpringLayout.NORTH, jButtonLogin, 497, SpringLayout.NORTH, jPanelData);
     }
 
     private void GUIPlaceCancelButton() {
 
         springLayout.putConstraint(SpringLayout.WEST, jButtonCancel, 50, SpringLayout.EAST, jButtonLogin);
-        springLayout.putConstraint(SpringLayout.NORTH, jButtonCancel, 500, SpringLayout.NORTH, jPanelData);
+        springLayout.putConstraint(SpringLayout.SOUTH, jButtonCancel, 550, SpringLayout.NORTH, jPanelData);
     }
 
     private void GUIPlaceBranchLabelAndTextField() {
 
-        springLayout.putConstraint(SpringLayout.WEST, jLabelBranch, 300, SpringLayout.WEST, jPanelData);
-        springLayout.putConstraint(SpringLayout.NORTH, jLabelBranch, 30, SpringLayout.SOUTH, jLabelPass);
+        springLayout.putConstraint(SpringLayout.WEST, jLabelBranch, 250, SpringLayout.WEST, jPanelData);
+        springLayout.putConstraint(SpringLayout.NORTH, jLabelBranch, 6, SpringLayout.SOUTH, jLabelPassword);
         springLayout.putConstraint(SpringLayout.WEST, jComboBoxBranch, 10, SpringLayout.EAST, jLabelBranch);
-        springLayout.putConstraint(SpringLayout.NORTH, jComboBoxBranch, 30, SpringLayout.NORTH, jTextFieldPass);
+        springLayout.putConstraint(SpringLayout.NORTH, jComboBoxBranch, 108, SpringLayout.NORTH, jTextFieldPass);
     }
 
     private void GUIPlacePasswordLabelAndTextField() {
 
-        springLayout.putConstraint(SpringLayout.WEST, jLabelPass, 300, SpringLayout.WEST, jPanelData);
-        springLayout.putConstraint(SpringLayout.NORTH, jLabelPass, 30, SpringLayout.SOUTH, jLabelIdName);
-        springLayout.putConstraint(SpringLayout.WEST, jTextFieldPass, 10, SpringLayout.EAST, jLabelPass);
-        springLayout.putConstraint(SpringLayout.NORTH, jTextFieldPass, 30, SpringLayout.SOUTH, jTextFieldId);
+        springLayout.putConstraint(SpringLayout.WEST, jLabelPassword, 250, SpringLayout.WEST, jPanelData);
+        springLayout.putConstraint(SpringLayout.NORTH, jLabelPassword, 260, SpringLayout.NORTH, jPanelData);
+        springLayout.putConstraint(SpringLayout.WEST, jTextFieldPass, 10, SpringLayout.EAST, jLabelPassword);
+        springLayout.putConstraint(SpringLayout.NORTH, jTextFieldPass, 60, SpringLayout.SOUTH, jTextFieldId);
     }
 
     private void GUIPlaceIDLabelAndTextField() {
 
-        springLayout.putConstraint(SpringLayout.WEST, jLabelIdName, 300, SpringLayout.WEST, jPanelData);
-        springLayout.putConstraint(SpringLayout.NORTH, jLabelIdName, 300, SpringLayout.NORTH, jPanelData);
-        springLayout.putConstraint(SpringLayout.WEST, jTextFieldId, 10, SpringLayout.EAST, jLabelIdName);
-        springLayout.putConstraint(SpringLayout.NORTH, jTextFieldId, 300, SpringLayout.NORTH, jPanelData);
+        springLayout.putConstraint(SpringLayout.WEST, jLabelId, 250, SpringLayout.WEST, jPanelData);
+        springLayout.putConstraint(SpringLayout.NORTH, jLabelId, 150, SpringLayout.NORTH, jPanelData);
+        springLayout.putConstraint(SpringLayout.WEST, jTextFieldId, 10, SpringLayout.EAST, jLabelId);
+        springLayout.putConstraint(SpringLayout.NORTH, jTextFieldId, 173, SpringLayout.NORTH, jPanelData);
     }
 
     private void GUIPlaceTagLogInLabel() {
@@ -306,15 +355,16 @@ public class Login extends JFrame {
     private void GUIDefineLayoutAndAddComponentsOnJPanel() {
 
         jPanelData.setLayout(springLayout);
-        jPanelData.add(jLabelIdName);
+        jPanelData.add(jLabelId);
+        jPanelData.add(jLabelPassword);
         jPanelData.add(jTextFieldId);
-        jPanelData.add(jLabelPass);
         jPanelData.add(jTextFieldPass);
         jPanelData.add(jLabelBranch);
         jPanelData.add(jComboBoxBranch);
         jPanelData.add(jButtonLogin);
         jPanelData.add(jButtonCancel);
         jPanelData.add(tagLogInLabel);
+        jPanelData.add(jLabelPhoto);
     }
 
     private void GUISettingForJFrame() {

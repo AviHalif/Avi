@@ -1,40 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="28e01829-941a-4903-97c8-9759c5096ef1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/log4j_1_2_17.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/log4j_1_2_17.xml" afterDir="false" />
+    <list default="true" id="28e01829-941a-4903-97c8-9759c5096ef1" name="Default Changelist" comment="ffgd">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/ItemsPurchaseCatalog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterCustomer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterCustomer$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterCustomer$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterCustomer$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterCustomer$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterCustomer$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterCustomer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterCustomer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/.idea/libraries/log4j_1_2_17.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/.idea/libraries/log4j_1_2_17.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Login$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Login$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Login$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Login$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Login$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Login$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Login$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Login$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Login$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Login$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Login$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Login$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Login.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuAdmin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuAdmin$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuAdmin$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuAdmin$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuAdmin$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuAdmin$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuAdmin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuAdmin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuCashier$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuCashier$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuCashier$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuCashier$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuCashier.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuCashier.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuSeller$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuSeller$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuSeller$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuSeller$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuSeller$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuSeller$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuSeller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuSeller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Storage$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Storage$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Storage$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Storage$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Storage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Storage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Welcome$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Welcome$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Welcome$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Welcome$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Welcome$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Welcome$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Welcome.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Welcome.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/ImageSlide$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/ImageSlide.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Server.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Avi/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/log4j.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/log4j.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/src/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/src/config.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Avi/src/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/src/log4j.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/src/log4j.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Gui/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gui/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Gui/MainMenuAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gui/MainMenuAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Gui/MainMenuCashier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gui/MainMenuCashier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Gui/MainMenuSeller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gui/MainMenuSeller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Gui/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gui/Storage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Gui/Welcome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gui/Welcome.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ImageSlide.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/log4j.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -65,10 +74,10 @@
     <session id="1135019796">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="70" />
+          <entry key="project.closed" value="76" />
           <entry key="project.open.time.10" value="3" />
           <entry key="project.open.time.11" value="1" />
-          <entry key="project.open.time.12" value="2" />
+          <entry key="project.open.time.12" value="3" />
           <entry key="project.open.time.13" value="2" />
           <entry key="project.open.time.14" value="3" />
           <entry key="project.open.time.18" value="1" />
@@ -87,12 +96,12 @@
           <entry key="project.open.time.35" value="4" />
           <entry key="project.open.time.36" value="2" />
           <entry key="project.open.time.37" value="4" />
-          <entry key="project.open.time.38" value="2" />
-          <entry key="project.open.time.39" value="3" />
+          <entry key="project.open.time.38" value="3" />
+          <entry key="project.open.time.39" value="4" />
           <entry key="project.open.time.40" value="2" />
           <entry key="project.open.time.41" value="3" />
           <entry key="project.open.time.42" value="2" />
-          <entry key="project.open.time.44" value="2" />
+          <entry key="project.open.time.44" value="3" />
           <entry key="project.open.time.47" value="2" />
           <entry key="project.open.time.49" value="1" />
           <entry key="project.open.time.50" value="2" />
@@ -101,16 +110,16 @@
           <entry key="project.open.time.57" value="1" />
           <entry key="project.open.time.58" value="1" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.open.time.63" value="1" />
+          <entry key="project.open.time.63" value="2" />
           <entry key="project.open.time.66" value="1" />
           <entry key="project.open.time.68" value="1" />
           <entry key="project.open.time.76" value="1" />
           <entry key="project.open.time.87" value="1" />
           <entry key="project.open.time.89" value="1" />
-          <entry key="project.open.time.9" value="2" />
+          <entry key="project.open.time.9" value="3" />
           <entry key="project.open.time.91" value="1" />
           <entry key="project.open.time.92" value="1" />
-          <entry key="project.opened" value="73" />
+          <entry key="project.opened" value="79" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -119,7 +128,7 @@
           <entry key="form" value="49" />
           <entry key="fxml" value="1" />
           <entry key="iml" value="1" />
-          <entry key="java" value="891" />
+          <entry key="java" value="915" />
           <entry key="jks" value="1" />
           <entry key="properties" value="10" />
           <entry key="sql" value="3" />
@@ -133,7 +142,7 @@
           <entry key="DBN-SQL" value="3" />
           <entry key="GUI_DESIGNER_FORM" value="49" />
           <entry key="IDEA_MODULE" value="1" />
-          <entry key="JAVA" value="890" />
+          <entry key="JAVA" value="914" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="Properties" value="10" />
           <entry key="Scratch" value="1" />
@@ -143,16 +152,16 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="28" />
-          <entry key="java" value="78354" />
-          <entry key="properties" value="97" />
+          <entry key="java" value="82379" />
+          <entry key="properties" value="114" />
           <entry key="txt" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="78354" />
+          <entry key="JAVA" value="82379" />
           <entry key="PLAIN_TEXT" value="32" />
-          <entry key="Properties" value="97" />
+          <entry key="Properties" value="114" />
         </counts>
       </usages-collector>
     </session>
@@ -161,82 +170,12 @@
     <favorites_list name="Avi" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Gui/Welcome.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="49" />
-              <folding>
-                <element signature="method#DrawWelcome#0;class#Welcome#0" />
-                <element signature="method#SetFrameVisibleAndStartTimer#0;class#Welcome#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Gui/Login.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="314" column="37" selection-start-line="314" selection-start-column="37" selection-end-line="314" selection-end-column="37" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/log4j.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="42" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Gui/ItemsPurchaseCatalog.java">
+        <entry file="file://$PROJECT_DIR$/src/Gui/Storage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="31" lean-forward="true" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Gui/RegisterCustomer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="56" selection-end-column="56" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#RegisterCustomer#0;class#RegisterCustomer#0" />
-                <element signature="method#SetObjectsComponents#0;class#RegisterCustomer#0" />
-                <element signature="method#SetGUIComponents#0;class#RegisterCustomer#0" />
-                <element signature="method#GUISettingForComponents#0;class#RegisterCustomer#0" />
-                <element signature="method#GUISettingForJFrame#0;class#RegisterCustomer#0" />
-                <element signature="method#SetGUIComponentsToEdit#0;class#RegisterCustomer#0" />
-                <element signature="method#DrawCustomersList#0;class#RegisterCustomer#0" />
-                <element signature="method#PrepareAndSendJsonDataIdForCheckingToServer#0;class#RegisterCustomer#0" />
-                <element signature="method#GetRegisterCustomerResponseFromServer#0;class#RegisterCustomer#0" />
-                <element signature="method#CheckCustomerFields#0;class#RegisterCustomer#0" />
-                <element signature="method#OnlyLettersSpaces#0;class#RegisterCustomer#0" />
-                <element signature="method#main#0;class#RegisterCustomer#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Gui/RegisterEmployee.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="67" column="33" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="252">
+              <caret line="197" selection-start-line="197" selection-end-line="197" />
             </state>
           </provider>
         </entry>
@@ -246,43 +185,43 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>DefineLogAndConfig</find>
-      <find>succ</find>
-      <find>Mysql</find>
-      <find>PrepareAndSendJsonDataToServer</find>
-      <find>GUIDefineLayoutAndAddComponentsOnJPanel();</find>
-      <find>jtextfieldid</find>
-      <find>jComboBoxBranch</find>
-      <find>employee.set</find>
-      <find>DefineSslCommunication</find>
-      <find>MySqlDefinitionAndQueryForLogIn</find>
-      <find>PrepareAndSendJsonDataNewEmployeeToServer</find>
-      <find>GetCustomersListResponseFromServer</find>
-      <find>PrepareAndSendJsonCustomersListDataToServer</find>
-      <find>thirdBackFrame</find>
-      <find>customers</find>
-      <find>customer.draw</find>
-      <find>registercu</find>
-      <find>DefineCommunicationBuffer</find>
-      <find>ChooseServerOperation</find>
-      <find>getss</find>
-      <find>ReadAndParseData</find>
-      <find>client</find>
-      <find>GetAllItemsDetailsAndTheirPhotosFromDB</find>
-      <find>snEmployee_data</find>
-      <find>GetResponseUpdateCustomerFromServer</find>
-      <find>Exce</find>
-      <find>GetResponseCustomerDetailsFromServer</find>
-      <find>BUTTON_ENTER_LOGO</find>
-      <find>label_id_name</find>
-      <find>jLabelIdName</find>
+      <find>GUISettingForJFrame</find>
+      <find>stora</find>
+      <find>FRAMEֹֹ_POSITION_X</find>
+      <find>FRAMEֹֹ_WIDTH_ֹSIZE</find>
+      <find>setLocation</find>
+      <find>decor</find>
+      <find>Storage</find>
+      <find>PrepareAndSendJsonStorageDataToServer</find>
+      <find>SeparateJsonArrayToSinglesAndConvertToStrings</find>
+      <find>GetStorageResponseFromServer</find>
+      <find>ConvertResultSetToJsonArray</find>
+      <find>SendAllKindOfItemsToClient</find>
+      <find>StorageResponse</find>
+      <find>QueryStorageFromDBAccordingToBranchName</find>
+      <find>GUISettingForJPanel</find>
+      <find>DrawTheStorageTable</find>
+      <find>springLayout</find>
+      <find>add</find>
+      <find>urban</find>
+      <find>TABLE_PANELֹֹ_WIDTH_ֹSIZE</find>
+      <find>setpre</find>
+      <find>setsi</find>
+      <find>jPanelTable</find>
+      <find>scroll</find>
+      <find>setPreferredScrollableViewportSize</find>
+      <find>scrollPane</find>
+      <find>JScrollPane</find>
+      <find>jPanelTable.add</find>
+      <find>scrol</find>
+      <find>model</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\AviHalif\IdeaProjects\Avi\src</dir>
@@ -294,8 +233,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Classes/ItemTableModel.java" />
-        <option value="$PROJECT_DIR$/src/Gui/MainMenu.java" />
         <option value="$PROJECT_DIR$/src/Gui/Customer.java" />
         <option value="$PROJECT_DIR$/src/Gui/CustomerManagement.java" />
         <option value="$PROJECT_DIR$/src/Gui/DetailsCustomerEdit.java" />
@@ -323,28 +260,30 @@
         <option value="$PROJECT_DIR$/src/ClientServer/ClientNew.java" />
         <option value="$PROJECT_DIR$/src/ClientServer/Client.java" />
         <option value="$PROJECT_DIR$/src/Client/Client.java" />
-        <option value="$PROJECT_DIR$/src/Gui/Storage.java" />
-        <option value="$PROJECT_DIR$/src/Server.java" />
         <option value="$PROJECT_DIR$/src/Gui/CustomerList.java" />
         <option value="$PROJECT_DIR$/src/Gui/CustomerListManagement.java" />
         <option value="$PROJECT_DIR$/src/Gui/EmployeeEdit.java" />
         <option value="$PROJECT_DIR$/src/Gui/EmployeeEditDetails.java" />
         <option value="$PROJECT_DIR$/src/Gui/EmployeeList.java" />
         <option value="$PROJECT_DIR$/src/Gui/EmployeeListManagement.java" />
-        <option value="$PROJECT_DIR$/src/Gui/MainMenuAdmin.java" />
-        <option value="$PROJECT_DIR$/src/Gui/MainMenuCashier.java" />
-        <option value="$PROJECT_DIR$/src/Gui/MainMenuSeller.java" />
         <option value="$PROJECT_DIR$/src/Gui/Register.java" />
         <option value="$PROJECT_DIR$/src/Gui/Reports.java" />
         <option value="$PROJECT_DIR$/src/Gui/CustomerEdit.java" />
         <option value="$PROJECT_DIR$/src/Gui/CustomerEditDetails.java" />
-        <option value="$PROJECT_DIR$/src/Gui/Welcome.java" />
-        <option value="$PROJECT_DIR$/src/Gui/Login.java" />
         <option value="$PROJECT_DIR$/src/Gui/RegisterCustomer.java" />
         <option value="$PROJECT_DIR$/src/Gui/RegisterEmployee.java" />
         <option value="$PROJECT_DIR$/src/config.properties" />
-        <option value="$PROJECT_DIR$/src/log4j.properties" />
         <option value="$PROJECT_DIR$/src/Gui/ItemsPurchaseCatalog.java" />
+        <option value="$PROJECT_DIR$/src/log4j.properties" />
+        <option value="$PROJECT_DIR$/src/Classes/RoundedBorder.java" />
+        <option value="$PROJECT_DIR$/src/Classes/CreateRoundButton.java" />
+        <option value="$PROJECT_DIR$/src/Gui/Welcome.java" />
+        <option value="$PROJECT_DIR$/src/Gui/MainMenuCashier.java" />
+        <option value="$PROJECT_DIR$/src/Gui/MainMenuAdmin.java" />
+        <option value="$PROJECT_DIR$/src/Gui/Login.java" />
+        <option value="$PROJECT_DIR$/src/Gui/MainMenuSeller.java" />
+        <option value="$PROJECT_DIR$/src/Server.java" />
+        <option value="$PROJECT_DIR$/src/Gui/Storage.java" />
       </list>
     </option>
   </component>
@@ -354,10 +293,9 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-10" />
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="width" value="980" />
-    <option name="height" value="1040" />
+    <option name="height" value="1030" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -365,8 +303,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -383,6 +319,12 @@
               <item name="Avi" type="b2602c69:ProjectViewProjectNode" />
               <item name="Avi" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Classes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Avi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Avi" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Gui" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -390,6 +332,8 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -397,7 +341,7 @@
     <property name="Repository.Attach.JavaDocs" value="true" />
     <property name="Repository.Attach.Sources" value="true" />
     <property name="SearchEverywhereHistoryKey" value="resultSet&#9;PSI&#9;JAVA://java.sql.ResultSet&#10;create new&#9;PSI&#9;JAVA://sun.nio.fs.WindowsChannelFactory.Flags#createNew&#10;preferences&#9;PSI&#9;JAVA://java.util.prefs.Preferences" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539269190786" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539384474198" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JAVA" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/log4j-1.2.17.jar!/" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -432,8 +376,8 @@
     </option>
   </component>
   <component name="RunManager" selected="Application.Welcome">
-    <configuration name="EmployeeEdit" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Gui.EmployeeEdit" />
+    <configuration name="EmployeeListManagement" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Gui.EmployeeListManagement" />
       <module name="Avi" />
       <extension name="coverage">
         <pattern>
@@ -445,8 +389,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EmployeeListManagement" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Gui.EmployeeListManagement" />
+    <configuration name="Login" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Gui.Login" />
       <module name="Avi" />
       <extension name="coverage">
         <pattern>
@@ -471,8 +415,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Reports" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Gui.Reports" />
+    <configuration name="RegisterEmployee" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Gui.RegisterEmployee" />
       <module name="Avi" />
       <extension name="coverage">
         <pattern>
@@ -508,17 +452,17 @@
       <item itemvalue="Application.Register" />
       <item itemvalue="Application.Welcome" />
       <item itemvalue="Application.Server" />
-      <item itemvalue="Application.Reports" />
-      <item itemvalue="Application.EmployeeEdit" />
       <item itemvalue="Application.EmployeeListManagement" />
+      <item itemvalue="Application.Login" />
+      <item itemvalue="Application.RegisterEmployee" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Welcome" />
         <item itemvalue="Application.Server" />
+        <item itemvalue="Application.RegisterEmployee" />
+        <item itemvalue="Application.Login" />
         <item itemvalue="Application.EmployeeListManagement" />
-        <item itemvalue="Application.EmployeeEdit" />
-        <item itemvalue="Application.Reports" />
       </list>
     </recent_temporary>
   </component>
@@ -568,7 +512,14 @@
       <option name="project" value="LOCAL" />
       <updated>1539267989473</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="ffgd">
+      <created>1539269218711</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1539269218711</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView">
@@ -584,7 +535,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49556214" visible="true" weight="0.19395973" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49556214" weight="0.19932885" />
       <window_info id="Structure" order="1" sideWeight="0.50443786" side_tool="true" weight="0.17919463" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -594,8 +545,8 @@
       <window_info id="DB Browser" order="7" weight="0.3295302" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3319149" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.076595746" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3248227" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.1035461" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3134752" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32907802" />
@@ -603,7 +554,7 @@
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32907802" />
       <window_info anchor="bottom" id="DB Execution Console" order="10" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.50496453" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.28936172" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="1" weight="0.25" />
       <window_info anchor="right" id="Palette" order="2" />
@@ -662,20 +613,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.2/lib/src.zip!/java.base/java/lang/Thread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="843" selection-start-line="843" selection-end-line="843" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files (x86)/MySQL/Connector J 5.1/mysql-connector-java-5.1.45-bin.jar!/com/mysql/jdbc/NonRegisteringDriver.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="532" selection-start-line="532" selection-end-line="532" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files (x86)/MySQL/Connector J 5.1/mysql-connector-java-5.1.45-bin.jar!/com/mysql/jdbc/Driver.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -782,20 +719,8 @@
       <provider selected="true" editor-type-id="ui-designer" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/log4j.fxml" />
-    <entry file="file://$PROJECT_DIR$/src/log4j.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/log.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/log4j.xml" />
+    <entry file="file://$PROJECT_DIR$/log.txt" />
     <entry file="file://$PROJECT_DIR$/src/Classes/Item.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -804,52 +729,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Client.java" />
-    <entry file="file://$PROJECT_DIR$/src/Server.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="26" column="6" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5926#7581#0" />
-            <element signature="e#7587#7888#0" />
-            <element signature="e#7894#8678#0" />
-            <element signature="e#8684#9323#0" />
-            <element signature="e#9329#10169#0" />
-            <element signature="e#10175#11177#0" />
-            <element signature="e#11183#12261#0" />
-            <element signature="e#12267#13111#0" />
-            <element signature="e#13117#13619#0" />
-            <element signature="e#13625#14589#0" />
-            <element signature="e#27715#28446#0" />
-            <element signature="e#28452#28693#0" />
-            <element signature="e#28699#29152#0" />
-            <element signature="e#29158#29594#0" />
-            <element signature="e#29600#30398#0" />
-            <element signature="e#30404#31109#0" />
-            <element signature="e#31115#31497#0" />
-            <element signature="e#31503#32467#0" />
-            <element signature="e#33190#34081#0" />
-            <element signature="e#34087#34477#0" />
-            <element signature="e#34483#34832#0" />
-            <element signature="e#34838#35839#0" />
-            <element signature="e#35845#36294#0" />
-            <element signature="e#36300#36940#0" />
-            <element signature="e#36946#37798#0" />
-            <element signature="e#37804#38411#0" />
-            <element signature="e#38417#38732#0" />
-            <element signature="e#38738#39089#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ServerThread.java" />
-    <entry file="file://$PROJECT_DIR$/src/ImageSlide.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ImageSlide.java" />
     <entry file="file://$PROJECT_DIR$/src/Client/Client.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
@@ -861,19 +742,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="21" column="30" lean-forward="true" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
-          <folding>
-            <element signature="method#CustomerList#0;class#CustomerList#0" />
-            <element signature="method#SetGUIComponents#0;class#CustomerList#0" />
-            <element signature="method#SetObjectsComponents#0;class#CustomerList#0" />
-            <element signature="method#DrawTheCustomersTable#0;class#CustomerList#0" />
-            <element signature="method#GUISettingForJTable#0;class#CustomerList#0" />
-            <element signature="method#GUISettingForJPanel#0;class#CustomerList#0" />
-            <element signature="method#GUISettingForJFrame#0;class#CustomerList#0" />
-            <element signature="method#InitializeActions#0;class#CustomerList#0" />
-            <element signature="method#GetCustomersListResponseFromServer#0;class#CustomerList#0" />
-            <element signature="method#SeparateJsonArrayToSinglesAndConvertToStrings#0;class#CustomerList#0" />
-            <element signature="method#PrepareAndSendJsonCustomersListDataToServer#0;class#CustomerList#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -881,14 +749,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="method#GUISettingForJFrame#0;class#CustomerListManagement#0" />
-            <element signature="method#GUISettingForJPanel#0;class#CustomerListManagement#0" />
-            <element signature="method#GUIPlaceComponentsOnJPanel#0;class#CustomerListManagement#0" />
-            <element signature="method#GUIDefineLayoutAndAddComponentsOnJPanel#0;class#CustomerListManagement#0" />
-            <element signature="method#InitializeActions#0;class#CustomerListManagement#0" />
-            <element signature="method#main#0;class#CustomerListManagement#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -896,9 +756,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="23" column="38" lean-forward="true" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -920,46 +777,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="58" selection-start-line="10" selection-start-column="58" selection-end-line="10" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#EmployeeListManagement#0;class#EmployeeListManagement#0" />
-            <element signature="method#DrawEmployee#0;class#EmployeeListManagement#0" />
-            <element signature="method#GUISettingForJPanel#0;class#EmployeeListManagement#0" />
-            <element signature="method#GUIPlaceComponentsOnJPanel#0;class#EmployeeListManagement#0" />
-            <element signature="method#GUIDefineLayoutAndAddComponentsOnJPanel#0;class#EmployeeListManagement#0" />
-            <element signature="method#GUISettingForJFrame#0;class#EmployeeListManagement#0" />
-            <element signature="method#InitializeActions#0;class#EmployeeListManagement#0" />
-            <element signature="method#main#0;class#EmployeeListManagement#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Gui/MainMenuAdmin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-          <folding>
-            <element signature="method#DrawTheReportsMenu#0;class#MainMenuAdmin#0" />
-            <element signature="method#DrawMainMenu#0;class#MainMenuAdmin#0" />
-            <element signature="method#GUISettingForJPanel#0;class#MainMenuAdmin#0" />
-            <element signature="method#GUIPlaceComponentsOnJPanel#0;class#MainMenuAdmin#0" />
-            <element signature="method#GUIDefineLayoutAndAddComponentsOnJPanel#0;class#MainMenuAdmin#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Gui/MainMenuCashier.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="17" column="49" selection-start-line="17" selection-start-column="49" selection-end-line="17" selection-end-column="49" />
-          <folding>
-            <element signature="method#DrawTheCustomersMenu#0;class#MainMenuCashier#0" />
-            <element signature="method#DrawTheSellMenu#0;class#MainMenuCashier#0" />
-            <element signature="method#DrawMainMenu#0;class#MainMenuCashier#0" />
-            <element signature="method#GUISettingForJPanel#0;class#MainMenuCashier#0" />
-            <element signature="method#GUIDefineLayoutAndAddComponentsOnJPanel#0;class#MainMenuCashier#0" />
-            <element signature="method#GUIPlaceComponentsOnJPanel#0;class#MainMenuCashier#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -967,17 +784,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
-          <folding>
-            <element signature="e#1493#1661#0" />
-            <element signature="e#1667#2230#0" />
-            <element signature="e#2236#2619#0" />
-            <element signature="e#2625#3532#0" />
-            <element signature="e#3538#4019#0" />
-            <element signature="e#4025#4950#0" />
-            <element signature="e#4956#5520#0" />
-            <element signature="e#5526#6051#0" />
-            <element signature="e#6057#6385#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -988,38 +794,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Gui/Storage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1292">
-          <caret line="92" column="84" selection-start-line="92" selection-start-column="84" selection-end-line="92" selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Gui/CustomerEdit.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
           <caret line="65" column="78" selection-start-line="65" selection-start-column="42" selection-end-line="65" selection-end-column="78" />
-          <folding>
-            <element signature="method#CustomerEdit#0;class#CustomerEdit#0" />
-            <element signature="method#SetObjectsComponents#0;class#CustomerEdit#0" />
-            <element signature="method#SetGUIComponents#0;class#CustomerEdit#0" />
-            <element signature="method#DrawCustomerEditDetailsMenu#0;class#CustomerEdit#0" />
-            <element signature="method#GetResponseCustomerDetailsFromServer#0;class#CustomerEdit#0" />
-            <element signature="method#PrepareAndSendJsonDataToServer#0;class#CustomerEdit#0" />
-            <element signature="method#DrawCustomerEdit#0;class#CustomerEdit#0" />
-            <element signature="method#GUISettingForJPanel#0;class#CustomerEdit#0" />
-            <element signature="method#GUIPlaceComponentsOnJPanel#0;class#CustomerEdit#0" />
-            <element signature="method#GUIDefineLayoutAndAddComponentsOnJPanel#0;class#CustomerEdit#0" />
-            <element signature="method#GUISettingForJFrame#0;class#CustomerEdit#0" />
-            <element signature="e#6884#6885#0" expanded="true" />
-            <element signature="e#6911#6912#0" expanded="true" />
-            <element signature="method#CheckCustomerId#0;class#CustomerEdit#0" />
-            <element signature="e#7364#7365#0" expanded="true" />
-            <element signature="e#7396#7397#0" expanded="true" />
-            <element signature="e#7433#7434#0" expanded="true" />
-            <element signature="e#7466#7467#0" expanded="true" />
-            <element signature="method#main#0;class#CustomerEdit#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1027,51 +805,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="663">
           <caret line="203" column="5" lean-forward="true" selection-start-line="203" selection-start-column="5" selection-end-line="203" selection-end-column="5" />
-          <folding>
-            <element signature="e#1420#2273#0" />
-            <element signature="e#2279#2512#0" />
-            <element signature="e#2518#2745#0" />
-            <element signature="e#2751#6824#0" />
-            <element signature="e#6077#6297#0" expanded="true" />
-            <element signature="e#6296#6297#0" expanded="true" />
-            <element signature="e#6343#6562#0" expanded="true" />
-            <element signature="e#6561#6562#0" expanded="true" />
-            <element signature="e#6597#6816#0" expanded="true" />
-            <element signature="e#6815#6816#0" expanded="true" />
-            <element signature="e#6723#7263#0" />
-            <element signature="e#7376#7779#0" />
-            <element signature="e#7678#8131#0" />
-            <element signature="e#8137#8291#0" />
-            <element signature="e#8297#8415#0" />
-            <element signature="e#8421#8682#0" />
-            <element signature="e#8688#9625#0" />
-            <element signature="e#9631#10725#0" />
-            <element signature="e#10731#11861#0" />
-            <element signature="e#11974#12175#0" />
-            <element signature="e#12181#12647#0" />
-            <element signature="e#12653#13510#0" />
-            <element signature="e#13516#14064#0" />
-            <element signature="e#14259#15569#0" />
-            <element signature="e#15575#15868#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Gui/Welcome.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="49" />
-          <folding>
-            <element signature="method#DrawWelcome#0;class#Welcome#0" />
-            <element signature="method#SetFrameVisibleAndStartTimer#0;class#Welcome#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Gui/MainMenuSeller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="44" column="64" selection-start-line="44" selection-start-column="64" selection-end-line="44" selection-end-column="64" />
         </state>
       </provider>
     </entry>
@@ -1082,59 +815,91 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Gui/RegisterEmployee.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="67" column="33" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/log4j.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="42" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Gui/Login.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="314" column="37" selection-start-line="314" selection-start-column="37" selection-end-line="314" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="136">
+          <caret line="8" column="77" lean-forward="true" selection-start-line="8" selection-start-column="77" selection-end-line="8" selection-end-column="77" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Gui/RegisterCustomer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
+        <state relative-caret-position="663">
           <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="56" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Gui/RegisterEmployee.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="67" column="33" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Classes/RoundedBorder.java" />
+    <entry file="file://$PROJECT_DIR$/src/Classes/CreateRoundButton.java" />
+    <entry file="file://$PROJECT_DIR$/src/Gui/ItemsPurchaseCatalog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="128" column="18" lean-forward="true" selection-start-line="128" selection-start-column="18" selection-end-line="128" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Gui/MainMenuCashier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="157" column="43" selection-start-line="157" selection-start-column="17" selection-end-line="157" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Gui/Welcome.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="75" column="34" selection-start-line="75" selection-start-column="25" selection-end-line="75" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Gui/MainMenuSeller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="216" column="12" selection-start-line="216" selection-start-column="12" selection-end-line="216" selection-end-column="12" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#RegisterCustomer#0;class#RegisterCustomer#0" />
-            <element signature="method#SetObjectsComponents#0;class#RegisterCustomer#0" />
-            <element signature="method#SetGUIComponents#0;class#RegisterCustomer#0" />
-            <element signature="method#GUISettingForComponents#0;class#RegisterCustomer#0" />
-            <element signature="method#GUISettingForJFrame#0;class#RegisterCustomer#0" />
-            <element signature="method#SetGUIComponentsToEdit#0;class#RegisterCustomer#0" />
-            <element signature="method#DrawCustomersList#0;class#RegisterCustomer#0" />
-            <element signature="method#PrepareAndSendJsonDataIdForCheckingToServer#0;class#RegisterCustomer#0" />
-            <element signature="method#GetRegisterCustomerResponseFromServer#0;class#RegisterCustomer#0" />
-            <element signature="method#CheckCustomerFields#0;class#RegisterCustomer#0" />
-            <element signature="method#OnlyLettersSpaces#0;class#RegisterCustomer#0" />
-            <element signature="method#main#0;class#RegisterCustomer#0" />
+            <element signature="e#15615#15616#0" expanded="true" />
+            <element signature="e#15653#15654#0" expanded="true" />
+            <element signature="e#15695#15696#0" expanded="true" />
+            <element signature="e#15732#15733#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Gui/ItemsPurchaseCatalog.java">
+    <entry file="file://$PROJECT_DIR$/src/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="31" lean-forward="true" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
+        <state relative-caret-position="288">
+          <caret line="1141" column="35" lean-forward="true" selection-start-line="1141" selection-start-column="35" selection-end-line="1141" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Gui/MainMenuAdmin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="134" lean-forward="true" selection-start-line="134" selection-end-line="135" selection-end-column="107" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Gui/Login.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="121" column="31" selection-start-line="121" selection-start-column="31" selection-end-line="121" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Gui/Storage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="197" selection-start-line="197" selection-end-line="197" />
         </state>
       </provider>
     </entry>

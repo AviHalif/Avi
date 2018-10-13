@@ -10,6 +10,7 @@ import java.util.Collections;
 public class Welcome extends JFrame { //extends Application {
 
     public static final String FRAME_NAME = "CASTRO - WELCOME";
+    public static final String OPEN_PHOTO = "/src/images/openphoto.png";
     public static final String BUTTON_ENTER_LOGO = "/src/images/enterLogo.png";
     public static final String CASTRO_LOGO = "/src/images/castroLogoJPG.png";
     public static final String CREATORS_LOGO = "/src/images/Creators.png";
@@ -18,7 +19,7 @@ public class Welcome extends JFrame { //extends Application {
     public static final String JOPTIONPANE_TITLE = "CASTRO - CLOSE TERMINAL";
     public static final int DELAY_TIME  = 30;
     public static final int ENTER_BUTTON_WIDTH = 500;
-    public static final int ENTER_BUTTON_HEIGHT = 120;
+    public static final int ENTER_BUTTON_HEIGHT = 75;
 
     private int colorIdx = 255;
     private Timer timer;
@@ -26,17 +27,10 @@ public class Welcome extends JFrame { //extends Application {
 
     private JPanel jPanelData;
     private SpringLayout springLayout;
-    private JLabel castroLogoLabel, creatorsLogoLabel;
-    private ImageIcon castroLogoJPG, enterLogoJPG, creatorsLogoJPG;
+    private JLabel castroLogoLabel, creatorsLogoLabel, openPhotoLabel;
+    private ImageIcon castroLogoJPG, enterLogoJPG, creatorsLogoJPG, openPhotoJPG;
     private JButton jButtonEnter;
-  /*
-    // Width and height of image in pixels
-    private final double IMG_WIDTH = 600;
-    private final double IMG_HEIGHT = 300;
-    private final int NUM_OF_IMGS = 3;
-    private final int SLIDE_FREQ = 5; // in secs
-    private StackPane root;
-    private Pane clipPane;*/
+
 
     public Welcome(){
 
@@ -50,6 +44,9 @@ public class Welcome extends JFrame { //extends Application {
 
         castroLogoJPG = new ImageIcon(getClass().getResource(CASTRO_LOGO));
         castroLogoLabel = new JLabel(castroLogoJPG);
+
+        openPhotoJPG = new ImageIcon(getClass().getResource(OPEN_PHOTO));
+        openPhotoLabel = new JLabel(openPhotoJPG);
 
         enterLogoJPG = new ImageIcon(getClass().getResource(BUTTON_ENTER_LOGO));
         jButtonEnter = new JButton(enterLogoJPG);
@@ -100,8 +97,6 @@ public class Welcome extends JFrame { //extends Application {
                     colorIdx--;
             }
         });
-
-
     }
 
     protected void DrawWelcome(){
@@ -127,14 +122,17 @@ public class Welcome extends JFrame { //extends Application {
 
     private void GUIPlaceComponentsOnJPanel() {
 
-        springLayout.putConstraint(SpringLayout.WEST,jButtonEnter,(screenSize.width)/2 - 250,SpringLayout.WEST,jPanelData);
-        springLayout.putConstraint(SpringLayout.NORTH,jButtonEnter,(screenSize.height)/2 + 200,SpringLayout.NORTH,jPanelData);
+        springLayout.putConstraint(SpringLayout.WEST,jButtonEnter,(screenSize.width)/2 - 270,SpringLayout.WEST,jPanelData);
+        springLayout.putConstraint(SpringLayout.NORTH,jButtonEnter,(screenSize.height)/2 + 280,SpringLayout.NORTH,jPanelData);
 
         springLayout.putConstraint(SpringLayout.WEST,castroLogoLabel,-190,SpringLayout.WEST,jPanelData);
         springLayout.putConstraint(SpringLayout.NORTH,castroLogoLabel,-40,SpringLayout.NORTH,jPanelData);
 
         springLayout.putConstraint(SpringLayout.WEST,creatorsLogoLabel,3,SpringLayout.WEST,jPanelData);
         springLayout.putConstraint(SpringLayout.SOUTH,creatorsLogoLabel,3,SpringLayout.SOUTH,jPanelData);
+
+        springLayout.putConstraint(SpringLayout.WEST,openPhotoLabel,500,SpringLayout.WEST,jPanelData);
+        springLayout.putConstraint(SpringLayout.SOUTH,openPhotoLabel,0,SpringLayout.SOUTH,jPanelData);
     }
 
     private void GUIDefineLayoutAndAddComponentsOnJPanel() {
@@ -143,6 +141,7 @@ public class Welcome extends JFrame { //extends Application {
         jPanelData.add(jButtonEnter);
         jPanelData.add(castroLogoLabel);
         jPanelData.add(creatorsLogoLabel);
+        jPanelData.add(openPhotoLabel);
     }
 
     private void GUISettingForJFrame() {
@@ -184,82 +183,3 @@ public class Welcome extends JFrame { //extends Application {
         //launch(args);
     }
 }
-
-/*
-    @Override
-    public void start(Stage stage) throws Exception {
-
-        stage.initStyle(StageStyle.UNDECORATED);
-
-        //root code
-        StackPane root = new StackPane();
-
-        root.setEffect( new InnerShadow() );
-
-        Pane clipPane = new Pane();
-
-        stage.setX(450);
-        stage.setY(370);
-        stage.setAlwaysOnTop(true);
-
-        // To center the slide show incase maximized
-
-        clipPane.setMaxSize(IMG_WIDTH, IMG_HEIGHT);
-        clipPane.setClip(new Rectangle(IMG_WIDTH, IMG_HEIGHT));
-
-        BorderPane borderPane = new BorderPane(clipPane);
-        borderPane.setVisible(false);
-
-        HBox imgContainer = new HBox();
-
-        //image view
-        ImageView imgGreen = new ImageView("/src/images/photoLogIn1.png");
-        ImageView imgBlue = new ImageView("/src/images/photoLogIn2.png");
-        ImageView imgRose = new ImageView("/src/images/photoLogIn3.png");
-
-        imgContainer.getChildren().addAll(imgGreen, imgBlue, imgRose);
-        clipPane.getChildren().add(imgContainer);
-
-        root.getChildren().add(clipPane);
-
-        Scene scene = new Scene(root, IMG_WIDTH, IMG_HEIGHT);
-        stage.setTitle("Image Slider");
-        stage.setScene(scene);
-        startAnimation(imgContainer);
-        stage.show();
-    }
-
-
-
-    private void startAnimation(final HBox hbox) {
-        //error occured on (ActionEvent t) line
-        //slide action
-        EventHandler<javafx.event.ActionEvent> slideAction = (javafx.event.ActionEvent t) -> {
-            TranslateTransition trans = new TranslateTransition(Duration.seconds(1.5), hbox);
-            trans.setByX(-IMG_WIDTH);
-            trans.setInterpolator(Interpolator.EASE_BOTH);
-            trans.play();
-        };
-        //eventHandler
-        EventHandler<javafx.event.ActionEvent> resetAction = (javafx.event.ActionEvent t) -> {
-            TranslateTransition trans = new TranslateTransition(Duration.seconds(1), hbox);
-            trans.setByX((NUM_OF_IMGS - 1) * IMG_WIDTH);
-            trans.setInterpolator(Interpolator.EASE_BOTH);
-            trans.play();
-        };
-
-        java.util.List<KeyFrame> keyFrames = new ArrayList<>();
-        for (int i = 1; i <= NUM_OF_IMGS; i++) {
-            if (i == NUM_OF_IMGS) {
-                keyFrames.add(new KeyFrame(Duration.seconds(i * SLIDE_FREQ), resetAction));
-            } else {
-                keyFrames.add(new KeyFrame(Duration.seconds(i * SLIDE_FREQ), slideAction));
-            }
-        }
-//add timeLine
-        Timeline anim = new Timeline(keyFrames.toArray(new KeyFrame[NUM_OF_IMGS]));
-
-        anim.setCycleCount(Timeline.INDEFINITE);
-        anim.playFromStart();
-    }
-}*/

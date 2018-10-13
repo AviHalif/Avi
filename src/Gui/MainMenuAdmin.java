@@ -4,6 +4,7 @@ import Classes.Employee;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,11 +12,19 @@ import java.io.IOException;
 
 public class MainMenuAdmin extends MainMenuCashier {
 
-    public static final String FRAME_NAME = "SHIFT MANAGER";
+    public static final String BUTTON_EMPLOYEES = "/src/images/employees.png";
+    public static final String BUTTON_REPORTS = "/src/images/reports.png";
+    public static final int RIGHT_PANELֹֹ_WIDTH_ֹSIZE = 420;
+    public static final int RIGHT_PANELֹֹ_HEIGHT_ֹSIZE = 500;
+    public static final int EMPLOYESS_BUTTON_WIDTH = 350;
+    public static final int EMPLOYESS_BUTTON_HEIGHT = 80;
+    public static final int REPORTS_BUTTON_WIDTH = 280;
+    public static final int REPORTS_BUTTON_HEIGHT = 80;
 
     private SpringLayout springLayout;
     private JButton jButtonReport, jButtonEmployee;
     private JPanel jPanelRight;
+    private ImageIcon  reportsLogoJPG, employeesLogoJPG;
 
 
     public MainMenuAdmin(Employee employee) {
@@ -109,8 +118,6 @@ public class MainMenuAdmin extends MainMenuCashier {
 
         super.DrawMainMenu();
 
-        setTitle(FRAME_NAME);
-
         GUISettingForJPanel();
     }
 
@@ -122,28 +129,49 @@ public class MainMenuAdmin extends MainMenuCashier {
 
     private void GUIPlaceComponentsOnJPanel() {
 
-        springLayout.putConstraint(SpringLayout.WEST,jButtonReport,10,SpringLayout.WEST,jPanelRight);
-        springLayout.putConstraint(SpringLayout.NORTH,jButtonReport,25,SpringLayout.NORTH,jPanelRight);
+        springLayout.putConstraint(SpringLayout.WEST,jButtonReport,63,SpringLayout.WEST,jPanelRight);
+        springLayout.putConstraint(SpringLayout.NORTH,jButtonReport,260,SpringLayout.NORTH,jPanelRight);
 
-        springLayout.putConstraint(SpringLayout.WEST,jButtonEmployee,10,SpringLayout.WEST,jPanelRight);
-        springLayout.putConstraint(SpringLayout.NORTH,jButtonEmployee,25,SpringLayout.NORTH,jButtonReport);
+        springLayout.putConstraint(SpringLayout.WEST,jButtonEmployee,28,SpringLayout.WEST,jPanelRight);
+        springLayout.putConstraint(SpringLayout.NORTH,jButtonEmployee,40,SpringLayout.SOUTH,jButtonReport);
     }
 
     private void GUIDefineLayoutAndAddComponentsOnJPanel() {
 
         jPanelRight = new JPanel();
+        jPanelRight.setBackground(Color.black);
 
         springLayout = new SpringLayout();
         jPanelRight.setLayout(springLayout);
-        jPanelRight.setPreferredSize(new Dimension(100, 400));
+        jPanelRight.setPreferredSize(new Dimension(RIGHT_PANELֹֹ_WIDTH_ֹSIZE, RIGHT_PANELֹֹ_HEIGHT_ֹSIZE));
 
-        jButtonReport = new JButton("Reports");
-        jButtonEmployee = new JButton("Employees Management");
+        getjLabelBackPhoto().setVisible(false);
 
-        jPanelRight.add(jButtonReport);
-        jPanelRight.add(jButtonEmployee);
+        SetButtonsOnLeftPanel();
+
+        getSpringLayoutPanels().putConstraint(SpringLayout.NORTH, jPanelRight, 200, SpringLayout.NORTH, getjPanelMain());
+        getSpringLayoutPanels().putConstraint(SpringLayout.WEST, jPanelRight, 5, SpringLayout.EAST, getjPanelMid());
 
         getjPanelMain().add(jPanelRight);
+    }
+
+    private void SetButtonsOnLeftPanel() {
+
+        reportsLogoJPG = new ImageIcon(getClass().getResource(BUTTON_REPORTS));
+        jButtonReport = new JButton(reportsLogoJPG);
+        jButtonReport.setBorderPainted(true);
+        jButtonReport.setBackground(Color.white);
+        jButtonReport.setPreferredSize(new Dimension(REPORTS_BUTTON_WIDTH, REPORTS_BUTTON_HEIGHT));
+        jButtonReport.setBorder(new LineBorder(Color.red));
+        jPanelRight.add(jButtonReport);
+
+        employeesLogoJPG = new ImageIcon(getClass().getResource(BUTTON_EMPLOYEES));
+        jButtonEmployee = new JButton(employeesLogoJPG);
+        jButtonEmployee.setBorderPainted(true);
+        jButtonEmployee.setBackground(Color.BLACK);
+        jButtonEmployee.setPreferredSize(new Dimension(EMPLOYESS_BUTTON_WIDTH, EMPLOYESS_BUTTON_HEIGHT));
+        jButtonEmployee.setBorder(new LineBorder(Color.red));
+        jPanelRight.add(jButtonEmployee);
     }
 
     @Override

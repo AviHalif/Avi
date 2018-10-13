@@ -4,6 +4,7 @@ import Classes.Employee;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,11 +12,19 @@ import java.io.IOException;
 
 public class MainMenuCashier extends MainMenuSeller {
 
-    public static final String FRAME_NAME = "CASHIER";
+    public static final String BUTTON_CUSTOMERS = "/src/images/customers.png";
+    public static final String BUTTON_SELL_ITEM = "/src/images/sell_item.png";
+    public static final int CUSTOMER_BUTTON_WIDTH = 350;
+    public static final int CUSTOMER_BUTTON_HEIGHT = 80;
+    public static final int SELL_BUTTON_WIDTH = 280;
+    public static final int SELL_BUTTON_HEIGHT = 80;
+    public static final int MID_PANELֹֹ_WIDTH_ֹSIZE = 420;
+    public static final int MID_PANELֹֹ_HEIGHT_ֹSIZE = 400;
 
-    private JPanel jPanelMid;
+    private JPanel jPanelLeft;
     private SpringLayout springLayout;
     private JButton jButtonCustomer, jButtonSell;
+    private ImageIcon customerLogoJPG, sellLogoJPG;
 
 
     public MainMenuCashier(Employee employee) {
@@ -98,8 +107,6 @@ public class MainMenuCashier extends MainMenuSeller {
 
         super.DrawMainMenu();
 
-        setTitle(FRAME_NAME);
-
         GUISettingForJPanel();
     }
 
@@ -111,28 +118,50 @@ public class MainMenuCashier extends MainMenuSeller {
 
     private void GUIDefineLayoutAndAddComponentsOnJPanel() {
 
-        jPanelMid = new JPanel();
+        jPanelLeft = new JPanel();
+        jPanelLeft.setBackground(Color.black);
 
         springLayout = new SpringLayout();
-        jPanelMid.setLayout(springLayout);
-        jPanelMid.setPreferredSize(new Dimension(300, 400));
+        jPanelLeft.setLayout(springLayout);
+        jPanelLeft.setPreferredSize(new Dimension(MID_PANELֹֹ_WIDTH_ֹSIZE, MID_PANELֹֹ_HEIGHT_ֹSIZE));
 
-        jButtonCustomer = new JButton("Customers");
-        jPanelMid.add(jButtonCustomer);
+        getjLabelBackLeftPhoto().setVisible(false);
 
-        jButtonSell = new JButton("Sell item");
-        jPanelMid.add(jButtonSell);
+        SetButtonsOnLeftPanel();
 
-        getjPanelMain().add(jPanelMid);
+        getSpringLayoutPanels().putConstraint(SpringLayout.SOUTH, jPanelLeft, 0, SpringLayout.SOUTH, getjPanelMain());
+        getSpringLayoutPanels().putConstraint(SpringLayout.EAST, jPanelLeft, -5, SpringLayout.WEST, getjPanelMid());
+    }
+
+    private void SetButtonsOnLeftPanel() {
+
+        customerLogoJPG = new ImageIcon(getClass().getResource(BUTTON_CUSTOMERS));
+        jButtonCustomer = new JButton(customerLogoJPG);
+        jButtonCustomer.setBorderPainted(true);
+        jButtonCustomer.setBackground(Color.white);
+        jButtonCustomer.setPreferredSize(new Dimension(CUSTOMER_BUTTON_WIDTH, CUSTOMER_BUTTON_HEIGHT));
+        jButtonCustomer.setBorder(new LineBorder(Color.red));
+        jPanelLeft.add(jButtonCustomer);
+
+
+        sellLogoJPG = new ImageIcon(getClass().getResource(BUTTON_SELL_ITEM));
+        jButtonSell = new JButton(sellLogoJPG);
+        jButtonSell.setBorderPainted(true);
+        jButtonSell.setBackground(Color.BLACK);
+        jButtonSell.setPreferredSize(new Dimension(SELL_BUTTON_WIDTH, SELL_BUTTON_HEIGHT));
+        jButtonSell.setBorder(new LineBorder(Color.red));
+        jPanelLeft.add(jButtonSell);
+        getjPanelMain().add(jPanelLeft);
+
     }
 
     private void GUIPlaceComponentsOnJPanel() {
 
-        springLayout.putConstraint(SpringLayout.WEST,jButtonCustomer,10,SpringLayout.WEST,jPanelMid);
-        springLayout.putConstraint(SpringLayout.NORTH,jButtonCustomer,25,SpringLayout.NORTH,jPanelMid);
+        springLayout.putConstraint(SpringLayout.WEST,jButtonCustomer,65,SpringLayout.WEST,jPanelLeft);
+        springLayout.putConstraint(SpringLayout.NORTH,jButtonCustomer,150,SpringLayout.NORTH,jPanelLeft);
 
-        springLayout.putConstraint(SpringLayout.WEST,jButtonSell,10,SpringLayout.WEST,jPanelMid);
-        springLayout.putConstraint(SpringLayout.NORTH,jButtonSell,25,SpringLayout.NORTH,jButtonCustomer);
+        springLayout.putConstraint(SpringLayout.WEST,jButtonSell,105,SpringLayout.WEST,jPanelLeft);
+        springLayout.putConstraint(SpringLayout.NORTH,jButtonSell,50,SpringLayout.SOUTH,jButtonCustomer);
     }
 
     @Override
