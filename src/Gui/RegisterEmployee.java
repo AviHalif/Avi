@@ -265,7 +265,7 @@ public class RegisterEmployee extends Register {
                         employee.setEmpPhoto(path);
 
                     }else{
-                        JOptionPane.showMessageDialog(null, "Image size is too large!!! Limit to 128KB - Select other Image");
+                        JOptionPane.showMessageDialog(null, "Image size is too large!!! Limit to 32KB - Select other Image");
                     }
                 }
                 else if(result == JFileChooser.CANCEL_OPTION){
@@ -527,7 +527,7 @@ public class RegisterEmployee extends Register {
             File file = new File(path);
             long length = file.length();
 
-            if (length < 128000)
+            if (length < 32000)
                 temp = true;
 
             return temp;

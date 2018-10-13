@@ -5,45 +5,12 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Avi/.idea/libraries/log4j_1_2_17.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/.idea/libraries/log4j_1_2_17.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Avi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Login$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Login$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Login$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Login$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Login$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Login$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Login$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Login$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Login$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Login$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Login$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Login$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Login.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuAdmin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuAdmin$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuAdmin$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuAdmin$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuAdmin$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuAdmin$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuAdmin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuAdmin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuCashier$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuCashier$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuCashier$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuCashier$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuCashier.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuCashier.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuSeller$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuSeller$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuSeller$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuSeller$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuSeller$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuSeller$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuSeller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/MainMenuSeller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Storage$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Storage$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Storage$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Storage$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Storage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Storage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Welcome$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Welcome$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Welcome$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Welcome$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Welcome$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Welcome$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/Welcome.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/Welcome.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/ImageSlide$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/ImageSlide.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/log4j.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Avi/src/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/src/log4j.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Gui/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gui/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Gui/MainMenuAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gui/MainMenuAdmin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Gui/MainMenuCashier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gui/MainMenuCashier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Gui/MainMenuSeller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gui/MainMenuSeller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Gui/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gui/Storage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Gui/Welcome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gui/Welcome.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ImageSlide.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/log4j.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/EmployeeEditDetails$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/EmployeeEditDetails$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/EmployeeEditDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/EmployeeEditDetails.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Avi/Gui/RegisterEmployee.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Gui/EmployeeEditDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gui/EmployeeEditDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Gui/RegisterEmployee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gui/RegisterEmployee.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -74,11 +41,11 @@
     <session id="1135019796">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="76" />
+          <entry key="project.closed" value="78" />
           <entry key="project.open.time.10" value="3" />
           <entry key="project.open.time.11" value="1" />
-          <entry key="project.open.time.12" value="3" />
-          <entry key="project.open.time.13" value="2" />
+          <entry key="project.open.time.12" value="4" />
+          <entry key="project.open.time.13" value="3" />
           <entry key="project.open.time.14" value="3" />
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.22" value="1" />
@@ -101,7 +68,7 @@
           <entry key="project.open.time.40" value="2" />
           <entry key="project.open.time.41" value="3" />
           <entry key="project.open.time.42" value="2" />
-          <entry key="project.open.time.44" value="2" />
+          <entry key="project.open.time.44" value="3" />
           <entry key="project.open.time.47" value="2" />
           <entry key="project.open.time.49" value="1" />
           <entry key="project.open.time.50" value="2" />
@@ -119,7 +86,7 @@
           <entry key="project.open.time.9" value="3" />
           <entry key="project.open.time.91" value="1" />
           <entry key="project.open.time.92" value="1" />
-          <entry key="project.opened" value="78" />
+          <entry key="project.opened" value="81" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -128,7 +95,7 @@
           <entry key="form" value="49" />
           <entry key="fxml" value="1" />
           <entry key="iml" value="1" />
-          <entry key="java" value="915" />
+          <entry key="java" value="918" />
           <entry key="jks" value="1" />
           <entry key="properties" value="10" />
           <entry key="sql" value="3" />
@@ -142,7 +109,7 @@
           <entry key="DBN-SQL" value="3" />
           <entry key="GUI_DESIGNER_FORM" value="49" />
           <entry key="IDEA_MODULE" value="1" />
-          <entry key="JAVA" value="914" />
+          <entry key="JAVA" value="917" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="Properties" value="10" />
           <entry key="Scratch" value="1" />
@@ -152,14 +119,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="28" />
-          <entry key="java" value="82379" />
+          <entry key="java" value="82415" />
           <entry key="properties" value="114" />
           <entry key="txt" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="82379" />
+          <entry key="JAVA" value="82415" />
           <entry key="PLAIN_TEXT" value="32" />
           <entry key="Properties" value="114" />
         </counts>
@@ -171,11 +138,38 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Gui/Storage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="82">
-              <caret line="187" column="84" selection-start-line="187" selection-start-column="84" selection-end-line="187" selection-end-column="84" />
+            <state relative-caret-position="3060">
+              <caret line="197" selection-start-line="197" selection-end-line="197" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Gui/RegisterEmployee.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="623">
+              <caret line="260" column="53" selection-start-line="260" selection-start-column="53" selection-end-line="260" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Gui/EmployeeEditDetails.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="126" selection-start-line="126" selection-end-line="126" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Gui/MainMenuSeller.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="752">
+              <caret line="102" column="69" selection-start-line="102" selection-start-column="61" selection-end-line="102" selection-end-column="69" />
             </state>
           </provider>
         </entry>
@@ -192,12 +186,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>GUISettingForJFrame</find>
-      <find>stora</find>
-      <find>FRAMEֹֹ_POSITION_X</find>
-      <find>FRAMEֹֹ_WIDTH_ֹSIZE</find>
-      <find>setLocation</find>
-      <find>decor</find>
       <find>Storage</find>
       <find>PrepareAndSendJsonStorageDataToServer</find>
       <find>SeparateJsonArrayToSinglesAndConvertToStrings</find>
@@ -222,6 +210,12 @@
       <find>jPanelTable.add</find>
       <find>scrol</find>
       <find>model</find>
+      <find>KB</find>
+      <find>MaxSizeImage</find>
+      <find>NO_PHOTO</find>
+      <find>resiz</find>
+      <find>photo</find>
+      <find>no_photo</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\AviHalif\IdeaProjects\Avi\src</dir>
@@ -263,7 +257,6 @@
         <option value="$PROJECT_DIR$/src/Gui/CustomerList.java" />
         <option value="$PROJECT_DIR$/src/Gui/CustomerListManagement.java" />
         <option value="$PROJECT_DIR$/src/Gui/EmployeeEdit.java" />
-        <option value="$PROJECT_DIR$/src/Gui/EmployeeEditDetails.java" />
         <option value="$PROJECT_DIR$/src/Gui/EmployeeList.java" />
         <option value="$PROJECT_DIR$/src/Gui/EmployeeListManagement.java" />
         <option value="$PROJECT_DIR$/src/Gui/Register.java" />
@@ -271,7 +264,6 @@
         <option value="$PROJECT_DIR$/src/Gui/CustomerEdit.java" />
         <option value="$PROJECT_DIR$/src/Gui/CustomerEditDetails.java" />
         <option value="$PROJECT_DIR$/src/Gui/RegisterCustomer.java" />
-        <option value="$PROJECT_DIR$/src/Gui/RegisterEmployee.java" />
         <option value="$PROJECT_DIR$/src/config.properties" />
         <option value="$PROJECT_DIR$/src/Gui/ItemsPurchaseCatalog.java" />
         <option value="$PROJECT_DIR$/src/log4j.properties" />
@@ -284,6 +276,8 @@
         <option value="$PROJECT_DIR$/src/Gui/MainMenuSeller.java" />
         <option value="$PROJECT_DIR$/src/Server.java" />
         <option value="$PROJECT_DIR$/src/Gui/Storage.java" />
+        <option value="$PROJECT_DIR$/src/Gui/RegisterEmployee.java" />
+        <option value="$PROJECT_DIR$/src/Gui/EmployeeEditDetails.java" />
       </list>
     </option>
   </component>
@@ -319,20 +313,14 @@
               <item name="Avi" type="b2602c69:ProjectViewProjectNode" />
               <item name="Avi" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Classes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Avi" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Avi" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Gui" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="AndroidView" />
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -519,7 +507,14 @@
       <option name="project" value="LOCAL" />
       <updated>1539269218711</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="ffgd">
+      <created>1539416311259</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1539416311259</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -533,6 +528,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49556214" weight="0.19932885" />
       <window_info id="Structure" order="1" sideWeight="0.50443786" side_tool="true" weight="0.17919463" />
@@ -544,7 +540,7 @@
       <window_info id="DB Browser" order="7" weight="0.3295302" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3319149" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.1035461" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.16595745" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3134752" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -758,13 +754,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Gui/EmployeeEditDetails.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Gui/EmployeeList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -828,13 +817,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Gui/RegisterEmployee.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="850">
-          <caret line="67" column="33" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Classes/RoundedBorder.java" />
     <entry file="file://$PROJECT_DIR$/src/Classes/CreateRoundButton.java" />
     <entry file="file://$PROJECT_DIR$/src/Gui/ItemsPurchaseCatalog.java">
@@ -855,19 +837,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="261">
           <caret line="75" column="34" selection-start-line="75" selection-start-column="25" selection-end-line="75" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Gui/MainMenuSeller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="216" column="12" selection-start-line="216" selection-start-column="12" selection-end-line="216" selection-end-column="12" />
-          <folding>
-            <element signature="e#15615#15616#0" expanded="true" />
-            <element signature="e#15653#15654#0" expanded="true" />
-            <element signature="e#15695#15696#0" expanded="true" />
-            <element signature="e#15732#15733#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -897,8 +866,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Gui/Storage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="187" column="84" selection-start-line="187" selection-start-column="84" selection-end-line="187" selection-end-column="84" />
+        <state relative-caret-position="3060">
+          <caret line="197" selection-start-line="197" selection-end-line="197" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Gui/EmployeeEditDetails.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="126" selection-start-line="126" selection-end-line="126" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Gui/RegisterEmployee.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="623">
+          <caret line="260" column="53" selection-start-line="260" selection-start-column="53" selection-end-line="260" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Gui/MainMenuSeller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="752">
+          <caret line="102" column="69" selection-start-line="102" selection-start-column="61" selection-end-line="102" selection-end-column="69" />
         </state>
       </provider>
     </entry>
