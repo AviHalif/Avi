@@ -34,8 +34,8 @@
     <session id="1135019796">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="79" />
-          <entry key="project.open.time.10" value="3" />
+          <entry key="project.closed" value="80" />
+          <entry key="project.open.time.10" value="4" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.12" value="4" />
           <entry key="project.open.time.13" value="4" />
@@ -79,7 +79,7 @@
           <entry key="project.open.time.9" value="3" />
           <entry key="project.open.time.91" value="1" />
           <entry key="project.open.time.92" value="1" />
-          <entry key="project.opened" value="82" />
+          <entry key="project.opened" value="83" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -88,7 +88,7 @@
           <entry key="form" value="49" />
           <entry key="fxml" value="1" />
           <entry key="iml" value="1" />
-          <entry key="java" value="918" />
+          <entry key="java" value="921" />
           <entry key="jks" value="1" />
           <entry key="properties" value="10" />
           <entry key="sql" value="3" />
@@ -102,7 +102,7 @@
           <entry key="DBN-SQL" value="3" />
           <entry key="GUI_DESIGNER_FORM" value="49" />
           <entry key="IDEA_MODULE" value="1" />
-          <entry key="JAVA" value="917" />
+          <entry key="JAVA" value="920" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="Properties" value="10" />
           <entry key="Scratch" value="1" />
@@ -112,14 +112,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="28" />
-          <entry key="java" value="82415" />
+          <entry key="java" value="82417" />
           <entry key="properties" value="114" />
           <entry key="txt" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="82415" />
+          <entry key="JAVA" value="82417" />
           <entry key="PLAIN_TEXT" value="32" />
           <entry key="Properties" value="114" />
         </counts>
@@ -131,11 +131,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Gui/Storage.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="623">
               <caret line="197" selection-start-line="197" selection-end-line="197" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Gui/ItemsPurchaseCatalog.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-102">
+              <caret line="75" column="24" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Server.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="191">
+              <caret line="154" selection-start-line="154" selection-end-line="154" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Gui/MainMenuCashier.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="208">
+              <caret line="51" column="35" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -152,14 +182,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Storage</find>
-      <find>PrepareAndSendJsonStorageDataToServer</find>
-      <find>SeparateJsonArrayToSinglesAndConvertToStrings</find>
-      <find>GetStorageResponseFromServer</find>
-      <find>ConvertResultSetToJsonArray</find>
-      <find>SendAllKindOfItemsToClient</find>
-      <find>StorageResponse</find>
-      <find>QueryStorageFromDBAccordingToBranchName</find>
       <find>GUISettingForJPanel</find>
       <find>DrawTheStorageTable</find>
       <find>springLayout</find>
@@ -182,6 +204,14 @@
       <find>resiz</find>
       <find>photo</find>
       <find>no_photo</find>
+      <find>photos</find>
+      <find>GetAllItemsDetailsAndTheirPhotosFromDB</find>
+      <find>PrepareAndSendJsonDataToServerAskingForAllItemsDetails</find>
+      <find>GetAllItemsNamesFromServer</find>
+      <find>DrawTheCustomersMenu</find>
+      <find>DrawCustomer</find>
+      <find>sell</find>
+      <find>DrawTheSellMenu</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\AviHalif\IdeaProjects\Avi\src</dir>
@@ -240,10 +270,10 @@
         <option value="$PROJECT_DIR$/src/Gui/MainMenuAdmin.java" />
         <option value="$PROJECT_DIR$/src/Gui/Login.java" />
         <option value="$PROJECT_DIR$/src/Gui/MainMenuSeller.java" />
-        <option value="$PROJECT_DIR$/src/Server.java" />
         <option value="$PROJECT_DIR$/src/Gui/Storage.java" />
         <option value="$PROJECT_DIR$/src/Gui/RegisterEmployee.java" />
         <option value="$PROJECT_DIR$/src/Gui/EmployeeEditDetails.java" />
+        <option value="$PROJECT_DIR$/src/Server.java" />
       </list>
     </option>
   </component>
@@ -487,7 +517,14 @@
       <option name="project" value="LOCAL" />
       <updated>1539433393002</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="ffgd">
+      <created>1539444882036</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1539444882036</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TodoView">
@@ -503,7 +540,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49556214" visible="true" weight="0.19932885" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49556214" visible="true" weight="0.20201342" />
       <window_info id="Structure" order="1" sideWeight="0.50443786" side_tool="true" weight="0.17919463" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -792,41 +829,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Classes/RoundedBorder.java" />
     <entry file="file://$PROJECT_DIR$/src/Classes/CreateRoundButton.java" />
-    <entry file="file://$PROJECT_DIR$/src/Gui/ItemsPurchaseCatalog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="128" column="18" lean-forward="true" selection-start-line="128" selection-start-column="18" selection-end-line="128" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Gui/MainMenuCashier.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="157" column="43" selection-start-line="157" selection-start-column="17" selection-end-line="157" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Gui/Welcome.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="261">
           <caret line="75" column="34" selection-start-line="75" selection-start-column="25" selection-end-line="75" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Server.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="1141" column="35" lean-forward="true" selection-start-line="1141" selection-start-column="35" selection-end-line="1141" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Gui/MainMenuAdmin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="134" lean-forward="true" selection-start-line="134" selection-end-line="135" selection-end-column="107" />
         </state>
       </provider>
     </entry>
@@ -862,6 +868,37 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="623">
           <caret line="197" selection-start-line="197" selection-end-line="197" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Gui/MainMenuAdmin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="482">
+          <caret line="55" column="23" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Gui/ItemsPurchaseCatalog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-102">
+          <caret line="75" column="24" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Gui/MainMenuCashier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="51" column="35" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="154" selection-start-line="154" selection-end-line="154" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
