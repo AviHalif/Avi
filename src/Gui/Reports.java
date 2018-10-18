@@ -16,6 +16,8 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTSectPr;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTText;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,7 +26,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Vector;
 
@@ -32,17 +33,23 @@ import static java.time.LocalDate.now;
 
 public class Reports extends JFrame {
 
-    public static final String CASTRO_ICON = "/src/images/icon.png";
-    public static final String FRAME_NAME = "CASTRO - REPORTS";
-    public static final String BUTTON_REPORT_ALL = "DAILY REPORT ALL";
-    public static final String BUTTON_SPECIFIC_REPORT = "SPECIFIC_REPORT";
-    public static final String BUTTON_CHOOSE_FILTERS = "CHOOSE FILTERS";
-    public static final String BUTTON_CANCEL = "Cancel";
+    public static final String BACK_PHOTO = "/src/images/report_back.png";
+    public static final String TITLE = "/src/images/daily_purshase_report.png";
+    public static final String BACK_BUTTON = "/src/images/back.png";
 
-    public static final int FRAMEֹֹ_WIDTH_ֹSIZE = 1279;
-    public static final int FRAMEֹֹ_HEIGHT_ֹSIZE = 565;
-    public static final int FRAMEֹֹ_POSITION_X = 133;
-    public static final int FRAMEֹֹ_POSITION_Y = 250;
+    public static final String REPORT_ALL_BUTTON = "/src/images/filter_all.png";
+    public static final String SPECIFIC_REPORT_BUTTON = "/src/images/spefici.png";
+    public static final String CHOOSE_FILTERS_BUTTON = "/src/images/choose_items.png";
+    public static final int BUTTON_WIDTH1 = 390;
+    public static final int BUTTON_WIDTH2 = 400;
+    public static final int BUTTON_HEIGHT = 50;
+
+    public static final int FRAMEֹֹ_POSITION_X = 7;
+    public static final int FRAMEֹֹ_POSITION_Y = 230;
+    public static final int FRAMEֹֹ_WIDTH_ֹSIZE = 1520;
+    public static final int FRAMEֹֹ_HEIGHT_ֹSIZE = 630;
+
+
 
     private String branch;
     private String[] itemNames;
@@ -54,6 +61,8 @@ public class Reports extends JFrame {
 
     private JFrame prevFrame;
     private JPanel jPanelData;
+    private ImageIcon backgroundPhotoJPG, backLogoJPG, titlePhotoJPG, reportAllLogoJPG, specificLogoJPG, chooseFiltersLogoJPG;
+    private JLabel backgroundPhotoLabel, titleLabel;
     private SpringLayout springLayout;
     private JButton jButtonReportAll, jButtonSpecificReport, jButtonChooseFilters, jButtonCancel;
     private Checkbox[] checkArray;
@@ -77,9 +86,63 @@ public class Reports extends JFrame {
 
     protected void DrawReports() {
 
+        GUISettingForJPanel();
+
         GUISettingForJFrame();
 
-        GUISettingForJPanel();
+        GUIPlaceComponentsOnJPanel();
+    }
+
+    private void GUIPlaceComponentsOnJPanel() {
+
+        springLayout = new SpringLayout();
+        jPanelData.setLayout(springLayout);
+
+        springLayout.putConstraint(SpringLayout.EAST,backgroundPhotoLabel,0,SpringLayout.EAST,jPanelData);
+        springLayout.putConstraint(SpringLayout.SOUTH,backgroundPhotoLabel,0,SpringLayout.SOUTH,jPanelData);
+
+        springLayout.putConstraint(SpringLayout.WEST,jButtonCancel,0,SpringLayout.WEST,jPanelData);
+        springLayout.putConstraint(SpringLayout.SOUTH,jButtonCancel,0,SpringLayout.SOUTH,jPanelData);
+
+        springLayout.putConstraint(SpringLayout.WEST,titleLabel,300,SpringLayout.WEST,jPanelData);
+        springLayout.putConstraint(SpringLayout.NORTH,titleLabel,18,SpringLayout.NORTH,jPanelData);
+
+        springLayout.putConstraint(SpringLayout.WEST,jButtonReportAll,20,SpringLayout.WEST,jPanelData);
+        springLayout.putConstraint(SpringLayout.NORTH,jButtonReportAll,300,SpringLayout.NORTH,jPanelData);
+
+        springLayout.putConstraint(SpringLayout.WEST,jButtonSpecificReport,20,SpringLayout.WEST,jPanelData);
+        springLayout.putConstraint(SpringLayout.NORTH,jButtonSpecificReport,50,SpringLayout.SOUTH,jButtonReportAll);
+
+        springLayout.putConstraint(SpringLayout.WEST,jButtonChooseFilters,20,SpringLayout.WEST,jPanelData);
+        springLayout.putConstraint(SpringLayout.NORTH,jButtonChooseFilters,50,SpringLayout.SOUTH,jButtonReportAll);
+
+        placeTheCheckBoxes();
+    }
+
+    private void placeTheCheckBoxes() {
+
+        int size = 19;
+
+        if(itemNames.length != 0) {
+
+            checkArray[0].setFont(new Font("Urban Sketch", Font.BOLD, 19));
+
+            springLayout.putConstraint(SpringLayout.WEST, checkArray[0], 450, SpringLayout.WEST, jPanelData);
+            springLayout.putConstraint(SpringLayout.NORTH, checkArray[0], 150, SpringLayout.NORTH, jPanelData);
+
+            for (int i = 1; i < (itemNames.length) ; i++) {
+
+                if(size%2 == 0)
+                    size = size +5;
+                else
+                    size = size -5;
+
+                checkArray[i].setFont(new Font("Urban Sketch", Font.BOLD, size));
+
+                springLayout.putConstraint(SpringLayout.WEST, checkArray[i], 450, SpringLayout.WEST, jPanelData);
+                springLayout.putConstraint(SpringLayout.NORTH, checkArray[i], 15, SpringLayout.SOUTH, checkArray[i-1]);
+            }
+        }
     }
 
     private void GUISettingForJPanel() {
@@ -112,6 +175,10 @@ public class Reports extends JFrame {
                 jPanelData.add( checkArray[i]);
             }
 
+            backgroundPhotoJPG = new ImageIcon(getClass().getResource(BACK_PHOTO));
+            backgroundPhotoLabel = new JLabel(backgroundPhotoJPG);
+            jPanelData.add(backgroundPhotoLabel);
+
         }catch (Exception ex){
 
             System.out.println(ex);
@@ -123,28 +190,61 @@ public class Reports extends JFrame {
         jPanelData = new JPanel();
         springLayout = new SpringLayout();
 
-        jButtonReportAll = new JButton(BUTTON_REPORT_ALL);
-        jButtonSpecificReport = new JButton(BUTTON_SPECIFIC_REPORT);
-        jButtonCancel = new JButton(BUTTON_CANCEL);
-        jButtonChooseFilters = new JButton(BUTTON_CHOOSE_FILTERS);
+        backLogoJPG = new ImageIcon(getClass().getResource(BACK_BUTTON));
+        jButtonCancel = new JButton(backLogoJPG);
+        jButtonCancel.setBorderPainted(false);
+        jButtonCancel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
 
-        jButtonSpecificReport.setVisible(false);
+        titlePhotoJPG = new ImageIcon(getClass().getResource(TITLE));
+        titleLabel = new JLabel(titlePhotoJPG);
 
+        SetButtonsOnPanel();
+        AddButtonsToPanel();
+    }
+
+    private void AddButtonsToPanel() {
+
+        jPanelData.add(titleLabel);
         jPanelData.add(jButtonReportAll);
         jPanelData.add(jButtonSpecificReport);
         jPanelData.add(jButtonCancel);
         jPanelData.add(jButtonChooseFilters);
     }
 
+    private void SetButtonsOnPanel() {
+
+        reportAllLogoJPG = new ImageIcon(getClass().getResource(REPORT_ALL_BUTTON));
+        jButtonReportAll = new JButton(reportAllLogoJPG);
+        jButtonReportAll.setBorderPainted(true);
+        jButtonReportAll.setBackground(Color.BLACK);
+        jButtonReportAll.setPreferredSize(new Dimension(BUTTON_WIDTH1, BUTTON_HEIGHT));
+        jButtonReportAll.setBorder(new LineBorder(Color.red));
+
+        specificLogoJPG = new ImageIcon(getClass().getResource(SPECIFIC_REPORT_BUTTON));
+        jButtonSpecificReport = new JButton(specificLogoJPG);
+        jButtonSpecificReport.setBorderPainted(true);
+        jButtonSpecificReport.setBackground(Color.black);
+        jButtonSpecificReport.setPreferredSize(new Dimension(BUTTON_WIDTH2, BUTTON_HEIGHT));
+        jButtonSpecificReport.setBorder(new LineBorder(Color.red));
+
+        jButtonSpecificReport.setVisible(false);
+
+        chooseFiltersLogoJPG = new ImageIcon(getClass().getResource(CHOOSE_FILTERS_BUTTON));
+        jButtonChooseFilters = new JButton(chooseFiltersLogoJPG);
+        jButtonChooseFilters.setBorderPainted(true);
+        jButtonChooseFilters.setBackground(Color.white);
+        jButtonChooseFilters.setPreferredSize(new Dimension(BUTTON_WIDTH1, BUTTON_HEIGHT));
+        jButtonChooseFilters.setBorder(new LineBorder(Color.red));
+    }
+
     private void GUISettingForJFrame() {
 
-        this.setTitle(FRAME_NAME);
-        this.setSize(FRAMEֹֹ_WIDTH_ֹSIZE, FRAMEֹֹ_HEIGHT_ֹSIZE);
+        this.setSize(FRAMEֹֹ_WIDTH_ֹSIZE,FRAMEֹֹ_HEIGHT_ֹSIZE);
         this.setLocation(FRAMEֹֹ_POSITION_X,FRAMEֹֹ_POSITION_Y);
-        this.setIconImages(Collections.singletonList(Toolkit.getDefaultToolkit().getImage(getClass().getResource(CASTRO_ICON))));
         this.setResizable(false);
 
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setContentPane(jPanelData);
     }
 
     public void InitializeActions() {

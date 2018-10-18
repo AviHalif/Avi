@@ -3,6 +3,7 @@ package Gui;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,9 +11,14 @@ import java.io.IOException;
 
 public class EmployeeListManagement extends EmployeeList {
 
-    private JPanel jPanelManage;
-    private SpringLayout springLayout;
+    public static final String ADD_EMPLOYEE_BUTTON = "/src/images/add_new_emp.png";
+    public static final String UPDATE_EMPLOYEE_BUTTON = "/src/images/update_emp.png";
+    public static final int BUTTON_WIDTH = 390;
+    public static final int BUTTON_HEIGHT = 50;
+
+
     private JButton jButtonAddEmployee, jButtonManageEmployee;
+    private ImageIcon addLogoJPG, updateLogoJPG;
 
     public EmployeeListManagement(JFrame oneBackFrame, String branchName) { // הגיע לכאן(=המסך ניהול עובדים הראשי) המסך הראשי של האדמין
 
@@ -22,44 +28,50 @@ public class EmployeeListManagement extends EmployeeList {
     @Override
     protected void DrawEmployee() throws IOException, ParseException {
 
-        super.DrawEmployee();
-
-        GUISettingForJFrame();
-
-        GUISettingForJPanel();
-    }
-
-    private void GUISettingForJPanel() {
-
         GUIDefineLayoutAndAddComponentsOnJPanel();
 
+        super.DrawEmployee();
+
         GUIPlaceComponentsOnJPanel();
-    }
 
-    private void GUIPlaceComponentsOnJPanel() {
-
-        springLayout.putConstraint(SpringLayout.WEST, jButtonAddEmployee, 10, SpringLayout.WEST, jPanelManage);
-        springLayout.putConstraint(SpringLayout.NORTH, jButtonAddEmployee, 15, SpringLayout.NORTH, jPanelManage);
-        springLayout.putConstraint(SpringLayout.WEST, jButtonManageEmployee, 10, SpringLayout.EAST, jButtonAddEmployee);
-        springLayout.putConstraint(SpringLayout.NORTH, jButtonManageEmployee, 15, SpringLayout.NORTH, jPanelManage);
+        GUISettingForJFrame();
     }
 
     private void GUIDefineLayoutAndAddComponentsOnJPanel() {
 
-        jPanelManage = new JPanel();
+        SetButtonsOnPanel();
 
-        springLayout = new SpringLayout();
-        jPanelManage.setLayout(springLayout);
-        jPanelManage.setPreferredSize(new Dimension(700, 250));
-
-        jButtonAddEmployee = new JButton("ADD EMPLOYEE");
-        jButtonManageEmployee = new JButton("EDIT EMPLOYEE");
-
-        jPanelManage.add(jButtonAddEmployee);
-        jPanelManage.add(jButtonManageEmployee);
-
-        getjPanelMain().add(jPanelManage);
+        getjPanelMain().add(jButtonAddEmployee);
+        getjPanelMain().add(jButtonManageEmployee);
     }
+
+
+    private void GUIPlaceComponentsOnJPanel() {
+
+        getSpringLayout().putConstraint(SpringLayout.WEST, jButtonAddEmployee, 350, SpringLayout.WEST, getjPanelMain());
+        getSpringLayout().putConstraint(SpringLayout.NORTH, jButtonAddEmployee, -90, SpringLayout.SOUTH, getjPanelMain());
+        getSpringLayout().putConstraint(SpringLayout.WEST, jButtonManageEmployee, 50, SpringLayout.EAST, jButtonAddEmployee);
+        getSpringLayout().putConstraint(SpringLayout.NORTH, jButtonManageEmployee, -90, SpringLayout.SOUTH, getjPanelMain());
+    }
+
+
+    private void SetButtonsOnPanel() {
+
+        addLogoJPG = new ImageIcon(getClass().getResource(ADD_EMPLOYEE_BUTTON));
+        jButtonAddEmployee = new JButton(addLogoJPG);
+        jButtonAddEmployee.setBorderPainted(true);
+        jButtonAddEmployee.setBackground(Color.BLACK);
+        jButtonAddEmployee.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        jButtonAddEmployee.setBorder(new LineBorder(Color.red));
+
+        updateLogoJPG = new ImageIcon(getClass().getResource(UPDATE_EMPLOYEE_BUTTON));
+        jButtonManageEmployee = new JButton(updateLogoJPG);
+        jButtonManageEmployee.setBorderPainted(true);
+        jButtonManageEmployee.setBackground(Color.white);
+        jButtonManageEmployee.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        jButtonManageEmployee.setBorder(new LineBorder(Color.red));
+    }
+
 
     private void GUISettingForJFrame() {
 
@@ -78,6 +90,8 @@ public class EmployeeListManagement extends EmployeeList {
                 RegisterEmployee employee = null; // שולח למסך הרישום את המסך הראשי של האדמין ואת המסך של הניהול עובדים
                 try {
                     employee = new RegisterEmployee(getJFrame(), getjFramePrev(), getBranchName());
+                    employee.setUndecorated(true);
+
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -85,7 +99,6 @@ public class EmployeeListManagement extends EmployeeList {
                 employee.DrawRegister();
                 employee.InitializeActions();
                 employee.setVisible(true);
-                employee.setLocationRelativeTo(null);
             }
         });
 

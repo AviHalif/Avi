@@ -36,9 +36,10 @@ public class ItemsPurchaseCatalog extends JFrame {
     public static final String SIZE4 = "XL";
     public static final String DEFAULT_SIZE = "S";
     public static final int NUM_OF_COLUMNS_IN_ALL_ITEMS_TABLE = 3;
-
-    public static final int FRAMEֹֹ_WIDTH_ֹSIZE = 1000;
-    public static final int FRAMEֹֹ_HEIGHT_ֹSIZE = 800;
+    public static final int FRAMEֹֹ_POSITION_X = 7;
+    public static final int FRAMEֹֹ_POSITION_Y = 230;
+    public static final int FRAMEֹֹ_WIDTH_ֹSIZE = 1520;
+    public static final int FRAMEֹֹ_HEIGHT_ֹSIZE = 630;
 
     private Item item;
     private Customer customer;
@@ -333,7 +334,12 @@ public class ItemsPurchaseCatalog extends JFrame {
 
     private void GUISettingForJFrame() {
 
-        this.setSize(FRAMEֹֹ_WIDTH_ֹSIZE, FRAMEֹֹ_HEIGHT_ֹSIZE);
+        this.setSize(FRAMEֹֹ_WIDTH_ֹSIZE,FRAMEֹֹ_HEIGHT_ֹSIZE);
+        this.setLocation(FRAMEֹֹ_POSITION_X,FRAMEֹֹ_POSITION_Y);
+        this.setResizable(false);
+
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
         this.setContentPane(mainPanel);
     }
 
@@ -384,7 +390,6 @@ public class ItemsPurchaseCatalog extends JFrame {
         jLabelItemName.setText(LABEL_ITEM_NAME + itemName[0]);
 
         this.setVisible(true);
-        this.setLocationRelativeTo(null);
     }
 
     private void PrepareAndSendJsonDataToServerAskingForAllItemsPhotos() throws IOException {

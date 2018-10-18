@@ -18,7 +18,6 @@ import java.util.Collections;
 
 public class Login extends JFrame {
 
-
     public static final String BACK_BUTTON = "/src/images/back.png";
     public static final String LOG_IN_BUTTON = "/src/images/logIn.png";
     public static final String CASTRO_ICON = "/src/images/icon.png";
@@ -28,7 +27,7 @@ public class Login extends JFrame {
     public static final String LABEL_ID = "/src/images/id_number.png";
     public static final String BRANCH_NAME = "/src/images/branch.png";
     public static final String FRAME_NAME = "CASTRO - LOG IN";
-    public static final String DEFAULT_BRANCH_NAME = "Jerusalem";
+    public static final String DEFAULT_BRANCH_NAME = "Tel Aviv";
     public static final String BRANCH_NAME1 = "Tel Aviv";
     public static final String BRANCH_NAME2 = "Jerusalem";
 
@@ -87,11 +86,11 @@ public class Login extends JFrame {
         jLabelBranch = new JLabel(label_branch);
 
         jTextFieldId = new JTextField();
-        jTextFieldId.setText("111111");  ////////// למחוקקקקקקקקקק
+        jTextFieldId.setText("333333");  ////////// למחוקקקקקקקקקק
 
         jTextFieldPass = new JPasswordField();
-        jTextFieldPass.setText("AAAaaa111"); /////////// למחוקקקקקקקקקקקקק
-        employee.setEmpPass("AAAaaa111");
+        jTextFieldPass.setText("SSSsss333"); /////////// למחוקקקקקקקקקקקקק
+        employee.setEmpPass("SSSsss333");
 
         jComboBoxBranch = new JComboBox<>(new String[]{BRANCH_NAME1, BRANCH_NAME2});
 

@@ -11,6 +11,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
@@ -25,6 +27,18 @@ public class RegisterEmployee extends Register {
 
     public static final String HELP_LABEL = "/src/images/ques_mark.png";
     public static final String NO_PHOTO = "/src/images/No_Image_Available.png";
+    public static final String TITLE = "/src/images/employee_register.png";
+    public static final String BLACK_PHOTO = "/src/images/black_back.png";
+    public static final String LABEL_BRANCH = "/src/images/registry_branch.png";
+    public static final String LABEL_BANK = "/src/images/registry_bank.png";
+    public static final String LABEL_PASS = "/src/images/registry_pass.png";
+    public static final String CHANGE_PHOTO = "/src/images/change_photo.png";
+    public static final String REMOVE_PHOTO = "/src/images/remove_photo.png";
+    public static final String VERIFY_REGISTER = "/src/images/verify_photo.png";
+    public static final int BUTTON_WIDTH2 = 350;
+    public static final int BUTTON_HEIGHT2 = 50;
+    public static final int BUTTON_WIDTH3 = 300;
+    public static final int BUTTON_HEIGHT3 = 50;
 
     private Employee employee;
     private String empBranchName, propFileName;
@@ -33,16 +47,16 @@ public class RegisterEmployee extends Register {
 
     private Properties properties;
     private InputStream inStream;
+    private ImageIcon label_branch, label_pass, label_bank;
+    private JLabel jLabelbranch, jLabelpass, jLabelbank;
 
     private Client client;
 
     private JSONObject jsonObject;
     private ObjectMapper objectMapper;
 
-    private JPanel jPanelDownFields;
-    private SpringLayout springLayoutFields;
-    private JLabel helpLabel, bankaccount_label, branch_label, password_label, photoLabel;
-    private ImageIcon helpLabelJPG, photoLabelJPG;
+    private JLabel helpLabel, photoLabel, titleLabel, blackgroundPhotoLabel;
+    private ImageIcon titlePhotoJPG, helpLabelJPG, photoLabelJPG, blackgroundPhotoJPG, changeLogoJPG, removeLogoJPG, verifyLogoJPG;
     private JTextField branchName_text, bankaccount_text;
     private JPasswordField password_text, password_authentication_text;
     private JButton verifyAndRegister, browse_button, remove_photo_button;
@@ -79,18 +93,9 @@ public class RegisterEmployee extends Register {
 
     private void SetGUIComponents() {
 
-        GUISettingForJPanel();
-
         GUISettingForJFrame();
     }
 
-    private void GUISettingForJPanel() {
-
-        jPanelDownFields = new JPanel();
-        springLayoutFields= new SpringLayout();
-        jPanelDownFields.setLayout(springLayoutFields);
-        jPanelDownFields.setPreferredSize(new Dimension(800, 300));
-    }
 
     private void GUISetComponentsOnJPanelDown() {
 
@@ -105,56 +110,108 @@ public class RegisterEmployee extends Register {
 
     private void GUISetLabelsComponents() {
 
-        bankaccount_label = new JLabel("BANK ACCOUNT :");
-        branch_label = new JLabel("BRANCH :");
-        password_label = new JLabel("PASSWORD :");
+        label_bank = new ImageIcon(getClass().getResource(LABEL_BANK));
+        jLabelbank = new JLabel(label_bank);
 
-        jPanelDownFields.add(bankaccount_label);
-        jPanelDownFields.add(branch_label);
-        jPanelDownFields.add(password_label);
+        label_pass = new ImageIcon(getClass().getResource(LABEL_PASS));
+        jLabelpass = new JLabel(label_pass);
+
+        label_branch = new ImageIcon(getClass().getResource(LABEL_BRANCH));
+        jLabelbranch = new JLabel(label_branch);
+
+        getjPanelTopFields().add(jLabelbank);
+        getjPanelTopFields().add(jLabelpass);
+        getjPanelTopFields().add(jLabelbranch);
     }
 
     private void GUISetButtonsComponents() {
 
-        browse_button = new JButton("BROWSE");
+        changeLogoJPG = new ImageIcon(getClass().getResource(CHANGE_PHOTO));
+        browse_button = new JButton(changeLogoJPG);
+        browse_button.setBorderPainted(true);
+        browse_button.setBackground(Color.white);
+        browse_button.setPreferredSize(new Dimension(BUTTON_WIDTH3, BUTTON_HEIGHT3));
+        browse_button.setBorder(new LineBorder(Color.red));
         browse_button.setEnabled(false);
 
-        remove_photo_button = new JButton("REMOVE IMAGE");
+        removeLogoJPG = new ImageIcon(getClass().getResource(REMOVE_PHOTO));
+        remove_photo_button = new JButton(removeLogoJPG);
+        remove_photo_button.setBorderPainted(true);
+        remove_photo_button.setBackground(Color.white);
+        remove_photo_button.setPreferredSize(new Dimension(BUTTON_WIDTH3, BUTTON_HEIGHT3));
+        remove_photo_button.setBorder(new LineBorder(Color.red));
         remove_photo_button.setEnabled(false);
 
-        verifyAndRegister = new JButton("VERIFY & REGISTER");
+        verifyLogoJPG = new ImageIcon(getClass().getResource(VERIFY_REGISTER));
+        verifyAndRegister = new JButton(verifyLogoJPG);
+        verifyAndRegister.setBorderPainted(true);
+        verifyAndRegister.setBackground(Color.white);
+        verifyAndRegister.setPreferredSize(new Dimension(BUTTON_WIDTH2, BUTTON_HEIGHT2));
+        verifyAndRegister.setBorder(new LineBorder(Color.red));
+        verifyAndRegister.setEnabled(false);
         verifyAndRegister.setVisible(false);
 
-        jPanelDownFields.add(verifyAndRegister);
-        jPanelDownFields.add(browse_button);
-        jPanelDownFields.add(remove_photo_button);
+        getjPanelTopFields().add(verifyAndRegister);
+        getjPanelTopFields().add(browse_button);
+        getjPanelTopFields().add(remove_photo_button);
     }
 
     private void GUISetTextFieldsAndComboComponents() {
 
-        bankaccount_text = new JTextField(15);
-        password_text = new JPasswordField(15);
-        password_authentication_text = new JPasswordField(15);
+        bankaccount_text = new JTextField();
+        bankaccount_text.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
+        bankaccount_text.setHorizontalAlignment(JTextField.CENTER);
+        bankaccount_text.setFont(new Font("Urban Sketch", Font.BOLD, 30));
+        bankaccount_text.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.black));
+        bankaccount_text.setForeground (Color.black);
+        bankaccount_text.setOpaque(false);
+
+        bankaccount_text.setEnabled(false);
+
+
+        password_text = new JPasswordField();
+        password_text.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
+        password_text.setHorizontalAlignment(JTextField.CENTER);
+        password_text.setFont(new Font("Urban Sketch", Font.BOLD, 30));
+        password_text.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.black));
+        password_text.setForeground (Color.black);
+        password_text.setOpaque(false);
+
+        password_text.setEnabled(false);
+
+
+        password_authentication_text = new JPasswordField();
+        password_authentication_text.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
+        password_authentication_text.setHorizontalAlignment(JTextField.CENTER);
+        password_authentication_text.setFont(new Font("Urban Sketch", Font.BOLD, 30));
+        password_authentication_text.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.black));
+        password_authentication_text.setForeground (Color.black);
+        password_authentication_text.setOpaque(false);
 
         password_authentication_text.setVisible(false);
 
-        branchName_text = new JTextField(empBranchName);
-        branchName_text.setEnabled(false);
 
-        bankaccount_text.setEnabled(false);
-        password_text.setEnabled(false);
+        branchName_text = new JTextField(empBranchName);
+        branchName_text.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
+        branchName_text.setHorizontalAlignment(JTextField.CENTER);
+        branchName_text.setFont(new Font("Urban Sketch", Font.BOLD, 30));
+        branchName_text.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.black));
+        branchName_text.setForeground (Color.black);
+        branchName_text.setOpaque(false);
+
+        branchName_text.setEditable(false);
+
 
         getType_box().setEnabled(false);
-
 
         getComboBoxModel().addElement("Seller");
         getComboBoxModel().addElement("Cashier");
         getComboBoxModel().addElement("Shift Manager");
 
-        jPanelDownFields.add(bankaccount_text);
-        jPanelDownFields.add(branchName_text);
-        jPanelDownFields.add(password_text);
-        jPanelDownFields.add(password_authentication_text);
+        getjPanelTopFields().add(bankaccount_text);
+        getjPanelTopFields().add(branchName_text);
+        getjPanelTopFields().add(password_text);
+        getjPanelTopFields().add(password_authentication_text);
     }
 
     private void GUISetToolKitsComponents() {
@@ -162,20 +219,16 @@ public class RegisterEmployee extends Register {
         helpLabelJPG = new ImageIcon(getClass().getResource(HELP_LABEL));
         helpLabel = new JLabel(helpLabelJPG);
         helpLabel.setPreferredSize(new Dimension(120, 120));
-        jPanelDownFields.add(helpLabel);
-        helpLabel.setToolTipText("Please insert only ............ !!!");
-
+        getjPanelTopFields().add(helpLabel);
+        helpLabel.setToolTipText("Please insert at least one char A-Z, a-z and 0-9 !!!");
 
         photoLabelJPG = new ImageIcon(getClass().getResource(NO_PHOTO));
         photoLabel = new JLabel(photoLabelJPG);
-        photoLabel.setPreferredSize(new Dimension(300, 300)); // לשנות שיהיה ריסאייזבאל כמו שמציג את התמונות ברגע שבוחר אותם מהמחשב
-        jPanelDownFields.add(photoLabel);
+        photoLabel.setPreferredSize(new Dimension(200, 250)); // לשנות שיהיה ריסאייזבאל כמו שמציג את התמונות ברגע שבוחר אותם מהמחשב
         employee.setEmpPhoto("C:/Users/AviHalif/IdeaProjects/Avi/src/images/No_Image_Available.png"); // כאן חייב להזין את הנתיב המלא של בחירת התמונה
     }
 
     private void GUISettingForJFrame() {
-
-        this.setTitle("Employee Register");
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
@@ -183,7 +236,20 @@ public class RegisterEmployee extends Register {
     @Override
     protected void DrawRegister() {
 
+        titlePhotoJPG = new ImageIcon(getClass().getResource(TITLE));
+        titleLabel = new JLabel(titlePhotoJPG);
+        getjPanelMain().add(titleLabel);
+
+        blackgroundPhotoJPG = new ImageIcon(getClass().getResource(BLACK_PHOTO));
+        blackgroundPhotoLabel = new JLabel(blackgroundPhotoJPG);
+
         super.DrawRegister();
+
+        getSpringLayoutPanels().putConstraint(SpringLayout.WEST,titleLabel,60,SpringLayout.WEST,getjPanelMain());
+        getSpringLayoutPanels().putConstraint(SpringLayout.NORTH,titleLabel,5,SpringLayout.NORTH,getjPanelMain());
+
+        getSpringLayoutFields().putConstraint(SpringLayout.WEST,blackgroundPhotoLabel,5,SpringLayout.EAST,getFullname_text());
+        getSpringLayoutFields().putConstraint(SpringLayout.SOUTH,blackgroundPhotoLabel,230,SpringLayout.SOUTH,getjPanelTopFields());
 
         SetObjectsComponents();
 
@@ -193,49 +259,48 @@ public class RegisterEmployee extends Register {
 
         GUIPlaceComponentsOnDownPanel();
 
-        GUIPlaceAndAddPanelsOnMainPanel();
-    }
+        getjPanelTopFields().add(blackgroundPhotoLabel);
 
-    private void GUIPlaceAndAddPanelsOnMainPanel() {
-
-        // Layout for Panels
-        getSpringLayoutPanels().putConstraint(SpringLayout.WEST, jPanelDownFields, 10, SpringLayout.WEST, getjPanelMain());
-        getSpringLayoutPanels().putConstraint(SpringLayout.NORTH, jPanelDownFields, 25, SpringLayout.SOUTH, getjPanelTopFields());
-
-        getjPanelMain().add(jPanelDownFields);
+        getjPanelTopFields().add(photoLabel);
     }
 
     private void GUIPlaceComponentsOnDownPanel() {
 
-        springLayoutFields.putConstraint(SpringLayout.WEST, helpLabel, 100, SpringLayout.WEST, jPanelDownFields);
-        springLayoutFields.putConstraint(SpringLayout.NORTH, helpLabel, 100, SpringLayout.NORTH, jPanelDownFields);
+        getSpringLayoutFields().putConstraint(SpringLayout.WEST,jLabelbank,230,SpringLayout.WEST,getjPanelTopFields());
+        getSpringLayoutFields().putConstraint(SpringLayout.NORTH,jLabelbank,100,SpringLayout.NORTH,getjLabeltype());
 
-        springLayoutFields.putConstraint(SpringLayout.EAST, photoLabel, 10, SpringLayout.EAST, jPanelDownFields);
-        springLayoutFields.putConstraint(SpringLayout.NORTH, photoLabel, 10, SpringLayout.NORTH, jPanelDownFields);
+        getSpringLayoutFields().putConstraint(SpringLayout.WEST, jLabelbranch, 850, SpringLayout.WEST, getjPanelMain());
+        getSpringLayoutFields().putConstraint(SpringLayout.NORTH, jLabelbranch, 200, SpringLayout.NORTH, getjPanelMain());
 
-        springLayoutFields.putConstraint(SpringLayout.WEST, browse_button, 10, SpringLayout.WEST, jPanelDownFields);
-        springLayoutFields.putConstraint(SpringLayout.SOUTH, browse_button, 10, SpringLayout.SOUTH, jPanelDownFields);
+        getSpringLayoutFields().putConstraint(SpringLayout.WEST, jLabelpass, 850, SpringLayout.WEST, getjPanelMain());
+        getSpringLayoutFields().putConstraint(SpringLayout.NORTH, jLabelpass, 17, SpringLayout.SOUTH, jLabelbranch);
 
-        springLayoutFields.putConstraint(SpringLayout.WEST, bankaccount_label, 10, SpringLayout.WEST, jPanelDownFields);
-        springLayoutFields.putConstraint(SpringLayout.NORTH, bankaccount_label, 10, SpringLayout.NORTH, jPanelDownFields);
-        springLayoutFields.putConstraint(SpringLayout.WEST, bankaccount_text, 10, SpringLayout.EAST, bankaccount_label);
-        springLayoutFields.putConstraint(SpringLayout.NORTH, bankaccount_text, 10, SpringLayout.NORTH, jPanelDownFields);
+        getSpringLayoutFields().putConstraint(SpringLayout.WEST, bankaccount_text, -10, SpringLayout.EAST, jLabelbank);
+        getSpringLayoutFields().putConstraint(SpringLayout.NORTH, bankaccount_text, 35, SpringLayout.SOUTH,getjLabeltype());
 
-        springLayoutFields.putConstraint(SpringLayout.WEST, branch_label, 10, SpringLayout.WEST, jPanelDownFields);
-        springLayoutFields.putConstraint(SpringLayout.NORTH, branch_label, 10, SpringLayout.NORTH, bankaccount_label);
-        springLayoutFields.putConstraint(SpringLayout.WEST, branchName_text, 10, SpringLayout.EAST, branch_label);
-        springLayoutFields.putConstraint(SpringLayout.NORTH, branchName_text, 10, SpringLayout.NORTH, bankaccount_text);
+        getSpringLayoutFields().putConstraint(SpringLayout.WEST, branchName_text, 15, SpringLayout.EAST, jLabelbranch);
+        getSpringLayoutFields().putConstraint(SpringLayout.NORTH, branchName_text, 215, SpringLayout.SOUTH, getjPanelMain());
 
-        springLayoutFields.putConstraint(SpringLayout.WEST, password_label, 10, SpringLayout.WEST, jPanelDownFields);
-        springLayoutFields.putConstraint(SpringLayout.NORTH, password_label, 10, SpringLayout.NORTH, branch_label);
-        springLayoutFields.putConstraint(SpringLayout.WEST, password_text, 10, SpringLayout.EAST, password_label);
-        springLayoutFields.putConstraint(SpringLayout.NORTH, password_text, 10, SpringLayout.NORTH, branchName_text);
+        getSpringLayoutFields().putConstraint(SpringLayout.WEST, password_text, 5, SpringLayout.EAST, jLabelpass);
+        getSpringLayoutFields().putConstraint(SpringLayout.NORTH, password_text, 48, SpringLayout.SOUTH, branchName_text);
 
-        springLayoutFields.putConstraint(SpringLayout.WEST, password_authentication_text, 10, SpringLayout.EAST, password_text);
-        springLayoutFields.putConstraint(SpringLayout.NORTH, password_authentication_text, 10, SpringLayout.NORTH, jPanelDownFields);
+        getSpringLayoutFields().putConstraint(SpringLayout.WEST, password_authentication_text, 5, SpringLayout.EAST, jLabelpass);
+        getSpringLayoutFields().putConstraint(SpringLayout.NORTH, password_authentication_text, 48, SpringLayout.SOUTH, password_text);
 
-        springLayoutFields.putConstraint(SpringLayout.WEST, verifyAndRegister, 10, SpringLayout.EAST, getCancelButton());
-        springLayoutFields.putConstraint(SpringLayout.SOUTH, verifyAndRegister, 100, SpringLayout.NORTH, getCancelButton());
+        getSpringLayoutFields().putConstraint(SpringLayout.EAST, helpLabel, 10, SpringLayout.WEST, password_text);
+        getSpringLayoutFields().putConstraint(SpringLayout.NORTH, helpLabel, 110, SpringLayout.SOUTH, branchName_text);
+
+        getSpringLayoutFields().putConstraint(SpringLayout.WEST, photoLabel, 5, SpringLayout.WEST, getjPanelTopFields());
+        getSpringLayoutFields().putConstraint(SpringLayout.NORTH, photoLabel, 0, SpringLayout.SOUTH, getCheckButton());
+
+        getSpringLayoutFields().putConstraint(SpringLayout.EAST, verifyAndRegister, 25, SpringLayout.EAST, blackgroundPhotoLabel);
+        getSpringLayoutFields().putConstraint(SpringLayout.NORTH, verifyAndRegister, 480, SpringLayout.NORTH, getjPanelTopFields());
+
+        getSpringLayoutFields().putConstraint(SpringLayout.EAST, browse_button, 350, SpringLayout.EAST, blackgroundPhotoLabel);
+        getSpringLayoutFields().putConstraint(SpringLayout.NORTH, browse_button, 480, SpringLayout.NORTH, getjPanelTopFields());
+
+        getSpringLayoutFields().putConstraint(SpringLayout.EAST, remove_photo_button, 350, SpringLayout.EAST, blackgroundPhotoLabel);
+        getSpringLayoutFields().putConstraint(SpringLayout.NORTH, remove_photo_button, 550, SpringLayout.NORTH, getjPanelTopFields());
     }
 
     protected void InitializeActions() {
@@ -285,13 +350,12 @@ public class RegisterEmployee extends Register {
 
                 photoLabelJPG = new ImageIcon(getClass().getResource(NO_PHOTO));
                 photoLabel = new JLabel(photoLabelJPG);
-                photoLabel.setPreferredSize(new Dimension(300, 300)); // לשנות שיהיה ריסאייזבאל כמו שמציג את התמונות ברגע שבוחר אותם מהמחשב
-                jPanelDownFields.add(photoLabel);
+                photoLabel.setPreferredSize(new Dimension(200, 250)); // לשנות שיהיה ריסאייזבאל כמו שמציג את התמונות ברגע שבוחר אותם מהמחשב
 
                 employee.setEmpPhoto("C:/Users/AviHalif/IdeaProjects/Avi/src/images/No_Image_Available.png"); // כאן חייב להזין את הנתיב המלא של בחירת התמונה
 
-                springLayoutFields.putConstraint(SpringLayout.EAST, photoLabel, 10, SpringLayout.EAST, jPanelDownFields);
-                springLayoutFields.putConstraint(SpringLayout.NORTH, photoLabel, 10, SpringLayout.NORTH, jPanelDownFields);
+                getSpringLayoutFields().putConstraint(SpringLayout.WEST, photoLabel, 5, SpringLayout.WEST, getjPanelTopFields());
+                getSpringLayoutFields().putConstraint(SpringLayout.NORTH, photoLabel, 0, SpringLayout.SOUTH, getCheckButton());
 
                 photoLabel.setVisible(true);
                 remove_photo_button.setEnabled(false);
@@ -379,7 +443,7 @@ public class RegisterEmployee extends Register {
             }
         });
 
-        getRegister().addActionListener(new ActionListener() {
+        getRegisterButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -393,14 +457,14 @@ public class RegisterEmployee extends Register {
                     JOptionPane.showMessageDialog(null, "PASSWORD VERIFICATION : Please enter your password again");
 
                     password_authentication_text.setVisible(true);
-                    getRegister().setVisible(false);
-                    verifyAndRegister.setVisible(true);
+                    getRegisterButton().setVisible(false);
+                    verifyAndRegister.setVisible(false);
                 } catch (Exception ex) {
                 }
             }
         });
 
-        getOKButton().addActionListener(new ActionListener() {
+        getCheckButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -421,7 +485,7 @@ public class RegisterEmployee extends Register {
 
                     if (!(response.equals(""))) { // אם התז כבר נמצא במערכת תציג הודעה ותאפס את השדה טקסט
                         JOptionPane.showMessageDialog(null, response);
-                        getOKButton().setEnabled(false);
+                        getCheckButton().setEnabled(false);
                         getId_text().setText("");
 
 
@@ -440,12 +504,21 @@ public class RegisterEmployee extends Register {
 
         bankaccount_text.addFocusListener(new FocusAdapter() {
 
+                @Override
+                public void focusGained(FocusEvent e) {
+
+                    bankaccount_text.setBorder(BorderFactory.createLineBorder(Color.red));
+                }
+
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
                 employee.setEmpBank(bankaccount_text.getText());
+                bankaccount_text.setBorder(BorderFactory.createLineBorder(Color.black));
 
             }
+
+
         });
 
     }
@@ -461,8 +534,8 @@ public class RegisterEmployee extends Register {
         bankaccount_text.setEnabled(true);
         password_text.setEnabled(true);
 
-        getOKButton().setVisible(false); // תחליף בין הכפתורים ע"י העלמתם
-        getRegister().setVisible(true);
+        getCheckButton().setVisible(false); // תחליף בין הכפתורים ע"י העלמתם
+        getRegisterButton().setVisible(true);
     }
 
     private void InsertAllFieldsToEmployeeObject() {
@@ -481,7 +554,7 @@ public class RegisterEmployee extends Register {
         password_authentication_text.setText("");
         password_authentication_text.setVisible(false);
         verifyAndRegister.setVisible(false);
-        getRegister().setVisible(true);
+        getRegisterButton().setVisible(true);
     }
 
     private void DrawUpdateEmployeeList() throws IOException, ParseException {
@@ -516,9 +589,9 @@ public class RegisterEmployee extends Register {
         ImageIcon image = new ImageIcon(newImage);
 
         photoLabel = new JLabel(image);
-        springLayoutFields.putConstraint(SpringLayout.EAST, photoLabel, 10, SpringLayout.EAST, jPanelDownFields);
-        springLayoutFields.putConstraint(SpringLayout.NORTH, photoLabel, 10, SpringLayout.NORTH, jPanelDownFields);
-        jPanelDownFields.add(photoLabel);
+        getSpringLayoutFields().putConstraint(SpringLayout.WEST, photoLabel, 5, SpringLayout.WEST, getjPanelTopFields());
+        getSpringLayoutFields().putConstraint(SpringLayout.NORTH, photoLabel, 0, SpringLayout.SOUTH, getCheckButton());
+        getjPanelTopFields().add(photoLabel);
     }
 
     private boolean MaxSizeImage(String path) {

@@ -63,9 +63,10 @@ public class MainMenuAdmin extends MainMenuCashier {
 }
 
     private void DrawTheEmployeeMenu() {
-        
-        getJFrame().setEnabled(false);
+
         EmployeeListManagement employeeListManagement = new EmployeeListManagement(getJFrame(),getEmployee().getEmpBranch());
+        getJFrame().setEnabled(false); // Disable edit this window when you open the next window
+        employeeListManagement.setUndecorated(true);
 
         try {
             employeeListManagement.DrawEmployee();
@@ -77,25 +78,23 @@ public class MainMenuAdmin extends MainMenuCashier {
         
         employeeListManagement.InitializeActions();
         employeeListManagement.setVisible(true);
-        employeeListManagement.toFront();
-        employeeListManagement.setLocationRelativeTo(null);
     }
 
     private void DrawTheReportsMenu() {
 
-        getJFrame().setEnabled(false);
         Reports report = new Reports(getJFrame(),getEmployee().getEmpBranch());
+        getJFrame().setEnabled(false);
+        report.setUndecorated(true);
         report.DrawReports();
         report.InitializeActions();
         report.setVisible(true);
-        report.toFront();
-        report.setLocationRelativeTo(null);
     }
 
     private void DrawTheCustomerMenu() {
 
         CustomerListManagement customers = new CustomerListManagement(getJFrame(),getEmployee().getEmpBranch());
         setEnabled(false); // Disable edit this window when you open the next window
+        customers.setUndecorated(true);
 
         try {
 
@@ -110,7 +109,6 @@ public class MainMenuAdmin extends MainMenuCashier {
 
         customers.InitializeActions();
         customers.setVisible(true);
-        customers.setLocationRelativeTo(null);
     }
 
     @Override

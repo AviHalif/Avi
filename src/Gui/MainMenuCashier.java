@@ -74,6 +74,7 @@ public class MainMenuCashier extends MainMenuSeller {
         CustomerList customers = new CustomerList(getJFrame(), getEmployee().getEmpBranch());
 
         setEnabled(false); // Disable edit this window when you open the next window
+        customers.setUndecorated(true);
 
         try {
 
@@ -87,19 +88,16 @@ public class MainMenuCashier extends MainMenuSeller {
 
         customers.InitializeActions();
         customers.setVisible(true);
-        customers.setLocationRelativeTo(null);
     }
 
     private void DrawTheSellMenu() throws IOException {
 
-        getJFrame().setEnabled(false);
-
         ItemsPurchaseCatalog catalog = new ItemsPurchaseCatalog(getJFrame(),getEmployee().getEmpBranch(),getEmployee().getEmpType());
-
+        getJFrame().setEnabled(false);
+        catalog.setUndecorated(true);
         catalog.DrawCatalog();
         catalog.InitializeActions();
         catalog.setVisible(true);
-        catalog.setLocationRelativeTo(null);
     }
 
     @Override

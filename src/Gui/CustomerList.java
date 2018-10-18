@@ -7,6 +7,11 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +22,20 @@ import java.util.Vector;
 
 public class CustomerList extends JFrame{
 
-    public static final String BUTTON_BACK_NAME = "BACK";
+    public static final String BACK_PHOTO = "/src/images/weloveour.png";
+    public static final String BACK_BUTTON = "/src/images/back.png";
+    public static final String TITLE = "/src/images/customers_title.png";
+    public static final int TABLE_COLUMN_SIZE = 600;
+    public static final int ROW_HEIGHT = 50;
+    public static final int  NUM_OF_COLUMNS = 4;
+    public static final int TABLE_PANELֹֹ_WIDTH_ֹSIZE = 1100;
+    public static final int TABLE_PANELֹֹ_HEIGHT_ֹSIZE = 350;
+    public static final int TABLEֹֹ_WIDTH_ֹSIZE = 1000;
+    public static final int TABLEֹֹ_HEIGHT_ֹSIZE = 330;
+    public static final int FRAMEֹֹ_POSITION_X = 7;
+    public static final int FRAMEֹֹ_POSITION_Y = 230;
+    public static final int FRAMEֹֹ_WIDTH_ֹSIZE = 1520;
+    public static final int FRAMEֹֹ_HEIGHT_ֹSIZE = 630;
 
     private String branchName;
     private Client client;
@@ -28,8 +46,12 @@ public class CustomerList extends JFrame{
 
     private JFrame jFramePrev;
     private JPanel jPanelMain, jPanelTable;
+    private SpringLayout springLayout;
     private JTable table;
+    private JLabel backgroundPhotoLabel, titleLabel;
     private JButton jButtonBack;
+    private ImageIcon backgroundPhotoJPG, backLogoJPG, titlePhotoJPG;
+
 
     public CustomerList(JFrame oneBackFrame, String branchName)  { //  הגיע לכאן(=המסך ניהול עובדים הראשי) המסך הראשי של האדמין או הקופאי
 
@@ -42,6 +64,23 @@ public class CustomerList extends JFrame{
     private void SetGUIComponents(JFrame oneBackFrame) {
 
         this.jFramePrev = oneBackFrame;
+
+        jPanelMain = new JPanel();
+        jPanelTable = new JPanel();
+        jPanelTable.setOpaque(false);
+
+        jPanelTable.setPreferredSize(new Dimension(TABLE_PANELֹֹ_WIDTH_ֹSIZE, TABLE_PANELֹֹ_HEIGHT_ֹSIZE));
+
+        backgroundPhotoJPG = new ImageIcon(getClass().getResource(BACK_PHOTO));
+        backgroundPhotoLabel = new JLabel(backgroundPhotoJPG);
+
+        backLogoJPG = new ImageIcon(getClass().getResource(BACK_BUTTON));
+        jButtonBack = new JButton(backLogoJPG);
+        jButtonBack.setBorderPainted(false);
+        jButtonBack.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
+
+        titlePhotoJPG = new ImageIcon(getClass().getResource(TITLE));
+        titleLabel = new JLabel(titlePhotoJPG);
     }
 
     private void SetObjectsComponents(String branchName) {
@@ -50,6 +89,8 @@ public class CustomerList extends JFrame{
     }
 
     protected void DrawCustomer() throws IOException, ParseException {
+
+        GUIPlaceComponentsOnJPanel();
 
         PrepareAndSendJsonCustomersListDataToServer();
 
@@ -60,6 +101,24 @@ public class CustomerList extends JFrame{
         client.getSslSocket().close();
 
         }
+
+    private void GUIPlaceComponentsOnJPanel() {
+
+        springLayout = new SpringLayout();
+        jPanelMain.setLayout(springLayout);
+
+        springLayout.putConstraint(SpringLayout.WEST,jPanelTable,220,SpringLayout.WEST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.NORTH,jPanelTable,130,SpringLayout.NORTH,jPanelMain);
+
+        springLayout.putConstraint(SpringLayout.WEST,jButtonBack,0,SpringLayout.WEST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.SOUTH,jButtonBack,0,SpringLayout.SOUTH,jPanelMain);
+
+        springLayout.putConstraint(SpringLayout.WEST,backgroundPhotoLabel,-170,SpringLayout.WEST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.NORTH,backgroundPhotoLabel,-80,SpringLayout.NORTH,jPanelMain);
+
+        springLayout.putConstraint(SpringLayout.WEST,titleLabel,390,SpringLayout.WEST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.NORTH,titleLabel,18,SpringLayout.NORTH,jPanelMain);
+    }
 
     private void DrawTheCustomersTable(Vector<Vector<String>> dataList) {
 
@@ -75,38 +134,83 @@ public class CustomerList extends JFrame{
     private void GUISettingForJTable(Vector<Vector<String>> dataList) {
 
         Vector<String> columnNames = new Vector<>();
-        columnNames.add("CustomerList ID");
-        columnNames.add("CustomerList Name");
-        columnNames.add("CustomerList Phone");
-        columnNames.add("CustomerList Type");
+        columnNames.add("Customer ID");
+        columnNames.add("Customer Name");
+        columnNames.add("Customer Phone");
+        columnNames.add("Customer Type");
 
-        jPanelTable = new JPanel();
-        jPanelTable.setPreferredSize(new Dimension(700, 500));
+        // Insert the Strings list into the table with the columns name
+        table = new JTable(dataList, columnNames){
+            @Override // Set values position in the center of the columns
+            public Component prepareRenderer(TableCellRenderer renderer, int row,
+                                             int col) {
+                Component comp = super.prepareRenderer(renderer, row, col);
+                ((JLabel) comp).setHorizontalAlignment(JLabel.CENTER);
+                return comp;
+            }
+        };
 
-        table = new JTable(dataList, columnNames);
         JScrollPane tableContainer = new JScrollPane(table);
 
         jPanelTable.add(tableContainer, BorderLayout.CENTER);
-        jPanelMain.add(jPanelTable);
-        jPanelMain.add(jButtonBack);
+
+        GUISetTable(tableContainer);
+    }
+
+    private void GUISetTable(JScrollPane tableContainer) {
+
+        setColumnWidths(table,TABLE_COLUMN_SIZE,NUM_OF_COLUMNS);
+        table.setRowHeight(ROW_HEIGHT);
+        table.setFont(new Font("Urban Sketch", Font.BOLD, 25));
+        table.setForeground(Color.black);
+        Dimension d = table.getPreferredSize();
+        d.width = TABLEֹֹ_WIDTH_ֹSIZE;
+        d.height = TABLEֹֹ_HEIGHT_ֹSIZE;
+        table.setPreferredScrollableViewportSize(d);
+        tableContainer.setPreferredSize(new Dimension(d));
+
+        JTableHeader anHeader = table.getTableHeader();
+        anHeader.setForeground(new Color(0).white);
+        anHeader.setBackground(new Color(0).black);
+        table.getTableHeader().setFont(new Font("Urban Sketch", Font.PLAIN, 27));
+
+        table.setOpaque(false); // אם יש שקיפות אז אי אפשר לסמן שורה שלמה בכחול
+        ((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setOpaque(false);
+        tableContainer.setOpaque(false);
+        tableContainer.getViewport().setOpaque(false);
 
         table.setAutoCreateRowSorter(true);
         table.getTableHeader().setReorderingAllowed(false); // Disable moving columns position
-        table.setEnabled(false);
+        table.setDefaultEditor(Object.class, null);
+    }
+
+    private void setColumnWidths(JTable table, int width, int numOfColumns) {
+
+        TableColumnModel columnModel = table.getColumnModel();
+
+        for (int i = 0; i < numOfColumns; i++) {
+
+            columnModel.getColumn(i).setMaxWidth(width);
+        }
     }
 
     private void GUISettingForJPanel() {
 
-        jPanelMain = new JPanel();
-        jButtonBack = new JButton(BUTTON_BACK_NAME);
+        jPanelMain.add(titleLabel);
+        jPanelMain.add(jButtonBack);
+        jPanelMain.add(jPanelTable);
+        jPanelMain.add(backgroundPhotoLabel);
+
     }
 
-    private void GUISettingForJFrame() {
+    protected void GUISettingForJFrame() {
 
-        this.setTitle("CASTRO - CUSTOMERS LIST");
-        this.setSize(800,800);
+        this.setSize(FRAMEֹֹ_WIDTH_ֹSIZE,FRAMEֹֹ_HEIGHT_ֹSIZE);
+        this.setLocation(FRAMEֹֹ_POSITION_X,FRAMEֹֹ_POSITION_Y);
+        this.setResizable(false);
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setContentPane(jPanelMain);
     }
 
     protected void InitializeActions() {
@@ -178,7 +282,14 @@ public class CustomerList extends JFrame{
 
         client.getOutputStream().writeUTF(jsonObject.toString() + "\n");
         client.getOutputStream().flush();
+    }
 
+    public JPanel getjPanelTable() {
+        return jPanelTable;
+    }
+
+    public SpringLayout getSpringLayout() {
+        return springLayout;
     }
 
     public String getBranchName() {

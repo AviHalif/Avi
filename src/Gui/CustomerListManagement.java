@@ -3,6 +3,7 @@ package Gui;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,9 +11,13 @@ import java.io.IOException;
 
 public class CustomerListManagement extends CustomerList {
 
-    private JPanel jPanelManage;
-    private SpringLayout springLayout;
+    public static final String ADD_CUSTOMER_BUTTON = "/src/images/add_new_cust.png";
+    public static final String UPDATE_CUSTOMER_BUTTON = "/src/images/update_cust.png";
+    public static final int BUTTON_WIDTH = 390;
+    public static final int BUTTON_HEIGHT = 50;
+
     private JButton jButtonAddCustom, jButtonManageCustom;
+    private ImageIcon addLogoJPG, updateLogoJPG;
 
 
     public CustomerListManagement(JFrame oneBackFrame, String branchName) { // הגיע לכאן(=המסך ניהול עובדים הראשי) המסך הראשי של האדמין
@@ -23,48 +28,46 @@ public class CustomerListManagement extends CustomerList {
     @Override
     protected void DrawCustomer() throws IOException, ParseException {
 
+        GUIDefineLayoutAndAddComponentsOnJPanel();
+
         super.DrawCustomer();
 
         GUISettingForJFrame();
-
-        GUISettingForJPanel();
-    }
-
-    private void GUISettingForJFrame() {
-
-        setTitle("CustomerList Management");
-    }
-
-    private void GUISettingForJPanel() {
-
-        GUIDefineLayoutAndAddComponentsOnJPanel();
 
         GUIPlaceComponentsOnJPanel();
     }
 
     private void GUIPlaceComponentsOnJPanel() {
 
-        springLayout.putConstraint(SpringLayout.WEST, jButtonAddCustom, 10, SpringLayout.WEST, jPanelManage);
-        springLayout.putConstraint(SpringLayout.NORTH, jButtonAddCustom, 25, SpringLayout.NORTH, jPanelManage);
-        springLayout.putConstraint(SpringLayout.WEST, jButtonManageCustom, 10, SpringLayout.EAST, jButtonAddCustom);
-        springLayout.putConstraint(SpringLayout.NORTH, jButtonManageCustom, 25, SpringLayout.NORTH, jPanelManage);
+        getSpringLayout().putConstraint(SpringLayout.WEST, jButtonAddCustom, 320, SpringLayout.WEST, getjPanelMain());
+        getSpringLayout().putConstraint(SpringLayout.SOUTH, jButtonAddCustom, -70, SpringLayout.SOUTH, getjPanelMain());
+
+        getSpringLayout().putConstraint(SpringLayout.WEST, jButtonManageCustom, 100, SpringLayout.EAST, jButtonAddCustom);
+        getSpringLayout().putConstraint(SpringLayout.SOUTH, jButtonManageCustom, -70, SpringLayout.SOUTH,  getjPanelMain());
     }
 
     private void GUIDefineLayoutAndAddComponentsOnJPanel() {
 
-        jPanelManage = new JPanel();
+        SetButtonsOnPanel();
+        getjPanelMain().add(jButtonAddCustom);
+        getjPanelMain().add(jButtonManageCustom);
+    }
 
-        springLayout = new SpringLayout();
-        jPanelManage.setLayout(springLayout);
-        jPanelManage.setPreferredSize(new Dimension(700, 250));
+    private void SetButtonsOnPanel() {
 
-        jButtonAddCustom = new JButton("ADD CUSTOMER");
-        jButtonManageCustom = new JButton("EDIT CUSTOMER");
+        addLogoJPG = new ImageIcon(getClass().getResource(ADD_CUSTOMER_BUTTON));
+        jButtonAddCustom = new JButton(addLogoJPG);
+        jButtonAddCustom.setBorderPainted(true);
+        jButtonAddCustom.setBackground(Color.BLACK);
+        jButtonAddCustom.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        jButtonAddCustom.setBorder(new LineBorder(Color.red));
 
-        jPanelManage.add(jButtonAddCustom);
-        jPanelManage.add(jButtonManageCustom);
-
-        getjPanelMain().add(jPanelManage);
+        updateLogoJPG = new ImageIcon(getClass().getResource(UPDATE_CUSTOMER_BUTTON));
+        jButtonManageCustom = new JButton(updateLogoJPG);
+        jButtonManageCustom.setBorderPainted(true);
+        jButtonManageCustom.setBackground(Color.white);
+        jButtonManageCustom.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        jButtonManageCustom.setBorder(new LineBorder(Color.red));
     }
 
     @Override
@@ -83,10 +86,10 @@ public class CustomerListManagement extends CustomerList {
                     e1.printStackTrace();
                 }
                 getJFrame().setEnabled(false); // Disable edit the previous window
+                customers.setUndecorated(true);
                 customers.DrawRegister();
                 customers.InitializeActions();
                 customers.setVisible(true);
-                customers.setLocationRelativeTo(null);
             }
         });
 

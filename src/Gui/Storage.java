@@ -7,6 +7,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
@@ -21,20 +22,20 @@ import java.util.Vector;
 
 public class Storage extends JFrame {
 
-    public static final String FRAME_NAME = "CASTRO - BRANCH STORAGE";
     public static final String COLUMN_TYPE = "Item Type";
     public static final String COLUMN_SIZE = "Item Size";
-    public static final String COLUMN_BRANCH = "Item Branch";
     public static final String COLUMN_AMOUNT = "Item Amount";
-    public static final String COLUMN_PRICE = "Price";
     public static final String COLUMN_PART_NUMBER = "Part Number";
-    public static final String BUTTON_BACK_NAME = "BACK";
+    public static final String BACK_PHOTO = "/src/images/backPhotoStorage.png";
+    public static final String BACK_BUTTON = "/src/images/back.png";
+    public static final String TITLE_TEL_AVIV = "/src/images/title_branch_storage_telaviv.png";
+    public static final String TITLE_JERUSALEM = "/src/images/title_branch_storage_Jerusalem.png";
 
-    public static final int TABLE_COLUMN_SIZE = 300;
+    public static final int TABLE_COLUMN_SIZE = 600;
     public static final int ROW_HEIGHT = 50;
-    public static final int  NUM_OF_COLUMNS = 4;
-    public static final int TABLE_PANELֹֹ_WIDTH_ֹSIZE = 700;
-    public static final int TABLE_PANELֹֹ_HEIGHT_ֹSIZE = 800;
+    public static final int NUM_OF_COLUMNS = 4;
+    public static final int TABLE_PANELֹֹ_WIDTH_ֹSIZE = 800;
+    public static final int TABLE_PANELֹֹ_HEIGHT_ֹSIZE = 600;
     public static final int FRAMEֹֹ_POSITION_X = 7;
     public static final int FRAMEֹֹ_POSITION_Y = 230;
     public static final int FRAMEֹֹ_WIDTH_ֹSIZE = 1520;
@@ -50,9 +51,12 @@ public class Storage extends JFrame {
 
     private JPanel jPanelMain;
     private JPanel jPanelTable;
+
+    private JLabel backgroundPhotoLabel, titleLabel;
     private SpringLayout springLayout;
     private JTable table;
     private JButton jButtonBack;
+    private ImageIcon backgroundPhotoJPG, backLogoJPG, titlePhotoTelAvivJPG, titlePhotoJerusalemJPG;
 
 
     public Storage(String branchName){
@@ -61,6 +65,21 @@ public class Storage extends JFrame {
 
         SetObjectsComponents(branchName);
         SetGUIComponents();
+        SetTheTitleBranchName();
+    }
+
+    private void SetTheTitleBranchName() {
+
+        titlePhotoJerusalemJPG = new ImageIcon(getClass().getResource(TITLE_JERUSALEM));
+        titlePhotoTelAvivJPG = new ImageIcon(getClass().getResource(TITLE_TEL_AVIV));
+
+        if(branchName.equals("Tel Aviv")) {
+            titleLabel = new JLabel(titlePhotoTelAvivJPG);
+        }else{
+            titleLabel = new JLabel(titlePhotoJerusalemJPG);
+        }
+
+        jPanelMain.add(titleLabel);
     }
 
     private void SetObjectsComponents(String branchName) {
@@ -72,10 +91,17 @@ public class Storage extends JFrame {
 
         jPanelMain = new JPanel();
         jPanelTable = new JPanel();
-        jPanelTable.setBackground(Color.white);
+        jPanelTable.setOpaque(false);
+
         jPanelTable.setPreferredSize(new Dimension(TABLE_PANELֹֹ_WIDTH_ֹSIZE, TABLE_PANELֹֹ_HEIGHT_ֹSIZE));
 
-        jButtonBack = new JButton(BUTTON_BACK_NAME);
+        backgroundPhotoJPG = new ImageIcon(getClass().getResource(BACK_PHOTO));
+        backgroundPhotoLabel = new JLabel(backgroundPhotoJPG);
+
+        backLogoJPG = new ImageIcon(getClass().getResource(BACK_BUTTON));
+        jButtonBack = new JButton(backLogoJPG);
+        jButtonBack.setBorderPainted(false);
+        jButtonBack.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
     }
 
     private void InitializeActions(JFrame prevFrame) {
@@ -125,14 +151,18 @@ public class Storage extends JFrame {
         springLayout = new SpringLayout();
         jPanelMain.setLayout(springLayout);
 
-        springLayout.putConstraint(SpringLayout.WEST,jPanelTable,400,SpringLayout.WEST,jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH,jPanelTable,170,SpringLayout.NORTH,jPanelMain);
+        springLayout.putConstraint(SpringLayout.WEST,jPanelTable,-60,SpringLayout.WEST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.NORTH,jPanelTable,110,SpringLayout.NORTH,jPanelMain);
+
+        springLayout.putConstraint(SpringLayout.WEST,jButtonBack,250,SpringLayout.WEST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.NORTH,jButtonBack,570,SpringLayout.NORTH,jPanelMain);
     }
 
     private void GUISettingForJPanel() {
 
         jPanelMain.add(jButtonBack);
         jPanelMain.add(jPanelTable);
+        jPanelMain.add(backgroundPhotoLabel);
     }
 
     private void DrawTheStorageTable(Vector<Vector<String>> dataList) {
@@ -155,15 +185,21 @@ public class Storage extends JFrame {
         };
 
         JScrollPane tableContainer = new JScrollPane(table);
+
         jPanelTable.add(tableContainer, BorderLayout.CENTER);
 
+        GUISetTable(tableContainer);
+    }
+
+    private void GUISetTable(JScrollPane tableContainer) {
 
         setColumnWidths(table,TABLE_COLUMN_SIZE,NUM_OF_COLUMNS);
         table.setRowHeight(ROW_HEIGHT);
         table.setFont(new Font("Urban Sketch", Font.BOLD, 20));
+        table.setForeground(Color.black);
         Dimension d = table.getPreferredSize();
-        d.width = 700;
-        d.height = 375;
+        d.width = 680;
+        d.height = 430;
         table.setPreferredScrollableViewportSize(d);
         tableContainer.setPreferredSize(new Dimension(d));
 
@@ -172,13 +208,10 @@ public class Storage extends JFrame {
         anHeader.setBackground(new Color(0).black);
         table.getTableHeader().setFont(new Font("Urban Sketch", Font.PLAIN, 25));
 
-
         table.setOpaque(false); // אם יש שקיפות אז אי אפשר לסמן שורה שלמה בכחול
         ((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setOpaque(false);
         tableContainer.setOpaque(false);
         tableContainer.getViewport().setOpaque(false);
-
-
 
         table.setAutoCreateRowSorter(true);
         table.getTableHeader().setReorderingAllowed(false); // Disable moving columns position
@@ -215,7 +248,6 @@ public class Storage extends JFrame {
 
     private void GUISettingForJFrame() {
 
-        this.setTitle(FRAME_NAME);
         this.setSize(FRAMEֹֹ_WIDTH_ֹSIZE,FRAMEֹֹ_HEIGHT_ֹSIZE);
         this.setLocation(FRAMEֹֹ_POSITION_X,FRAMEֹֹ_POSITION_Y);
         this.setResizable(false);

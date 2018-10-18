@@ -19,11 +19,16 @@ import java.util.Properties;
 
 public class RegisterCustomer extends Register {
 
+    public static final String TITLE = "/src/images/customer_register.png";
+
     private static Logger logger = Logger.getLogger(RegisterCustomer.class.getName());
 
     private Customer customer;
     private boolean showCustomersTable;
     private String empBranchName, propFileName;
+
+    private ImageIcon titlePhotoJPG;
+    private JLabel titleLabel;
 
     private Properties properties;
     private InputStream inStream;
@@ -43,6 +48,19 @@ public class RegisterCustomer extends Register {
         this.empBranchName = empBranchName;
 
         DefineLogAndConfig();
+    }
+
+    @Override
+    protected void DrawRegister() {
+
+        titlePhotoJPG = new ImageIcon(getClass().getResource(TITLE));
+        titleLabel = new JLabel(titlePhotoJPG);
+        getjPanelMain().add(titleLabel);
+
+        super.DrawRegister();
+
+        getSpringLayoutPanels().putConstraint(SpringLayout.WEST,titleLabel,60,SpringLayout.WEST,getjPanelMain());
+        getSpringLayoutPanels().putConstraint(SpringLayout.NORTH,titleLabel,5,SpringLayout.NORTH,getjPanelMain());
     }
 
     private void DefineLogAndConfig() throws IOException {
@@ -65,13 +83,6 @@ public class RegisterCustomer extends Register {
 
     private void SetGUIComponents(boolean showCustomersTable) {
 
-        GUISettingForComponents(showCustomersTable);
-
-        GUISettingForJFrame();
-    }
-
-    private void GUISettingForComponents(Boolean showCustomersTable) {
-
         this.showCustomersTable = showCustomersTable;
 
         getComboBoxModel().addElement("New");
@@ -79,11 +90,6 @@ public class RegisterCustomer extends Register {
         getComboBoxModel().addElement("Returned");
 
         getType_box().setEnabled(false);
-    }
-
-    private void GUISettingForJFrame() {
-
-        this.setTitle("Customer Register");
     }
 
     protected void InitializeActions() {
@@ -98,7 +104,7 @@ public class RegisterCustomer extends Register {
             }
         });
 
-        getRegister().addActionListener(new ActionListener() {
+        getRegisterButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -143,7 +149,7 @@ public class RegisterCustomer extends Register {
             }
         });
 
-        getOKButton().addActionListener(new ActionListener() {
+        getCheckButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed (ActionEvent e){
 
@@ -164,7 +170,7 @@ public class RegisterCustomer extends Register {
                     if (response.equals("")) { // אם התז כבר נמצא במערכת תציג הודעה ותאפס את השדה טקסט
                         client.getSslSocket().close();
                         JOptionPane.showMessageDialog(null, "ID Customer : " + customer.getCustId() + " is already Exist !!!");
-                        getOKButton().setEnabled(false);
+                        getCheckButton().setEnabled(false);
                         getId_text().setText("");
 
                     } else { // אם הת. לא נמצאת בבסיס נתונים עדיין אז תפתח את הנתונים להזנה ותנעל את הת.ז ללא עריכה
@@ -186,8 +192,9 @@ public class RegisterCustomer extends Register {
         getPhone_text().setEnabled(true);
         getFullname_text().setEnabled(true);
 
-        getOKButton().setVisible(false); // תחליף בין הכפתורים ע"י העלמתם
-        getRegister().setVisible(true);
+        getCheckButton().setVisible(false); // תחליף בין הכפתורים ע"י העלמתם
+        getRegisterButton().setVisible(true);
+        getRegisterButton().setEnabled(true);
     }
 
     private void DrawCustomersList() {
@@ -196,10 +203,10 @@ public class RegisterCustomer extends Register {
 
             getjFramePrev().setVisible(false);
             CustomerListManagement customerListManagement = new CustomerListManagement(getTwoBackFrame(), empBranchName);
+            customerListManagement.setUndecorated(true);
             customerListManagement.DrawCustomer();
             customerListManagement.InitializeActions();
             customerListManagement.setVisible(true);
-            customerListManagement.setLocationRelativeTo(null);
 
         } catch (IOException e1) {
             e1.printStackTrace();

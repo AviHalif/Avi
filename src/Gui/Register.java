@@ -1,6 +1,8 @@
 package Gui;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -8,20 +10,34 @@ import java.io.IOException;
 
 public class Register extends JFrame{
 
+    public static final String BACK_PHOTO = "/src/images/castro_shop_background.png";
+    public static final String LABEL_NAME = "/src/images/registry_name.png";
+    public static final String LABEL_PHONE = "/src/images/registry_phone.png";
+    public static final String LABEL_TYPE = "/src/images/registry_type.png";
+    public static final String LABEL_ID = "/src/images/registry_id.png";
+    public static final String CHECK_ID = "/src/images/check_id.png";
+    public static final String REGISTER = "/src/images/register_id.png";
+    public static final String BACK_BUTTON = "/src/images/back.png";
+    public static final int FRAMEֹֹ_POSITION_X = 7;
+    public static final int FRAMEֹֹ_POSITION_Y = 230;
+    public static final int FRAMEֹֹ_WIDTH_ֹSIZE = 1520;
+    public static final int FRAMEֹֹ_HEIGHT_ֹSIZE = 630;
+    public static final int JTEXTFIELD_WIDTH = 250;
+    public static final int JTEXTFIELD_HEIGHT = 50;
+    public static final int BUTTON_WIDTH = 190;
+    public static final int BUTTON_HEIGHT = 50;
+
     private String fullName = "", id = "", phone = "";
 
     private JFrame jFramePrev, twoBackFrame;
     private JPanel jPanelMain, jPanelButtons, jPanelTopFields;
-
-    private  SpringLayout springLayoutPanels, springLayoutFields, springLayoutButtons;
-
+    private SpringLayout springLayoutPanels, springLayoutFields, springLayoutButtons;
+    private JLabel backgroundPhotoLabel, jLabelId, jLabelname, jLabelphone, jLabeltype;
     private JTextField phone_text, fullname_text, id_text;
+    private ImageIcon backgroundPhotoJPG, label_id, label_name, label_phone, label_type, backLogoJPG,  registerLogoJPG, checkLogoJPG;
     private JComboBox type_box;
     private DefaultComboBoxModel comboBoxModel;
-
-    private JLabel phone_label, fullname_label, id_label, type_label;
-
-    private JButton OKButton, cancelButton, register;
+    private JButton cancelButton, registerButton, checkButton;
 
 
     public Register(JFrame oneBackFrame, JFrame twoBackFrame) { // הגיע לכאן המסך הראשי של האדמין ואת המסך של הניהול עובדים
@@ -33,6 +49,31 @@ public class Register extends JFrame{
 
         this.jFramePrev =  oneBackFrame;
         this.twoBackFrame = twoBackFrame;
+
+        jPanelMain = new JPanel();
+    }
+
+    private void SetGUIButtons() {
+
+        backLogoJPG = new ImageIcon(getClass().getResource(BACK_BUTTON));
+        cancelButton = new JButton(backLogoJPG);
+        cancelButton.setBorderPainted(false);
+        cancelButton.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
+        jPanelButtons.add(cancelButton);
+
+        registerLogoJPG = new ImageIcon(getClass().getResource(REGISTER));
+        registerButton = new JButton(registerLogoJPG);
+        registerButton.setBorderPainted(true);
+        registerButton.setBackground(Color.BLACK);
+        registerButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        registerButton.setBorder(new LineBorder(Color.red));
+
+        checkLogoJPG = new ImageIcon(getClass().getResource(CHECK_ID));
+        checkButton = new JButton(checkLogoJPG);
+        checkButton.setBorderPainted(true);
+        checkButton.setBackground(Color.white);
+        checkButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        checkButton.setBorder(new LineBorder(Color.red));
     }
 
     protected void DrawRegister(){
@@ -59,11 +100,14 @@ public class Register extends JFrame{
 
         springLayoutPanels.putConstraint(SpringLayout.WEST,jPanelTopFields,10,SpringLayout.WEST,jPanelMain);
         springLayoutPanels.putConstraint(SpringLayout.NORTH,jPanelTopFields,25,SpringLayout.NORTH,jPanelMain);
-        springLayoutPanels.putConstraint(SpringLayout.WEST,jPanelButtons,10,SpringLayout.WEST,jPanelMain);
-        springLayoutPanels.putConstraint(SpringLayout.SOUTH,jPanelButtons,25,SpringLayout.SOUTH,jPanelMain);
+        springLayoutPanels.putConstraint(SpringLayout.WEST,jPanelButtons,0,SpringLayout.WEST,jPanelMain);
+        springLayoutPanels.putConstraint(SpringLayout.SOUTH,jPanelButtons,0,SpringLayout.SOUTH,jPanelMain);
+        springLayoutPanels.putConstraint(SpringLayout.EAST,backgroundPhotoLabel,0,SpringLayout.EAST,jPanelMain);
+        springLayoutPanels.putConstraint(SpringLayout.SOUTH,backgroundPhotoLabel,0,SpringLayout.SOUTH,jPanelMain);
 
         jPanelMain.add(jPanelButtons);
         jPanelMain.add(jPanelTopFields);
+        jPanelMain.add(backgroundPhotoLabel);
     }
 
     private void GUIPlaceComponentsOnJPanel() {
@@ -83,53 +127,64 @@ public class Register extends JFrame{
 
     private void GUIPlaceTextFieldsAndComboComponents() {
 
-        springLayoutFields.putConstraint(SpringLayout.WEST,id_text,10,SpringLayout.EAST,id_label);
-        springLayoutFields.putConstraint(SpringLayout.NORTH,id_text,25,SpringLayout.NORTH,jPanelTopFields);
+        springLayoutFields.putConstraint(SpringLayout.WEST,id_text,-50,SpringLayout.EAST,jLabelId);
+        springLayoutFields.putConstraint(SpringLayout.NORTH,id_text,120,SpringLayout.NORTH,jPanelTopFields);
 
-        springLayoutFields.putConstraint(SpringLayout.WEST,fullname_text,10,SpringLayout.EAST,fullname_label);
-        springLayoutFields.putConstraint(SpringLayout.NORTH,fullname_text,25,SpringLayout.NORTH,id_text);
+        springLayoutFields.putConstraint(SpringLayout.WEST,fullname_text,8,SpringLayout.EAST,jLabelname);
+        springLayoutFields.putConstraint(SpringLayout.NORTH,fullname_text,100,SpringLayout.NORTH,id_text);
 
-        springLayoutFields.putConstraint(SpringLayout.WEST,phone_text,10,SpringLayout.EAST,phone_label);
-        springLayoutFields.putConstraint(SpringLayout.NORTH,phone_text,25,SpringLayout.NORTH,fullname_text);
+        springLayoutFields.putConstraint(SpringLayout.WEST,phone_text,-2,SpringLayout.EAST,jLabelphone);
+        springLayoutFields.putConstraint(SpringLayout.NORTH,phone_text,100,SpringLayout.NORTH,fullname_text);
 
-        springLayoutFields.putConstraint(SpringLayout.WEST,type_box,10,SpringLayout.EAST,type_label);
-        springLayoutFields.putConstraint(SpringLayout.NORTH,type_box,25,SpringLayout.NORTH,phone_text);
+        springLayoutFields.putConstraint(SpringLayout.WEST,type_box,-20,SpringLayout.EAST,jLabeltype);
+        springLayoutFields.putConstraint(SpringLayout.NORTH,type_box,100,SpringLayout.NORTH,phone_text);
     }
 
     private void GUIPlaceButtonsComponents() {
 
-        springLayoutButtons.putConstraint(SpringLayout.WEST,OKButton,10,SpringLayout.WEST,jPanelButtons);
-        springLayoutButtons.putConstraint(SpringLayout.NORTH,OKButton,25,SpringLayout.NORTH,jPanelButtons);
-        springLayoutButtons.putConstraint(SpringLayout.WEST,cancelButton,10,SpringLayout.EAST,OKButton);
-        springLayoutButtons.putConstraint(SpringLayout.NORTH,jPanelButtons,25,SpringLayout.NORTH,jPanelButtons);
+        springLayoutFields.putConstraint(SpringLayout.WEST,checkButton,50,SpringLayout.WEST,jPanelTopFields);
+        springLayoutFields.putConstraint(SpringLayout.NORTH,checkButton,120,SpringLayout.NORTH,jPanelTopFields);
+
+        springLayoutButtons.putConstraint(SpringLayout.WEST,cancelButton,0,SpringLayout.WEST,jPanelButtons);
+        springLayoutButtons.putConstraint(SpringLayout.SOUTH,cancelButton,0,SpringLayout.SOUTH,jPanelButtons);
+
+        springLayoutFields.putConstraint(SpringLayout.WEST,registerButton,50,SpringLayout.WEST,jPanelTopFields);
+        springLayoutFields.putConstraint(SpringLayout.NORTH,registerButton,120,SpringLayout.NORTH,jPanelTopFields);
     }
 
     private void GUIPlaceLabelsComponents() {
 
-        springLayoutFields.putConstraint(SpringLayout.WEST,id_label,10,SpringLayout.WEST,jPanelTopFields);
-        springLayoutFields.putConstraint(SpringLayout.NORTH,id_label,25,SpringLayout.NORTH,jPanelTopFields);
+        springLayoutFields.putConstraint(SpringLayout.WEST,jLabelId,250,SpringLayout.WEST,jPanelTopFields);
+        springLayoutFields.putConstraint(SpringLayout.NORTH,jLabelId,100,SpringLayout.NORTH,jPanelTopFields);
 
-        springLayoutFields.putConstraint(SpringLayout.WEST,fullname_label,10,SpringLayout.WEST,jPanelTopFields);
-        springLayoutFields.putConstraint(SpringLayout.NORTH,fullname_label,25,SpringLayout.NORTH,id_label);
+        springLayoutFields.putConstraint(SpringLayout.WEST,jLabelname,250,SpringLayout.WEST,jPanelTopFields);
+        springLayoutFields.putConstraint(SpringLayout.NORTH,jLabelname,100,SpringLayout.NORTH,jLabelId);
 
-        springLayoutFields.putConstraint(SpringLayout.WEST,phone_label,10,SpringLayout.WEST,jPanelTopFields);
-        springLayoutFields.putConstraint(SpringLayout.NORTH,phone_label,25,SpringLayout.NORTH,fullname_label);
+        springLayoutFields.putConstraint(SpringLayout.WEST,jLabelphone,205,SpringLayout.WEST,jPanelTopFields);
+        springLayoutFields.putConstraint(SpringLayout.NORTH,jLabelphone,100,SpringLayout.NORTH,jLabelname);
 
-        springLayoutFields.putConstraint(SpringLayout.WEST,type_label,10,SpringLayout.WEST,jPanelTopFields);
-        springLayoutFields.putConstraint(SpringLayout.NORTH,type_label,25,SpringLayout.NORTH,phone_label);
+        springLayoutFields.putConstraint(SpringLayout.WEST,jLabeltype,275,SpringLayout.WEST,jPanelTopFields);
+        springLayoutFields.putConstraint(SpringLayout.NORTH,jLabeltype,100,SpringLayout.NORTH,jLabelphone);
     }
 
     private void GUIDefineLayoutAndAddComponentsOnJPanel() {
 
-        jPanelMain = new JPanel();
         jPanelButtons = new JPanel();
+        jPanelButtons.setOpaque(false);
+       // jPanelButtons.setBackground(Color.RED);
+
         jPanelTopFields = new JPanel();
+        jPanelTopFields.setOpaque(false);
+        //jPanelButtons.setBackground(Color.blue);
 
         springLayoutPanels = new SpringLayout();
         jPanelMain.setLayout(springLayoutPanels);
 
-        jPanelButtons.setPreferredSize(new Dimension(800, 100));
-        jPanelTopFields.setPreferredSize(new Dimension(800, 300));
+        jPanelButtons.setPreferredSize(new Dimension(300, 100));
+        jPanelTopFields.setPreferredSize(new Dimension(1600, 750));
+
+        backgroundPhotoJPG = new ImageIcon(getClass().getResource(BACK_PHOTO));
+        backgroundPhotoLabel = new JLabel(backgroundPhotoJPG);
 
         GUISetLabelsComponents();
 
@@ -137,7 +192,7 @@ public class Register extends JFrame{
 
         GUISetTextFieldsAndComboComponents();
 
-        register.setVisible(false);
+        registerButton.setVisible(false);
     }
 
     private void GUISetTextFieldsAndComboComponents() {
@@ -151,41 +206,84 @@ public class Register extends JFrame{
         phone_text.setEnabled(false);
         fullname_text.setEnabled(false);
 
+        DefineTextFieldsAndComboSizeAndDecorations();
+
         jPanelTopFields.add(phone_text);
         jPanelTopFields.add(fullname_text);
         jPanelTopFields.add(id_text);
         jPanelTopFields.add(type_box);
     }
 
+    private void DefineTextFieldsAndComboSizeAndDecorations() {
+
+        phone_text.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
+        phone_text.setHorizontalAlignment(JTextField.CENTER);
+        phone_text.setFont(new Font("Urban Sketch", Font.BOLD, 30));
+        phone_text.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.black));
+        phone_text.setForeground (Color.black);
+        phone_text.setOpaque(false);
+
+
+        fullname_text.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
+        fullname_text.setHorizontalAlignment(JTextField.CENTER);
+        fullname_text.setFont(new Font("Urban Sketch", Font.BOLD, 30));
+        fullname_text.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.black));
+        fullname_text.setForeground (Color.black);
+        fullname_text.setOpaque(false);
+
+
+        id_text.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
+        id_text.setHorizontalAlignment(JTextField.CENTER);
+        id_text.setFont(new Font("Urban Sketch", Font.BOLD, 30));
+        id_text.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.black));
+        id_text.setForeground (Color.black);
+        id_text.setOpaque(false);
+
+
+        type_box.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
+        type_box.setFont(new Font("Urban Sketch", Font.BOLD, 30));
+        type_box.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.black));
+        type_box.setOpaque(false);
+    }
+
     private void GUISetButtonsComponents() {
 
-        OKButton = new JButton("OK");
-        cancelButton = new JButton("CANCEL");
-        register = new JButton("REGISTER");
+        SetGUIButtons();
 
-        OKButton.setEnabled(false);
+        registerButton.setEnabled(false);
 
-        jPanelButtons.add(OKButton);
+        jPanelTopFields.add(registerButton);
         jPanelButtons.add(cancelButton);
-        jPanelButtons.add(register);
+        jPanelTopFields.add(checkButton);
     }
 
     private void GUISetLabelsComponents() {
 
-        id_label = new JLabel("ID :");
-        fullname_label = new JLabel("FULL NAME :");
-        phone_label = new JLabel("PHONE :");
-        type_label = new JLabel("TYPE");
+        label_id = new ImageIcon(getClass().getResource(LABEL_ID));
+        jLabelId = new JLabel(label_id);
 
-        jPanelTopFields.add(id_label);
-        jPanelTopFields.add(fullname_label);
-        jPanelTopFields.add(phone_label);
-        jPanelTopFields.add(type_label);
+        label_name = new ImageIcon(getClass().getResource(LABEL_NAME));
+        jLabelname = new JLabel(label_name);
+
+        label_type = new ImageIcon(getClass().getResource(LABEL_TYPE));
+        jLabeltype = new JLabel(label_type);
+
+        label_phone = new ImageIcon(getClass().getResource(LABEL_PHONE));
+        jLabelphone = new JLabel(label_phone);
+
+        jPanelTopFields.add(jLabelId);
+        jPanelTopFields.add(jLabelname);
+        jPanelTopFields.add(jLabeltype);
+        jPanelTopFields.add(jLabelphone);
     }
 
     private void GUISettingForJFrame() {
 
-        this.setSize(800,800);
+        this.setSize(FRAMEֹֹ_WIDTH_ֹSIZE,FRAMEֹֹ_HEIGHT_ֹSIZE);
+        this.setLocation(FRAMEֹֹ_POSITION_X,FRAMEֹֹ_POSITION_Y);
+        this.setResizable(false);
+
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     private void InitializeActions() {
@@ -194,10 +292,13 @@ public class Register extends JFrame{
             @Override
             public void focusGained(FocusEvent e) {
 
+                fullname_text.setBorder(BorderFactory.createLineBorder(Color.red));
             }
 
             @Override
             public void focusLost(FocusEvent e) {
+
+                fullname_text.setBorder(BorderFactory.createLineBorder(Color.black));
                 fullName = fullname_text.getText();
             }
         });
@@ -206,10 +307,13 @@ public class Register extends JFrame{
             @Override
             public void focusGained(FocusEvent e) {
 
+                phone_text.setBorder(BorderFactory.createLineBorder(Color.red));
             }
 
             @Override
             public void focusLost(FocusEvent e) {
+
+                phone_text.setBorder(BorderFactory.createLineBorder(Color.black));
                 phone = phone_text.getText();
             }
         });
@@ -218,12 +322,14 @@ public class Register extends JFrame{
             @Override
             public void focusGained(FocusEvent e) {
 
-                getOKButton().setEnabled(true);
+                id_text.setBorder(BorderFactory.createLineBorder(Color.red));
+                checkButton.setEnabled(true);
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 id = id_text.getText();
+                id_text.setBorder(BorderFactory.createLineBorder(Color.black));
             }
         });
 
@@ -265,12 +371,48 @@ public class Register extends JFrame{
         return this;
     }
 
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public SpringLayout getSpringLayoutFields() {
+        return springLayoutFields;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public JLabel getjLabeltype() {
+        return jLabeltype;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public JFrame getjFramePrev() {
+        return jFramePrev;
+    }
+
+    public JFrame getTwoBackFrame() {
+        return twoBackFrame;
+    }
+
     public JPanel getjPanelMain() {
         return jPanelMain;
     }
 
     public JPanel getjPanelTopFields() {
         return jPanelTopFields;
+    }
+
+    public SpringLayout getSpringLayoutPanels() {
+        return springLayoutPanels;
     }
 
     public JTextField getPhone_text() {
@@ -293,44 +435,12 @@ public class Register extends JFrame{
         return comboBoxModel;
     }
 
-    public JButton getOKButton() {
-        return OKButton;
+    public JButton getRegisterButton() {
+        return registerButton;
     }
 
-    public JButton getCancelButton() {
-        return cancelButton;
-    }
-
-    public JButton getRegister() {
-        return register;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public SpringLayout getSpringLayoutPanels() {
-        return springLayoutPanels;
-    }
-
-    public JFrame getjFramePrev() {
-        return jFramePrev;
-    }
-
-    public JFrame getTwoBackFrame() {
-        return twoBackFrame;
+    public JButton getCheckButton() {
+        return checkButton;
     }
 
     public static void main(String[] args) throws IOException {

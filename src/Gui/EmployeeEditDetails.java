@@ -300,7 +300,7 @@ public class EmployeeEditDetails extends JFrame {
                 comboBoxModel.removeAllElements();
                 getComboBoxModel().addElement("Seller");
                 getComboBoxModel().addElement("Cashier");
-                getComboBoxModel().addElement("Shift manager");
+                getComboBoxModel().addElement("Manager");
                 type_box.setEnabled(true);
             }
         });
