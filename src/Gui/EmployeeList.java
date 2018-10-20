@@ -22,38 +22,26 @@ import java.util.Vector;
 
 public class EmployeeList extends JFrame {
 
-    public static final String BACK_PHOTO = "/src/images/employees_back.png";
-    public static final String BACK_BUTTON = "/src/images/back.png";
-    public static final String TITLE_TEL_AVIV = "/src/images/employess_title_Tel_Aviv.png";
-    public static final String TITLE_JERUSALEM = "/src/images/employess_title_Jerusalem.png";
-    public static final int TABLE_COLUMN_SIZE = 600;
-    public static final int ROW_HEIGHT = 50;
-    public static final int  NUM_OF_COLUMNS = 6;
-    public static final int TABLE_PANELֹֹ_WIDTH_ֹSIZE = 1200;
-    public static final int TABLE_PANELֹֹ_HEIGHT_ֹSIZE = 350;
-    public static final int TABLEֹֹ_WIDTH_ֹSIZE = 1100;
-    public static final int TABLEֹֹ_HEIGHT_ֹSIZE = 350;
-    public static final int FRAMEֹֹ_POSITION_X = 7;
-    public static final int FRAMEֹֹ_POSITION_Y = 230;
-    public static final int FRAMEֹֹ_WIDTH_ֹSIZE = 1520;
-    public static final int FRAMEֹֹ_HEIGHT_ֹSIZE = 630;
 
-    private String branchName;
-    private Client client;
-    private JSONObject jsonObject;
-    private JSONArray jsonObjectResponseArray;
-    private JSONParser jsonParser;
-
-    private JFrame jFramePrev;
-    private JPanel jPanelMain, jPanelTable;
-    private SpringLayout springLayout;
     private JTable table;
+    private Client client;
+    private String branchName;
+    private JFrame jFramePrev;
+    private JButton jButtonBack;
+    private JSONObject jsonObject;
+    private JSONParser jsonParser;
+    private SpringLayout springLayout;
+    private JPanel jPanelMain, jPanelTable;
+    private JSONArray jsonObjectResponseArray;
     private JLabel backgroundPhotoLabel, titleLabel;
     private ImageIcon backgroundPhotoJPG, backLogoJPG, titlePhotoJerusalemJPG, titlePhotoTelAvivJPG;
-    private JButton jButtonBack;
+    public static final String BACK_PHOTO = "/src/images/employees_back.png", BACK_BUTTON = "/src/images/back.png", TITLE_TEL_AVIV = "/src/images/employess_title_Tel_Aviv.png",
+            TITLE_JERUSALEM = "/src/images/employess_title_Jerusalem.png";
+    public static final int TABLE_COLUMN_SIZE = 600, ROW_HEIGHT = 50, NUM_OF_COLUMNS = 6, TABLE_PANELֹֹ_WIDTH_ֹSIZE = 1200, TABLE_PANELֹֹ_HEIGHT_ֹSIZE = 350, TABLEֹֹ_WIDTH_ֹSIZE = 1100,
+            TABLEֹֹ_HEIGHT_ֹSIZE = 350, FRAMEֹֹ_POSITION_X = 7, FRAMEֹֹ_POSITION_Y = 230, FRAMEֹֹ_WIDTH_ֹSIZE = 1520, FRAMEֹֹ_HEIGHT_ֹSIZE = 630;
 
 
-    public EmployeeList(JFrame oneBackFrame, String branchName){ //  הגיע לכאן(=המסך ניהול עובדים הראשי) המסך הראשי של האדמין או הקופאי
+    public EmployeeList(JFrame oneBackFrame, String branchName){
 
         this.branchName = branchName;
 
@@ -160,7 +148,7 @@ public class EmployeeList extends JFrame {
         anHeader.setBackground(new Color(0).black);
         table.getTableHeader().setFont(new Font("Urban Sketch", Font.PLAIN, 27));
 
-        table.setOpaque(false); // אם יש שקיפות אז אי אפשר לסמן שורה שלמה בכחול
+        table.setOpaque(false);
         ((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setOpaque(false);
         tableContainer.setOpaque(false);
         tableContainer.getViewport().setOpaque(false);
@@ -235,7 +223,6 @@ public class EmployeeList extends JFrame {
 
     private Vector<Vector<String>> GetResponseFromServer() throws ParseException, IOException {
 
-
         String line = client.getInputStream().readUTF();
         jsonParser = new JSONParser();
         jsonObjectResponseArray = (JSONArray) jsonParser.parse(line);
@@ -298,10 +285,6 @@ public class EmployeeList extends JFrame {
 
     public SpringLayout getSpringLayout() {
         return springLayout;
-    }
-
-    public JTable getTable() {
-        return table;
     }
 
     public JSONObject getJsonObject() {

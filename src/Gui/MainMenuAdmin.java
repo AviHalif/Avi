@@ -12,20 +12,13 @@ import java.io.IOException;
 
 public class MainMenuAdmin extends MainMenuCashier {
 
-    public static final String BUTTON_EMPLOYEES = "/src/images/employees.png";
-    public static final String BUTTON_REPORTS = "/src/images/reports.png";
-    public static final int RIGHT_PANELֹֹ_WIDTH_ֹSIZE = 420;
-    public static final int RIGHT_PANELֹֹ_HEIGHT_ֹSIZE = 500;
-    public static final int EMPLOYESS_BUTTON_WIDTH = 350;
-    public static final int EMPLOYESS_BUTTON_HEIGHT = 80;
-    public static final int REPORTS_BUTTON_WIDTH = 280;
-    public static final int REPORTS_BUTTON_HEIGHT = 80;
-
+    private JPanel jPanelRight;
     private SpringLayout springLayout;
     private JButton jButtonReport, jButtonEmployee;
-    private JPanel jPanelRight;
     private ImageIcon  reportsLogoJPG, employeesLogoJPG;
-
+    public static final String BUTTON_EMPLOYEES = "/src/images/employees.png", BUTTON_REPORTS = "/src/images/reports.png";
+    public static final int RIGHT_PANELֹֹ_WIDTH_ֹSIZE = 420, RIGHT_PANELֹֹ_HEIGHT_ֹSIZE = 500, EMPLOYESS_BUTTON_WIDTH = 350, EMPLOYESS_BUTTON_HEIGHT = 80, REPORTS_BUTTON_WIDTH = 280,
+                            REPORTS_BUTTON_HEIGHT = 80;
 
     public MainMenuAdmin(Employee employee) {
         super(employee);
@@ -105,7 +98,6 @@ public class MainMenuAdmin extends MainMenuCashier {
         } catch (ParseException e1) {
             e1.printStackTrace();
         }
-
 
         customers.InitializeActions();
         customers.setVisible(true);

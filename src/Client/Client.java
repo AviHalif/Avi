@@ -34,20 +34,16 @@ public class Client {
     public int server_port;
     //The Server Address
     public String server_name;
-
-    public static final String TRUSTSTORE = "javax.net.ssl.trustStore";
-    public static final String TRUSTSTORE_FILE_DIRECTORY =  "C:/Users/AviHalif/IdeaProjects/Avi/src/myTrustStore.jts";
-    public static final String TRUSTSTORE_PASSWORD = "javax.net.ssl.trustStorePassword";
-    public static final String TRUSTSTORE_PASSWORD_FILE = "java13579";
-    public static final String HANDSHAKE_DEBUG = "javax.net.debug";
-    public static final String DEFINITION_HANDSHAKE_DEBUG = "all";
+    public static final String TRUSTSTORE = "javax.net.ssl.trustStore", TRUSTSTORE_FILE_DIRECTORY =  "C:/Users/AviHalif/IdeaProjects/Avi/src/myTrustStore.jts",
+                               TRUSTSTORE_PASSWORD = "javax.net.ssl.trustStorePassword", TRUSTSTORE_PASSWORD_FILE = "java13579", HANDSHAKE_DEBUG = "javax.net.debug",
+                               DEFINITION_HANDSHAKE_DEBUG = "all";
 
     public Client(){
         try {
 
             DefineConfig();
 
-              /*Adding the JSSE (Java Secure Socket Extension) provider which provides SSL and TLS protocols
+            /*Adding the JSSE (Java Secure Socket Extension) provider which provides SSL and TLS protocols
                         and includes functionality for data encryption, server authentication, message integrity,
                         and optional client authentication.*/
             Security.addProvider(new Provider());

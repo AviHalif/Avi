@@ -22,41 +22,25 @@ import java.util.Vector;
 
 public class Storage extends JFrame {
 
-    public static final String COLUMN_TYPE = "Item Type";
-    public static final String COLUMN_SIZE = "Item Size";
-    public static final String COLUMN_AMOUNT = "Item Amount";
-    public static final String COLUMN_PART_NUMBER = "Part Number";
-    public static final String BACK_PHOTO = "/src/images/backPhotoStorage.png";
-    public static final String BACK_BUTTON = "/src/images/back.png";
-    public static final String TITLE_TEL_AVIV = "/src/images/title_branch_storage_telaviv.png";
-    public static final String TITLE_JERUSALEM = "/src/images/title_branch_storage_Jerusalem.png";
 
-    public static final int TABLE_COLUMN_SIZE = 600;
-    public static final int ROW_HEIGHT = 50;
-    public static final int NUM_OF_COLUMNS = 4;
-    public static final int TABLE_PANELֹֹ_WIDTH_ֹSIZE = 800;
-    public static final int TABLE_PANELֹֹ_HEIGHT_ֹSIZE = 600;
-    public static final int FRAMEֹֹ_POSITION_X = 7;
-    public static final int FRAMEֹֹ_POSITION_Y = 230;
-    public static final int FRAMEֹֹ_WIDTH_ֹSIZE = 1520;
-    public static final int FRAMEֹֹ_HEIGHT_ֹSIZE = 630;
-
-    private String branchName;
-    private Vector<String> columnNames;
+    private JTable table;
     private Client client;
-
-    private JSONObject jsonObject;
-    private JSONArray jsonObjectResponseArray;
-    private JSONParser jsonParser;
-
+    private String branchName;
     private JPanel jPanelMain;
     private JPanel jPanelTable;
-
-    private JLabel backgroundPhotoLabel, titleLabel;
-    private SpringLayout springLayout;
-    private JTable table;
     private JButton jButtonBack;
+    private JSONParser jsonParser;
+    private JSONObject jsonObject;
+    private SpringLayout springLayout;
+    private Vector<String> columnNames;
+    private JSONArray jsonObjectResponseArray;
+    private JLabel backgroundPhotoLabel, titleLabel;
     private ImageIcon backgroundPhotoJPG, backLogoJPG, titlePhotoTelAvivJPG, titlePhotoJerusalemJPG;
+    public static final int TABLE_COLUMN_SIZE = 600, ROW_HEIGHT = 50, NUM_OF_COLUMNS = 4, TABLE_PANELֹֹ_WIDTH_ֹSIZE = 1000, TABLE_PANELֹֹ_HEIGHT_ֹSIZE = 600, FRAMEֹֹ_POSITION_X = 7,
+                            FRAMEֹֹ_POSITION_Y = 230, FRAMEֹֹ_WIDTH_ֹSIZE = 1520, FRAMEֹֹ_HEIGHT_ֹSIZE = 630;
+    public static final String COLUMN_TYPE = "Item Type", COLUMN_SIZE = "Item Size", COLUMN_AMOUNT = "Item Amount", COLUMN_PART_NUMBER = "Part Number",
+                               BACK_PHOTO = "/src/images/backPhotoStorage.png", BACK_BUTTON = "/src/images/back.png", TITLE_TEL_AVIV = "/src/images/title_branch_storage_telaviv.png",
+                               TITLE_JERUSALEM = "/src/images/title_branch_storage_Jerusalem.png";
 
 
     public Storage(String branchName){
@@ -151,10 +135,11 @@ public class Storage extends JFrame {
         springLayout = new SpringLayout();
         jPanelMain.setLayout(springLayout);
 
-        springLayout.putConstraint(SpringLayout.WEST,jPanelTable,-60,SpringLayout.WEST,jPanelMain);
+
+        springLayout.putConstraint(SpringLayout.WEST,jPanelTable,30,SpringLayout.WEST,jPanelMain);
         springLayout.putConstraint(SpringLayout.NORTH,jPanelTable,110,SpringLayout.NORTH,jPanelMain);
 
-        springLayout.putConstraint(SpringLayout.WEST,jButtonBack,250,SpringLayout.WEST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.WEST,jButtonBack,450,SpringLayout.WEST,jPanelMain);
         springLayout.putConstraint(SpringLayout.NORTH,jButtonBack,570,SpringLayout.NORTH,jPanelMain);
     }
 
@@ -198,7 +183,7 @@ public class Storage extends JFrame {
         table.setFont(new Font("Urban Sketch", Font.BOLD, 20));
         table.setForeground(Color.black);
         Dimension d = table.getPreferredSize();
-        d.width = 680;
+        d.width = 1000;
         d.height = 430;
         table.setPreferredScrollableViewportSize(d);
         tableContainer.setPreferredSize(new Dimension(d));
@@ -208,7 +193,7 @@ public class Storage extends JFrame {
         anHeader.setBackground(new Color(0).black);
         table.getTableHeader().setFont(new Font("Urban Sketch", Font.PLAIN, 25));
 
-        table.setOpaque(false); // אם יש שקיפות אז אי אפשר לסמן שורה שלמה בכחול
+        table.setOpaque(false);
         ((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setOpaque(false);
         tableContainer.setOpaque(false);
         tableContainer.getViewport().setOpaque(false);
@@ -297,7 +282,6 @@ public class Storage extends JFrame {
             }
 
         }
-
 
     public static void main(String[] args) throws IOException, ParseException {
 

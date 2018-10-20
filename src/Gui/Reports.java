@@ -33,39 +33,23 @@ import static java.time.LocalDate.now;
 
 public class Reports extends JFrame {
 
-    public static final String BACK_PHOTO = "/src/images/report_back.png";
-    public static final String TITLE = "/src/images/daily_purshase_report.png";
-    public static final String BACK_BUTTON = "/src/images/back.png";
-
-    public static final String REPORT_ALL_BUTTON = "/src/images/filter_all.png";
-    public static final String SPECIFIC_REPORT_BUTTON = "/src/images/spefici.png";
-    public static final String CHOOSE_FILTERS_BUTTON = "/src/images/choose_items.png";
-    public static final int BUTTON_WIDTH1 = 390;
-    public static final int BUTTON_WIDTH2 = 400;
-    public static final int BUTTON_HEIGHT = 50;
-
-    public static final int FRAMEֹֹ_POSITION_X = 7;
-    public static final int FRAMEֹֹ_POSITION_Y = 230;
-    public static final int FRAMEֹֹ_WIDTH_ֹSIZE = 1520;
-    public static final int FRAMEֹֹ_HEIGHT_ֹSIZE = 630;
-
-
-
-    private String branch;
-    private String[] itemNames;
-
     private Client client;
-    private JSONObject jsonObject;
-    private JSONArray jsonArrayResponse;
-    private JSONParser jsonParser;
-
+    private String branch;
     private JFrame prevFrame;
     private JPanel jPanelData;
-    private ImageIcon backgroundPhotoJPG, backLogoJPG, titlePhotoJPG, reportAllLogoJPG, specificLogoJPG, chooseFiltersLogoJPG;
-    private JLabel backgroundPhotoLabel, titleLabel;
-    private SpringLayout springLayout;
-    private JButton jButtonReportAll, jButtonSpecificReport, jButtonChooseFilters, jButtonCancel;
+    private String[] itemNames;
+    private JSONParser jsonParser;
+    private JSONObject jsonObject;
     private Checkbox[] checkArray;
+    private SpringLayout springLayout;
+    private JSONArray jsonArrayResponse;
+    private JLabel backgroundPhotoLabel, titleLabel;
+    private JButton jButtonReportAll, jButtonSpecificReport, jButtonChooseFilters, jButtonCancel;
+    private ImageIcon backgroundPhotoJPG, backLogoJPG, titlePhotoJPG, reportAllLogoJPG, specificLogoJPG, chooseFiltersLogoJPG;
+    public static final String BACK_PHOTO = "/src/images/report_back.png", TITLE = "/src/images/daily_purshase_report.png", BACK_BUTTON = "/src/images/back.png",
+                               REPORT_ALL_BUTTON = "/src/images/filter_all.png", SPECIFIC_REPORT_BUTTON = "/src/images/spefici.png", CHOOSE_FILTERS_BUTTON = "/src/images/choose_items.png";
+    public static final int BUTTON_WIDTH1 = 390, BUTTON_WIDTH2 = 400, BUTTON_HEIGHT = 50, FRAMEֹֹ_POSITION_X = 7, FRAMEֹֹ_POSITION_Y = 230, FRAMEֹֹ_WIDTH_ֹSIZE = 1520, FRAMEֹֹ_HEIGHT_ֹSIZE = 630;
+
 
     public Reports(JFrame prevFrame, String branch) {
 
@@ -423,7 +407,7 @@ public class Reports extends JFrame {
 
         int numOfItems = itemNames.length;
 
-        for (int i = 0; i < numOfItems; i++) { // מספר המוצרים השונים בבסיס נתונים - יש לקרוא מגודל של מערך
+        for (int i = 0; i < numOfItems; i++) {
 
             if (checkArray[i].getState() && type.equals(""))
                 type = type + "'" + checkArray[i].getLabel() + "'";

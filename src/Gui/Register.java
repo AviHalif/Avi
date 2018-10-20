@@ -10,37 +10,25 @@ import java.io.IOException;
 
 public class Register extends JFrame{
 
-    public static final String BACK_PHOTO = "/src/images/castro_shop_background.png";
-    public static final String LABEL_NAME = "/src/images/registry_name.png";
-    public static final String LABEL_PHONE = "/src/images/registry_phone.png";
-    public static final String LABEL_TYPE = "/src/images/registry_type.png";
-    public static final String LABEL_ID = "/src/images/registry_id.png";
-    public static final String CHECK_ID = "/src/images/check_id.png";
-    public static final String REGISTER = "/src/images/register_id.png";
-    public static final String BACK_BUTTON = "/src/images/back.png";
-    public static final int FRAMEֹֹ_POSITION_X = 7;
-    public static final int FRAMEֹֹ_POSITION_Y = 230;
-    public static final int FRAMEֹֹ_WIDTH_ֹSIZE = 1520;
-    public static final int FRAMEֹֹ_HEIGHT_ֹSIZE = 630;
-    public static final int JTEXTFIELD_WIDTH = 250;
-    public static final int JTEXTFIELD_HEIGHT = 50;
-    public static final int BUTTON_WIDTH = 190;
-    public static final int BUTTON_HEIGHT = 50;
 
-    private String fullName = "", id = "", phone = "";
-
+    private JComboBox type_box;
     private JFrame jFramePrev, twoBackFrame;
+    private DefaultComboBoxModel comboBoxModel;
+    private String fullName = "", id = "", phone = "";
+    private JTextField phone_text, fullname_text, id_text;
     private JPanel jPanelMain, jPanelButtons, jPanelTopFields;
+    private JButton cancelButton, registerButton, checkButton;
     private SpringLayout springLayoutPanels, springLayoutFields, springLayoutButtons;
     private JLabel backgroundPhotoLabel, jLabelId, jLabelname, jLabelphone, jLabeltype;
-    private JTextField phone_text, fullname_text, id_text;
     private ImageIcon backgroundPhotoJPG, label_id, label_name, label_phone, label_type, backLogoJPG,  registerLogoJPG, checkLogoJPG;
-    private JComboBox type_box;
-    private DefaultComboBoxModel comboBoxModel;
-    private JButton cancelButton, registerButton, checkButton;
+    public static final int FRAMEֹֹ_POSITION_X = 7, FRAMEֹֹ_POSITION_Y = 230, FRAMEֹֹ_WIDTH_ֹSIZE = 1520, FRAMEֹֹ_HEIGHT_ֹSIZE = 630, JTEXTFIELD_WIDTH = 250, JTEXTFIELD_HEIGHT = 50,
+                            BUTTON_WIDTH = 190, BUTTON_HEIGHT = 50;
+    public static final String BACK_PHOTO = "/src/images/castro_shop_background.png", LABEL_NAME = "/src/images/registry_name.png", LABEL_PHONE = "/src/images/registry_phone.png",
+                               LABEL_TYPE = "/src/images/registry_type.png", LABEL_ID = "/src/images/registry_id.png", CHECK_ID = "/src/images/check_id.png",
+                               REGISTER = "/src/images/register_id.png", BACK_BUTTON = "/src/images/back.png";
 
 
-    public Register(JFrame oneBackFrame, JFrame twoBackFrame) { // הגיע לכאן המסך הראשי של האדמין ואת המסך של הניהול עובדים
+    public Register(JFrame oneBackFrame, JFrame twoBackFrame) {
 
         SetGUIComponents(oneBackFrame,twoBackFrame);
     }
@@ -171,11 +159,9 @@ public class Register extends JFrame{
 
         jPanelButtons = new JPanel();
         jPanelButtons.setOpaque(false);
-       // jPanelButtons.setBackground(Color.RED);
 
         jPanelTopFields = new JPanel();
         jPanelTopFields.setOpaque(false);
-        //jPanelButtons.setBackground(Color.blue);
 
         springLayoutPanels = new SpringLayout();
         jPanelMain.setLayout(springLayoutPanels);

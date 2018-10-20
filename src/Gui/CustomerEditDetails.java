@@ -8,57 +8,44 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
+import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 
 public class CustomerEditDetails extends JFrame {
 
-    public static final String JOPTIONPANE_MESSAGE = "Are you sure you want to update customer ID number: ";
-    public static final String JOPTIONPANE_TITLE = "CASTRO - UPDATE DETAILS CUSTOMER";
-    public static final String JOPTIONPANE_MESSAGE_CLOSE = "Are you sure you want to close the window? Data will not be saved";
-    public static final String JOPTIONPANE_TITLE_CLOSE = "CASTRO";
-
     private Customer customer;
     private String branchName;
     private Client client;
-
+    private JPanel jPanelMain;
+    private JComboBox type_box;
     private JSONObject jsonObject;
     private ObjectMapper objectMapper;
-
-    private JFrame oneBackFrame, twoBackFrame, thirdBackFrame;
-    private JPanel jPanelMain;
-    private JLabel label_message, idCustomer_label, nameCustomer_label, telCustomer_label, typeCustomer_label;
-
-    private  SpringLayout springLayout;
-
-    private JTextField idCustomer_data, nameCustomer_data, telCustomer_data;
-
-    private JComboBox type_box;
+    private SpringLayout springLayout;
     private DefaultComboBoxModel comboBoxModel;
-
+    private JFrame oneBackFrame, twoBackFrame, thirdBackFrame;
+    private JTextField idCustomer_data, nameCustomer_data, telCustomer_data;
     private JButton nameEdit_btton, telEdit_btton, typeEdit_btton, ok_button, cancel_button;
+    private JLabel jLabelId, jLabelname, jLabelphone, backgroundPhotoLabel, titleLabel, jLabeltype;
+    public static final int FRAMEֹֹ_POSITION_X = 7, FRAMEֹֹ_POSITION_Y = 230, FRAMEֹֹ_WIDTH_ֹSIZE = 1520, FRAMEֹֹ_HEIGHT_ֹSIZE = 630, JTEXTFIELD_WIDTH = 250, JTEXTFIELD_HEIGHT = 50,
+                            BUTTON_WIDTH = 220, BUTTON_HEIGHT = 50, BUTTON_WIDTH2 = 360;
+    private ImageIcon  backgroundPhotoTopPanelJPG, backLogoJPG, titlePhotoJPG, label_id, label_name, label_phone, label_type, nameEditLogoJPG, phoneEditLogoJPG,
+                       typeEditLogoJPG, updateCustLogoJPG;
+    public static final String UPDATE_CUSTOMER = "/src/images/update_customer.png", JOPTIONPANE_MESSAGE = "Are you sure you want to update customer ID number: ",
+                               JOPTIONPANE_TITLE = "CASTRO - UPDATE DETAILS CUSTOMER", TITLE = "/src/images/customer_update.png", BACK_PHOTO = "/src/images/back_edit_1.png",
+                               BACK_BUTTON = "/src/images/back.png", LABEL_NAME = "/src/images/update_name.png", LABEL_PHONE = "/src/images/update_phone.png",
+                               LABEL_TYPE = "/src/images/update_type.png", LABEL_ID = "/src/images/update_id.png", EDIT_PHONE = "/src/images/edit_phone.png",
+                               EDIT_NAME = "/src/images/edit_name.png", EDIT_TYPE = "/src/images/edit_type.png";
 
 
     public CustomerEditDetails(String custId,String custName,String custTel,String custType,
                                JFrame oneBackFrame,JFrame twoBackFrame,JFrame thirdBackFrame, String branchName) {
-//// הגיעה החלונית הקטנה להזנת ת.ז לעדכון, המסך הראשי של האדמין ואת המסך של הניהול עובדים
 
         SetGUIComponents(oneBackFrame,twoBackFrame,thirdBackFrame);
 
         SetObjectsComponents(branchName,custId,custName,custTel,custType);
-
-        /*
-        if(custType.equals("New"))
-        this.customer = new NewCustomer(custId,custName,custTel,custType);
-
-        else
-            if(custType.equals("Return"))
-                this.customer = new ReturnedCustomer(custId,custName,custTel,custType);
-
-            else
-            if(custType.equals("VIP"))
-                this.customer = new VipCustomer(custId,custName,custTel,custType);
-*/
     }
 
     private void SetGUIComponents(JFrame oneBackFrame, JFrame twoBackFrame, JFrame thirdBackFrame) {
@@ -134,6 +121,7 @@ public class CustomerEditDetails extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 nameCustomer_data.setEnabled(true);
+                nameCustomer_data.setBorder(BorderFactory.createLineBorder(Color.red));
             }
         });
 
@@ -142,6 +130,7 @@ public class CustomerEditDetails extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 telCustomer_data.setEnabled(true);
+                telCustomer_data.setBorder(BorderFactory.createLineBorder(Color.red));
             }
         });
 
@@ -154,6 +143,8 @@ public class CustomerEditDetails extends JFrame {
                 getComboBoxModel().addElement("VIP");
                 getComboBoxModel().addElement("Returned");
                 type_box.setEnabled(true);
+                type_box.setBorder(BorderFactory.createLineBorder(Color.red));
+
             }
         });
 
@@ -161,6 +152,23 @@ public class CustomerEditDetails extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 customer.setCustType((String) getType_box().getSelectedItem());
+            }
+        });
+
+        type_box.addFocusListener(new FocusAdapter() {
+
+            @Override
+            public void focusGained(FocusEvent e) {
+
+                type_box.setBorder(BorderFactory.createLineBorder(Color.red));
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+
+                super.focusLost(e);
+                type_box.setBorder(BorderFactory.createLineBorder(Color.black));
+
             }
         });
 
@@ -181,6 +189,13 @@ public class CustomerEditDetails extends JFrame {
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
                 customer.setCustName(nameCustomer_data.getText());
+                nameCustomer_data.setBorder(BorderFactory.createLineBorder(Color.black));
+            }
+
+            @Override
+            public void focusGained(FocusEvent e) {
+
+                nameCustomer_data.setBorder(BorderFactory.createLineBorder(Color.red));
             }
         });
 
@@ -190,7 +205,13 @@ public class CustomerEditDetails extends JFrame {
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
                 customer.setCustTel(telCustomer_data.getText());
+                telCustomer_data.setBorder(BorderFactory.createLineBorder(Color.black));
+            }
 
+            @Override
+            public void focusGained(FocusEvent e) {
+
+                telCustomer_data.setBorder(BorderFactory.createLineBorder(Color.red));
             }
         });
 
@@ -206,6 +227,7 @@ public class CustomerEditDetails extends JFrame {
     private void DrawCustomerListManagement() {
 
         CustomerListManagement customerListManagement = new CustomerListManagement(twoBackFrame,branchName);
+        customerListManagement.setUndecorated(true);
 
         try {
 
@@ -219,7 +241,6 @@ public class CustomerEditDetails extends JFrame {
 
         customerListManagement.InitializeActions();
         customerListManagement.setVisible(true);
-        customerListManagement.setLocationRelativeTo(null);
     }
 
     private String GetResponseUpdateCustomerFromServer() throws ParseException, IOException {
@@ -276,53 +297,56 @@ public class CustomerEditDetails extends JFrame {
 
     private void GUIPlaceTextFieldsAndComboComponents() {
 
-        springLayout.putConstraint(SpringLayout.WEST,idCustomer_data,35,SpringLayout.EAST,idCustomer_label);
-        springLayout.putConstraint(SpringLayout.NORTH,idCustomer_data,25,SpringLayout.SOUTH,label_message);
+        springLayout.putConstraint(SpringLayout.WEST,idCustomer_data,250,SpringLayout.WEST,titleLabel);
+        springLayout.putConstraint(SpringLayout.NORTH,idCustomer_data,45,SpringLayout.SOUTH,titleLabel);
 
-        springLayout.putConstraint(SpringLayout.WEST,nameCustomer_data,35,SpringLayout.EAST,nameCustomer_label);
-        springLayout.putConstraint(SpringLayout.NORTH,nameCustomer_data,25,SpringLayout.SOUTH,idCustomer_data);
+        springLayout.putConstraint(SpringLayout.WEST,nameCustomer_data,15,SpringLayout.EAST,jLabelname);
+        springLayout.putConstraint(SpringLayout.NORTH,nameCustomer_data,50,SpringLayout.SOUTH,idCustomer_data);
 
-        springLayout.putConstraint(SpringLayout.WEST,telCustomer_data,35,SpringLayout.EAST,telCustomer_label);
-        springLayout.putConstraint(SpringLayout.NORTH,telCustomer_data,25,SpringLayout.SOUTH,nameCustomer_data);
+        springLayout.putConstraint(SpringLayout.WEST,type_box,35,SpringLayout.EAST,jLabeltype);
+        springLayout.putConstraint(SpringLayout.NORTH,type_box,50,SpringLayout.SOUTH,nameCustomer_data);
 
-        springLayout.putConstraint(SpringLayout.WEST,type_box,35,SpringLayout.EAST,typeCustomer_label);
-        springLayout.putConstraint(SpringLayout.NORTH,type_box,25,SpringLayout.SOUTH,telCustomer_data);
+        springLayout.putConstraint(SpringLayout.WEST,telCustomer_data,10,SpringLayout.EAST,jLabelphone);
+        springLayout.putConstraint(SpringLayout.NORTH,telCustomer_data,55,SpringLayout.SOUTH,type_box);
     }
 
     private void GUIPlaceButtonsComponents() {
 
-        springLayout.putConstraint(SpringLayout.EAST,nameEdit_btton,-100,SpringLayout.EAST,jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH,nameEdit_btton,25,SpringLayout.SOUTH,idCustomer_data);
+        springLayout.putConstraint(SpringLayout.EAST,nameEdit_btton,-600,SpringLayout.EAST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.NORTH,nameEdit_btton,50,SpringLayout.SOUTH,idCustomer_data);
 
-        springLayout.putConstraint(SpringLayout.EAST,telEdit_btton,-100,SpringLayout.EAST,jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH,telEdit_btton,25,SpringLayout.SOUTH,nameEdit_btton);
+        springLayout.putConstraint(SpringLayout.EAST,telEdit_btton,-600,SpringLayout.EAST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.NORTH,telEdit_btton,50,SpringLayout.SOUTH,typeEdit_btton);
 
-        springLayout.putConstraint(SpringLayout.WEST,ok_button,35,SpringLayout.WEST,jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH,ok_button,25,SpringLayout.SOUTH,typeEdit_btton);
+        springLayout.putConstraint(SpringLayout.EAST,ok_button,-60,SpringLayout.EAST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.SOUTH,ok_button,-55,SpringLayout.SOUTH,jPanelMain);
 
-        springLayout.putConstraint(SpringLayout.WEST,cancel_button,35,SpringLayout.EAST,ok_button);
-        springLayout.putConstraint(SpringLayout.NORTH,cancel_button,25,SpringLayout.SOUTH,typeEdit_btton);
+        springLayout.putConstraint(SpringLayout.WEST,cancel_button,0,SpringLayout.WEST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.SOUTH,cancel_button,0,SpringLayout.SOUTH,jPanelMain);
 
-        springLayout.putConstraint(SpringLayout.EAST,typeEdit_btton,-100,SpringLayout.EAST,jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH,typeEdit_btton,25,SpringLayout.SOUTH,telEdit_btton);
+        springLayout.putConstraint(SpringLayout.EAST,typeEdit_btton,-600,SpringLayout.EAST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.NORTH,typeEdit_btton,50,SpringLayout.SOUTH,nameEdit_btton);
     }
 
     private void GUIPlaceLabelsComponents() {
 
-        springLayout.putConstraint(SpringLayout.WEST,label_message,35,SpringLayout.WEST,jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH,label_message,25,SpringLayout.NORTH,jPanelMain);
+        springLayout.putConstraint(SpringLayout.WEST,titleLabel,120,SpringLayout.WEST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.NORTH,titleLabel,25,SpringLayout.NORTH,jPanelMain);
 
-        springLayout.putConstraint(SpringLayout.WEST,idCustomer_label,35,SpringLayout.WEST,jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH,idCustomer_label,25,SpringLayout.SOUTH,label_message);
+        springLayout.putConstraint(SpringLayout.WEST,jLabelId,135,SpringLayout.WEST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.NORTH,jLabelId,30,SpringLayout.SOUTH,titleLabel);
 
-        springLayout.putConstraint(SpringLayout.WEST,nameCustomer_label,35,SpringLayout.WEST,jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH,nameCustomer_label,25,SpringLayout.SOUTH,idCustomer_label);
+        springLayout.putConstraint(SpringLayout.WEST,jLabelname,155,SpringLayout.WEST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.NORTH,jLabelname,20,SpringLayout.SOUTH,jLabelId);
 
-        springLayout.putConstraint(SpringLayout.WEST,telCustomer_label,35,SpringLayout.WEST,jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH,telCustomer_label,25,SpringLayout.SOUTH,nameCustomer_label);
+        springLayout.putConstraint(SpringLayout.WEST,jLabelphone,160,SpringLayout.WEST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.NORTH,jLabelphone,20,SpringLayout.SOUTH,jLabeltype);
 
-        springLayout.putConstraint(SpringLayout.WEST,typeCustomer_label,35,SpringLayout.WEST,jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH,typeCustomer_label,25,SpringLayout.SOUTH,telCustomer_label);
+        springLayout.putConstraint(SpringLayout.WEST,jLabeltype,135,SpringLayout.WEST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.NORTH,jLabeltype,20,SpringLayout.SOUTH,jLabelname);
+
+        springLayout.putConstraint(SpringLayout.EAST,backgroundPhotoLabel,300,SpringLayout.EAST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.NORTH,backgroundPhotoLabel,0,SpringLayout.NORTH,jPanelMain);
     }
 
     private void GUIAddComponentsOnJPanel() {
@@ -334,16 +358,50 @@ public class CustomerEditDetails extends JFrame {
         GUISetLabelsComponents();
 
         GUISetButtonsComponents();
+
+        jPanelMain.add(backgroundPhotoLabel);
     }
 
     private void GUISetButtonsComponents() {
 
-        nameEdit_btton = new JButton("EDIT");
-        telEdit_btton = new JButton("EDIT");
-        typeEdit_btton = new JButton("EDIT");
+        nameEditLogoJPG = new ImageIcon(getClass().getResource(EDIT_NAME));
+        nameEdit_btton = new JButton(nameEditLogoJPG);
+        nameEdit_btton.setBorderPainted(true);
+        nameEdit_btton.setOpaque(false);
+        nameEdit_btton.setBackground(Color.white);
+        nameEdit_btton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        nameEdit_btton.setBorder(new LineBorder(Color.red));
 
-        ok_button = new JButton("OK");
-        cancel_button = new JButton("CANCEL");
+        phoneEditLogoJPG = new ImageIcon(getClass().getResource(EDIT_PHONE));
+        telEdit_btton = new JButton(phoneEditLogoJPG);
+        telEdit_btton.setBorderPainted(true);
+        telEdit_btton.setOpaque(false);
+        telEdit_btton.setBackground(Color.white);
+        telEdit_btton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        telEdit_btton.setBorder(new LineBorder(Color.red));
+
+        typeEditLogoJPG = new ImageIcon(getClass().getResource(EDIT_TYPE));
+        typeEdit_btton = new JButton(typeEditLogoJPG);
+        typeEdit_btton.setBorderPainted(true);
+        typeEdit_btton.setOpaque(false);
+        typeEdit_btton.setBackground(Color.white);
+        typeEdit_btton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        typeEdit_btton.setBorder(new LineBorder(Color.red));
+
+        updateCustLogoJPG = new ImageIcon(getClass().getResource(UPDATE_CUSTOMER));
+        ok_button = new JButton(updateCustLogoJPG);
+        ok_button.setBorderPainted(true);
+        ok_button.setBackground(Color.black);
+        ok_button.setPreferredSize(new Dimension(BUTTON_WIDTH2, BUTTON_HEIGHT));
+        ok_button.setBorder(new LineBorder(Color.red));
+
+        backgroundPhotoTopPanelJPG = new ImageIcon(getClass().getResource(BACK_PHOTO));
+        backgroundPhotoLabel = new JLabel(backgroundPhotoTopPanelJPG);
+
+        backLogoJPG = new ImageIcon(getClass().getResource(BACK_BUTTON));
+        cancel_button = new JButton(backLogoJPG);
+        cancel_button.setBorderPainted(false);
+        cancel_button.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
 
         jPanelMain.add(nameEdit_btton);
         jPanelMain.add(telEdit_btton);
@@ -356,16 +414,39 @@ public class CustomerEditDetails extends JFrame {
     private void GUISetTextFieldsAndComboComponents() {
 
         idCustomer_data = new JTextField();
+        idCustomer_data.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
+        idCustomer_data.setHorizontalAlignment(JTextField.CENTER);
+        idCustomer_data.setFont(new Font("Urban Sketch", Font.BOLD, 30));
+        idCustomer_data.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.black));
+        idCustomer_data.setForeground (Color.black);
+        idCustomer_data.setOpaque(false);
         idCustomer_data.setEnabled(false);
 
         nameCustomer_data = new JTextField();
+        nameCustomer_data.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
+        nameCustomer_data.setHorizontalAlignment(JTextField.CENTER);
+        nameCustomer_data.setFont(new Font("Urban Sketch", Font.BOLD, 30));
+        nameCustomer_data.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.black));
+        nameCustomer_data.setForeground (Color.black);
+        nameCustomer_data.setOpaque(false);
         nameCustomer_data.setEnabled(false);
 
         telCustomer_data = new JTextField();
+        telCustomer_data.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
+        telCustomer_data.setHorizontalAlignment(JTextField.CENTER);
+        telCustomer_data.setFont(new Font("Urban Sketch", Font.BOLD, 30));
+        telCustomer_data.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.black));
+        telCustomer_data.setForeground (Color.black);
+        telCustomer_data.setOpaque(false);
         telCustomer_data.setEnabled(false);
 
         comboBoxModel = new DefaultComboBoxModel();
         type_box = new JComboBox(comboBoxModel);
+
+        type_box.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
+        type_box.setFont(new Font("Urban Sketch", Font.BOLD, 30));
+        type_box.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.black));
+        type_box.setOpaque(false);
 
         comboBoxModel.addElement(customer.getCustType());
         type_box.setEnabled(false);
@@ -382,23 +463,35 @@ public class CustomerEditDetails extends JFrame {
 
     private void GUISetLabelsComponents() {
 
-        label_message = new JLabel("Customer details:");
-        idCustomer_label = new JLabel("Customer ID:");
-        nameCustomer_label = new JLabel("Customer name:");
-        telCustomer_label = new JLabel("Customer phone:");
-        typeCustomer_label = new JLabel("Customer type:");
+        titlePhotoJPG = new ImageIcon(getClass().getResource(TITLE));
+        titleLabel = new JLabel(titlePhotoJPG);
 
-        jPanelMain.add(label_message);
-        jPanelMain.add(idCustomer_label);
-        jPanelMain.add(nameCustomer_label);
-        jPanelMain.add(telCustomer_label);
-        jPanelMain.add(typeCustomer_label);
+        label_id = new ImageIcon(getClass().getResource(LABEL_ID));
+        jLabelId = new JLabel(label_id);
+
+        label_name = new ImageIcon(getClass().getResource(LABEL_NAME));
+        jLabelname = new JLabel(label_name);
+
+        label_phone = new ImageIcon(getClass().getResource(LABEL_PHONE));
+        jLabelphone = new JLabel(label_phone);
+
+        label_type = new ImageIcon(getClass().getResource(LABEL_TYPE));
+        jLabeltype = new JLabel(label_type);
+
+        jPanelMain.add(titleLabel);
+        jPanelMain.add(jLabelId);
+        jPanelMain.add(jLabelname);
+        jPanelMain.add(jLabelphone);
+        jPanelMain.add(jLabeltype);
     }
 
     private void GUISettingForJFrame() {
 
-        this.setTitle("Customer Edit Details");
-        this.setSize(500, 400);
+        this.setSize(FRAMEֹֹ_WIDTH_ֹSIZE,FRAMEֹֹ_HEIGHT_ֹSIZE);
+        this.setLocation(FRAMEֹֹ_POSITION_X,FRAMEֹֹ_POSITION_Y);
+        this.setResizable(false);
+
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     public JFrame getJFrame() {
@@ -464,16 +557,6 @@ public class CustomerEditDetails extends JFrame {
         return cancel_button;
     }
 
-    public Customer getCustomer() {
-
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-
-        this.customer = customer;
-    }
-
     public JPanel getjPanelMain() {
 
         return jPanelMain;
@@ -481,8 +564,7 @@ public class CustomerEditDetails extends JFrame {
 
     public static void main(String[] args) {
         CustomerEditDetails CustomerEditDetails = new CustomerEditDetails("25232342", "dfsfsdf", "44444444","SDFEF",
-                null,null,null,"sdfdsf");
-        // שולח את החלונית הקטנה להזנת ת.ז לעדכון, המסך הראשי של האדמין ואת המסך של הניהול עובדים
+                                                                     null,null,null,"sdfdsf");
         CustomerEditDetails.DrawCustomerEditDetails();
         CustomerEditDetails.InitializeActions();
         CustomerEditDetails.setVisible(true);

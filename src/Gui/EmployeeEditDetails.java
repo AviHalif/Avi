@@ -10,6 +10,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
@@ -18,41 +20,41 @@ import java.io.IOException;
 
 public class EmployeeEditDetails extends JFrame {
 
-    public static final String JOPTIONPANE_MESSAGE_UPDATE = "Are you sure you want to update employee ID number: ";
-    public static final String JOPTIONPANE_MESSAGE_PASS = "Are you sure you want to change the password of employee ID: ";
-    public static final String JOPTIONPANE_TITLE_UPDATE = "CASTRO - UPDATE DETAILS EMPLOYEE";
-    public static final String JOPTIONPANE_MESSAGE_CLOSE = "Are you sure you want to close the window? Data will not be saved";
-    public static final String JOPTIONPANE_TITLE_CLOSE = "CASTRO";
-    public static final String NO_PHOTO = "/src/images/No_Image_Available.png";
-
-    private String branchName;
-    private Employee employee;
-    private int passLength;
     private char[] pass;
-    private boolean anyChangeInPass, isPhotoChanged;
-    private byte[] decoded;
-
     private Client client;
-
+    private byte[] decoded;
+    private int passLength;
+    private JPanel jPanelMain;
+    private Employee employee;
+    private String branchName;
+    private JComboBox type_box;
     private JSONObject jsonObject;
     private ObjectMapper objectMapper;
-
-    private JFrame oneBackFrame, twoBackFrame, thirdBackFrame;
-    private JPanel jPanelMain;
-    private JLabel label_message, idEmployee_label, snEmployee_label, nameEmployee_label, telEmployee_label, bankEmployee_label, branchEmployee_label, passEmployee_label, typeEmployee_label, photoLabel;
     private SpringLayout springLayout;
-    private JTextField idEmployee_data, nameEmployee_data, telEmployee_data, bankEmployee_data, snEmployee_data, branchEmployee_data;
     private JPasswordField passEmployee_data;
-    private JComboBox type_box;
     private DefaultComboBoxModel comboBoxModel;
-    private JButton nameEdit_btton, telEdit_btton, typeEdit_btton, passEdit_btton, bankEdit_btton;
-    private JButton ok_button, cancel_button, remove_photo_button, change_photo_button;
-    private ImageIcon photoLabelJPG;
+    private boolean anyChangeInPass, isPhotoChanged;
+    private JFrame oneBackFrame, twoBackFrame, thirdBackFrame;
+    private JTextField idEmployee_data, nameEmployee_data, telEmployee_data, bankEmployee_data, snEmployee_data, branchEmployee_data;
+    private JButton nameEdit_btton, telEdit_btton, typeEdit_btton, passEdit_btton, bankEdit_btton, ok_button, cancel_button, change_photo_button;
+    private ImageIcon photoLabelJPG, backgroundPhotoTopPanelJPG, titlePhotoJPG, backLogoJPG, label_id, label_name, label_phone, label_type, label_sn, label_bank, label_branch, label_pass,
+                      nameEditLogoJPG,  bankEditLogoJPG, passEditLogoJPG, typeEditLogoJPG, telEditLogoJPG, changeLogoJPG, updateEmpLogoJPG;
+    private JLabel idEmployee_label, snEmployee_label, nameEmployee_label, telEmployee_label, bankEmployee_label, branchEmployee_label,
+                   passEmployee_label, typeEmployee_label, photoLabel, backgroundPhotoLabel, titleLabel;
+    public static final int FRAMEֹֹ_POSITION_X = 7, FRAMEֹֹ_POSITION_Y = 230, FRAMEֹֹ_WIDTH_ֹSIZE = 1520, FRAMEֹֹ_HEIGHT_ֹSIZE = 630, JTEXTFIELD_WIDTH = 250, JTEXTFIELD_HEIGHT = 50,
+                            BUTTON_WIDTH = 100, BUTTON_HEIGHT = 50, BUTTON_WIDTH2 = 300, BUTTON_WIDTH3 = 350;
+    public static final String UPDATE_EMPLOYEE = "/src/images/update_employee.png", CHANGE_PHOTO = "/src/images/change_photo.png", TITLE = "/src/images/employee_update.png",
+                              JOPTIONPANE_MESSAGE_UPDATE = "Are you sure you want to update employee ID number: ",
+                              JOPTIONPANE_MESSAGE_PASS = "Are you sure you want to change the password of employee ID: ", JOPTIONPANE_TITLE_UPDATE = "CASTRO - UPDATE DETAILS EMPLOYEE",
+                              NO_PHOTO = "/src/images/No_Image_Available.png", BACK_PHOTO = "/src/images/back_edit_2.png", BACK_BUTTON = "/src/images/back.png",
+                              LABEL_NAME = "/src/images/update_name.png", LABEL_PHONE = "/src/images/update_phone.png", LABEL_TYPE = "/src/images/update_type.png",
+                              LABEL_ID = "/src/images/update_id.png", EDIT = "/src/images/edit.png", LABEL_SN = "/src/images/update_sn.png", LABEL_BANK = "/src/images/update_bank.png",
+                              LABEL_BRANCH = "/src/images/update_branch.png", LABEL_PASSWORD = "/src/images/update_password.png";
+
 
     public EmployeeEditDetails(String empId,String empSn,String empName,String empTel,
                                String empBank, String empBranch, String empType, String empPhoto,
                                JFrame oneBackFrame,JFrame twoBackFrame, JFrame thirdBackFrame, String branchName) {
-//// הגיעה החלונית הקטנה להזנת ת.ז לעדכון, המסך הראשי של האדמין ואת המסך של הניהול עובדים
 
         SetGUIComponents(oneBackFrame, twoBackFrame, thirdBackFrame);
 
@@ -82,12 +84,10 @@ public class EmployeeEditDetails extends JFrame {
         // resize the photo
         photoLabel.setVisible(false);
 
-        // המרה של מה שהגיע בתוך אמפלויי.פוטו שהוא איזה שהוא המרה של מה שאוחסן בבסיס נתונים כבלוב וכעת יש להמירו לפני הצגה על הלייבל
         String encodedPhotos;
         Base64 codec = new Base64();
         encodedPhotos = employee.getEmpPhoto();
         decoded = codec.decode(encodedPhotos);
-
 
         ImageIcon MyImage = new ImageIcon(decoded);
         Image img = MyImage.getImage();
@@ -95,9 +95,8 @@ public class EmployeeEditDetails extends JFrame {
         ImageIcon image = new ImageIcon(newImage);
         photoLabel = new JLabel(image);
 
-        // מיקום התמונה
-        springLayout.putConstraint(SpringLayout.WEST,photoLabel,100,SpringLayout.WEST,jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH,photoLabel,500,SpringLayout.NORTH,jPanelMain);
+        springLayout.putConstraint(SpringLayout.EAST,photoLabel,0,SpringLayout.EAST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.NORTH,photoLabel,0,SpringLayout.NORTH,jPanelMain);
         jPanelMain.add(photoLabel);
 
     }
@@ -117,8 +116,7 @@ public class EmployeeEditDetails extends JFrame {
                     File selectedFile = fileChooser.getSelectedFile();
                     String path = selectedFile.getAbsolutePath();
 
-                    if(MaxSizeImage(path)) { // אם עברנו את הגול המירבי של תמונה
-
+                    if(MaxSizeImage(path)) {
                         photoLabel.setVisible(false);
 
                         ResizeThePhoto(path);
@@ -135,34 +133,7 @@ public class EmployeeEditDetails extends JFrame {
                 else if(result == JFileChooser.CANCEL_OPTION){
                     System.out.println("No Data");
                 }
-
-                if(!employee.getEmpPhoto().equals("C:/Users/AviHalif/IdeaProjects/Avi/src/images/No_Image_Available.png"))
-                    remove_photo_button.setEnabled(true);
             }
-        });
-
-        remove_photo_button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                photoLabel.setVisible(false);
-
-                photoLabelJPG = new ImageIcon(getClass().getResource(NO_PHOTO));
-                photoLabel = new JLabel(photoLabelJPG);
-                photoLabel.setPreferredSize(new Dimension(300, 300)); // לשנות שיהיה ריסאייזבאל כמו שמציג את התמונות ברגע שבוחר אותם מהמחשב
-                jPanelMain.add(photoLabel);
-
-                employee.setEmpPhoto("C:/Users/AviHalif/IdeaProjects/Avi/src/images/No_Image_Available.png"); // כאן חייב להזין את הנתיב המלא של בחירת התמונה
-                ok_button.setEnabled(true);
-                isPhotoChanged = true;
-
-                springLayout.putConstraint(SpringLayout.WEST,photoLabel,100,SpringLayout.WEST,jPanelMain);
-                springLayout.putConstraint(SpringLayout.NORTH,photoLabel,500,SpringLayout.NORTH,jPanelMain);
-
-                photoLabel.setVisible(true);
-                remove_photo_button.setEnabled(false);
-            }
-
         });
 
         ok_button.addActionListener(new ActionListener() {
@@ -224,11 +195,14 @@ public class EmployeeEditDetails extends JFrame {
             @Override
             public void focusGained(FocusEvent e) {
                 bankEdit_btton.setEnabled(false);
+                bankEmployee_data.setBorder(BorderFactory.createLineBorder(Color.red));
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 employee.setEmpBank(bankEmployee_data.getText());
+                bankEmployee_data.setBorder(BorderFactory.createLineBorder(Color.black));
+
             }
         });
 
@@ -236,12 +210,14 @@ public class EmployeeEditDetails extends JFrame {
             @Override
             public void focusGained(FocusEvent e) {
                 passEdit_btton.setEnabled(false);
+                passEmployee_data.setBorder(BorderFactory.createLineBorder(Color.red));
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 passLength = passEmployee_data.getPassword().length;
-                pass = passEmployee_data.getPassword(); // שומר את הסיסמא המקורית כצארים
+                pass = passEmployee_data.getPassword();
+                passEmployee_data.setBorder(BorderFactory.createLineBorder(Color.black));
             }
         });
 
@@ -251,6 +227,7 @@ public class EmployeeEditDetails extends JFrame {
 
                 ok_button.setEnabled(true);
                 bankEmployee_data.setEnabled(true);
+                bankEmployee_data.setBorder(BorderFactory.createLineBorder(Color.red));
             }
         });
 
@@ -267,6 +244,7 @@ public class EmployeeEditDetails extends JFrame {
                             ok_button.setEnabled(true);
                             passEmployee_data.setBackground(Color.WHITE);
                             passEmployee_data.setEnabled(true);
+                            passEmployee_data.setBorder(BorderFactory.createLineBorder(Color.red));
 
                     } else {
                          getFrame().setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -280,6 +258,8 @@ public class EmployeeEditDetails extends JFrame {
 
                 ok_button.setEnabled(true);
                 nameEmployee_data.setEnabled(true);
+                nameEmployee_data.setBorder(BorderFactory.createLineBorder(Color.red));
+
             }
         });
 
@@ -289,6 +269,7 @@ public class EmployeeEditDetails extends JFrame {
 
                 ok_button.setEnabled(true);
                 telEmployee_data.setEnabled(true);
+                telEmployee_data.setBorder(BorderFactory.createLineBorder(Color.red));
             }
         });
 
@@ -302,6 +283,7 @@ public class EmployeeEditDetails extends JFrame {
                 getComboBoxModel().addElement("Cashier");
                 getComboBoxModel().addElement("Manager");
                 type_box.setEnabled(true);
+                type_box.setBorder(BorderFactory.createLineBorder(Color.red));
             }
         });
 
@@ -313,17 +295,35 @@ public class EmployeeEditDetails extends JFrame {
             }
         });
 
+        type_box.addFocusListener(new FocusAdapter() {
+
+            @Override
+            public void focusGained(FocusEvent e) {
+
+                type_box.setBorder(BorderFactory.createLineBorder(Color.red));
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+
+                type_box.setBorder(BorderFactory.createLineBorder(Color.black));
+
+            }
+        });
+
         nameEmployee_data.addFocusListener(new FocusAdapter() {
 
             @Override
             public void focusGained(FocusEvent e) {
                 nameEdit_btton.setEnabled(false);
+                nameEmployee_data.setBorder(BorderFactory.createLineBorder(Color.red));
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
                 employee.setEmpName(nameEmployee_data.getText());
+                nameEmployee_data.setBorder(BorderFactory.createLineBorder(Color.black));
 
             }
         });
@@ -333,12 +333,14 @@ public class EmployeeEditDetails extends JFrame {
             @Override
             public void focusGained(FocusEvent e) {
                 telEdit_btton.setEnabled(false);
+                telEmployee_data.setBorder(BorderFactory.createLineBorder(Color.red));
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
                 employee.setEmpTel(telEmployee_data.getText());
+                telEmployee_data.setBorder(BorderFactory.createLineBorder(Color.black));
             }
         });
 
@@ -352,6 +354,7 @@ public class EmployeeEditDetails extends JFrame {
                 EmployeeListManagement employeeListManagement = new EmployeeListManagement(twoBackFrame,branchName);
                 try {
 
+                    employeeListManagement.setUndecorated(true);
                     employeeListManagement.DrawEmployee();
 
                 } catch (IOException e1) {
@@ -362,7 +365,6 @@ public class EmployeeEditDetails extends JFrame {
 
                 employeeListManagement.InitializeActions();
                 employeeListManagement.setVisible(true);
-                employeeListManagement.setLocationRelativeTo(null);
             }
         });
 
@@ -382,6 +384,7 @@ public class EmployeeEditDetails extends JFrame {
 
         try {
             employeeListManagement.DrawEmployee();
+            employeeListManagement.setUndecorated(true);
 
         } catch (IOException e1) {
             e1.printStackTrace();
@@ -391,7 +394,6 @@ public class EmployeeEditDetails extends JFrame {
 
         employeeListManagement.InitializeActions();
         employeeListManagement.setVisible(true);
-        employeeListManagement.setLocationRelativeTo(null);
     }
 
     private void ResizeThePhoto(String path) {
@@ -403,8 +405,8 @@ public class EmployeeEditDetails extends JFrame {
         ImageIcon image = new ImageIcon(newImage);
 
         photoLabel = new JLabel(image);
-        springLayout.putConstraint(SpringLayout.WEST,photoLabel,100,SpringLayout.WEST,jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH,photoLabel,500,SpringLayout.NORTH,jPanelMain);
+        springLayout.putConstraint(SpringLayout.EAST,photoLabel,0,SpringLayout.EAST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.NORTH,photoLabel,0,SpringLayout.NORTH,jPanelMain);
         jPanelMain.add(photoLabel);
     }
 
@@ -481,8 +483,11 @@ public class EmployeeEditDetails extends JFrame {
 
     private void GUISettingForJFrame() {
 
-        this.setTitle("Employee Edit Details");
-        this.setSize(500, 700);
+        this.setSize(FRAMEֹֹ_WIDTH_ֹSIZE,FRAMEֹֹ_HEIGHT_ֹSIZE);
+        this.setLocation(FRAMEֹֹ_POSITION_X,FRAMEֹֹ_POSITION_Y);
+        this.setResizable(false);
+
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     private void GUISettingForJPanel() {
@@ -506,92 +511,89 @@ public class EmployeeEditDetails extends JFrame {
 
     private void GUIPlaceTextFieldsAndComboComponents() {
 
-        springLayout.putConstraint(SpringLayout.WEST,label_message,35,SpringLayout.WEST,jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH,label_message,25,SpringLayout.NORTH,jPanelMain);
+        springLayout.putConstraint(SpringLayout.WEST,titleLabel,130,SpringLayout.WEST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.NORTH,titleLabel,25,SpringLayout.NORTH,jPanelMain);
 
-        springLayout.putConstraint(SpringLayout.WEST,idEmployee_data,35,SpringLayout.EAST,idEmployee_label);
-        springLayout.putConstraint(SpringLayout.NORTH,idEmployee_data,25,SpringLayout.SOUTH,label_message);
+        springLayout.putConstraint(SpringLayout.WEST,idEmployee_data,160,SpringLayout.EAST,idEmployee_label);
+        springLayout.putConstraint(SpringLayout.NORTH,idEmployee_data,40,SpringLayout.SOUTH,titleLabel);
 
-        springLayout.putConstraint(SpringLayout.WEST,telEmployee_data,35,SpringLayout.EAST,telEmployee_label);
-        springLayout.putConstraint(SpringLayout.NORTH,telEmployee_data,25,SpringLayout.SOUTH,type_box);
+        springLayout.putConstraint(SpringLayout.WEST,telEmployee_data,100,SpringLayout.EAST,telEmployee_label);
+        springLayout.putConstraint(SpringLayout.NORTH,telEmployee_data,50,SpringLayout.SOUTH,type_box);
 
-        springLayout.putConstraint(SpringLayout.WEST,snEmployee_data,35,SpringLayout.EAST,snEmployee_label);
-        springLayout.putConstraint(SpringLayout.NORTH,snEmployee_data,25,SpringLayout.SOUTH,idEmployee_data);
+        springLayout.putConstraint(SpringLayout.WEST,snEmployee_data,110,SpringLayout.EAST,snEmployee_label);
+        springLayout.putConstraint(SpringLayout.NORTH,snEmployee_data,60,SpringLayout.SOUTH,idEmployee_data);
 
-        springLayout.putConstraint(SpringLayout.WEST,bankEmployee_data,35,SpringLayout.EAST,bankEmployee_label);
-        springLayout.putConstraint(SpringLayout.NORTH,bankEmployee_data,25,SpringLayout.SOUTH,telEmployee_data);
+        springLayout.putConstraint(SpringLayout.WEST,bankEmployee_data,95,SpringLayout.EAST,bankEmployee_label);
+        springLayout.putConstraint(SpringLayout.NORTH,bankEmployee_data,50,SpringLayout.SOUTH,branchEmployee_data);
 
-        springLayout.putConstraint(SpringLayout.WEST,passEmployee_data,35,SpringLayout.EAST,passEmployee_label);
-        springLayout.putConstraint(SpringLayout.NORTH,passEmployee_data,25,SpringLayout.SOUTH,bankEmployee_data);
+        springLayout.putConstraint(SpringLayout.WEST,passEmployee_data,15,SpringLayout.EAST,passEmployee_label);
+        springLayout.putConstraint(SpringLayout.NORTH,passEmployee_data,63,SpringLayout.SOUTH,telEmployee_data);
 
         springLayout.putConstraint(SpringLayout.WEST,branchEmployee_data,35,SpringLayout.EAST,branchEmployee_label);
-        springLayout.putConstraint(SpringLayout.NORTH,branchEmployee_data,25,SpringLayout.SOUTH,snEmployee_data);
+        springLayout.putConstraint(SpringLayout.NORTH,branchEmployee_data,60,SpringLayout.SOUTH,snEmployee_data);
 
-        springLayout.putConstraint(SpringLayout.WEST,nameEmployee_data,35,SpringLayout.EAST,nameEmployee_label);
-        springLayout.putConstraint(SpringLayout.NORTH,nameEmployee_data,25,SpringLayout.SOUTH,branchEmployee_data);
+        springLayout.putConstraint(SpringLayout.WEST,nameEmployee_data,110,SpringLayout.EAST,nameEmployee_label);
+        springLayout.putConstraint(SpringLayout.NORTH,nameEmployee_data,160,SpringLayout.NORTH,titleLabel);
 
-        springLayout.putConstraint(SpringLayout.WEST,type_box,35,SpringLayout.EAST,typeEmployee_label);
-        springLayout.putConstraint(SpringLayout.NORTH,type_box,25,SpringLayout.SOUTH,nameEmployee_data);
+        springLayout.putConstraint(SpringLayout.WEST,type_box,125,SpringLayout.EAST,typeEmployee_label);
+        springLayout.putConstraint(SpringLayout.NORTH,type_box,55,SpringLayout.SOUTH,nameEmployee_data);
     }
 
     private void GUIPlaceButtonsComponents() {
 
-        springLayout.putConstraint(SpringLayout.WEST,remove_photo_button,35,SpringLayout.WEST,jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH,remove_photo_button,50,SpringLayout.SOUTH,ok_button);
+        springLayout.putConstraint(SpringLayout.EAST,change_photo_button,1195,SpringLayout.EAST,photoLabel);
+        springLayout.putConstraint(SpringLayout.NORTH,change_photo_button,100,SpringLayout.NORTH,jPanelMain);
 
-        springLayout.putConstraint(SpringLayout.WEST,change_photo_button,50,SpringLayout.EAST,remove_photo_button);
-        springLayout.putConstraint(SpringLayout.NORTH,change_photo_button,50,SpringLayout.SOUTH,cancel_button);
+        springLayout.putConstraint(SpringLayout.WEST,nameEdit_btton,400,SpringLayout.EAST,nameEmployee_label);
+        springLayout.putConstraint(SpringLayout.NORTH,nameEdit_btton,40,SpringLayout.SOUTH,titleLabel);
 
-        springLayout.putConstraint(SpringLayout.EAST,nameEdit_btton,-100,SpringLayout.EAST,jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH,nameEdit_btton,25,SpringLayout.SOUTH,branchEmployee_data);
+        springLayout.putConstraint(SpringLayout.WEST,typeEdit_btton,40,SpringLayout.EAST,type_box);
+        springLayout.putConstraint(SpringLayout.NORTH,typeEdit_btton,55,SpringLayout.SOUTH,nameEdit_btton);
 
-        springLayout.putConstraint(SpringLayout.EAST,typeEdit_btton,-100,SpringLayout.EAST,jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH,typeEdit_btton,25,SpringLayout.SOUTH,nameEdit_btton);
+        springLayout.putConstraint(SpringLayout.WEST,telEdit_btton,40,SpringLayout.EAST,telEmployee_data);
+        springLayout.putConstraint(SpringLayout.NORTH,telEdit_btton,50,SpringLayout.SOUTH,typeEdit_btton);
 
-        springLayout.putConstraint(SpringLayout.EAST,telEdit_btton,-100,SpringLayout.EAST,jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH,telEdit_btton,25,SpringLayout.SOUTH,typeEdit_btton);
+        springLayout.putConstraint(SpringLayout.WEST,passEdit_btton,40,SpringLayout.EAST,passEmployee_data);
+        springLayout.putConstraint(SpringLayout.NORTH,passEdit_btton,60,SpringLayout.SOUTH,telEdit_btton);
 
-        springLayout.putConstraint(SpringLayout.EAST,passEdit_btton,-100,SpringLayout.EAST,jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH,passEdit_btton,25,SpringLayout.SOUTH,bankEdit_btton);
+        springLayout.putConstraint(SpringLayout.WEST,ok_button,550,SpringLayout.WEST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.SOUTH,ok_button,-10,SpringLayout.SOUTH,jPanelMain);
 
-        springLayout.putConstraint(SpringLayout.WEST,ok_button,35,SpringLayout.WEST,jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH,ok_button,50,SpringLayout.SOUTH,passEmployee_label);
+        springLayout.putConstraint(SpringLayout.WEST,bankEdit_btton,50,SpringLayout.EAST,bankEmployee_data);
+        springLayout.putConstraint(SpringLayout.NORTH,bankEdit_btton,50,SpringLayout.SOUTH,branchEmployee_data);
 
-        springLayout.putConstraint(SpringLayout.EAST,bankEdit_btton,-100,SpringLayout.EAST,jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH,bankEdit_btton,25,SpringLayout.SOUTH,telEdit_btton);
-
-        springLayout.putConstraint(SpringLayout.WEST,cancel_button,35,SpringLayout.EAST,ok_button);
-        springLayout.putConstraint(SpringLayout.NORTH,cancel_button,50,SpringLayout.SOUTH,passEmployee_label);
+        springLayout.putConstraint(SpringLayout.WEST,cancel_button,0,SpringLayout.WEST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.SOUTH,cancel_button,0,SpringLayout.SOUTH,jPanelMain);
     }
 
     private void GUIPlaceLabelsComponents() {
 
-        springLayout.putConstraint(SpringLayout.WEST,photoLabel,100,SpringLayout.WEST,jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH,photoLabel,500,SpringLayout.NORTH,jPanelMain);
+        springLayout.putConstraint(SpringLayout.WEST,idEmployee_label,10,SpringLayout.WEST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.NORTH,idEmployee_label,25,SpringLayout.SOUTH,titleLabel);
 
-        springLayout.putConstraint(SpringLayout.WEST,idEmployee_label,35,SpringLayout.WEST,jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH,idEmployee_label,25,SpringLayout.SOUTH,label_message);
-
-        springLayout.putConstraint(SpringLayout.WEST,snEmployee_label,35,SpringLayout.WEST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.WEST,snEmployee_label,30,SpringLayout.WEST,jPanelMain);
         springLayout.putConstraint(SpringLayout.NORTH,snEmployee_label,25,SpringLayout.SOUTH,idEmployee_label);
 
         springLayout.putConstraint(SpringLayout.WEST,branchEmployee_label,35,SpringLayout.WEST,jPanelMain);
         springLayout.putConstraint(SpringLayout.NORTH,branchEmployee_label,25,SpringLayout.SOUTH,snEmployee_label);
 
-        springLayout.putConstraint(SpringLayout.WEST,nameEmployee_label,35,SpringLayout.WEST,jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH,nameEmployee_label,25,SpringLayout.SOUTH,branchEmployee_label);
+        springLayout.putConstraint(SpringLayout.WEST,nameEmployee_label,780,SpringLayout.WEST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.NORTH,nameEmployee_label,25,SpringLayout.SOUTH,titleLabel);
 
-        springLayout.putConstraint(SpringLayout.WEST,typeEmployee_label,35,SpringLayout.WEST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.WEST,typeEmployee_label,765,SpringLayout.WEST,jPanelMain);
         springLayout.putConstraint(SpringLayout.NORTH,typeEmployee_label,25,SpringLayout.SOUTH,nameEmployee_label);
 
-        springLayout.putConstraint(SpringLayout.WEST,telEmployee_label,35,SpringLayout.WEST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.WEST,telEmployee_label,790,SpringLayout.WEST,jPanelMain);
         springLayout.putConstraint(SpringLayout.NORTH,telEmployee_label,25,SpringLayout.SOUTH,typeEmployee_label);
 
         springLayout.putConstraint(SpringLayout.WEST,bankEmployee_label,35,SpringLayout.WEST,jPanelMain);
         springLayout.putConstraint(SpringLayout.NORTH,bankEmployee_label,25,SpringLayout.SOUTH,telEmployee_label);
 
-        springLayout.putConstraint(SpringLayout.WEST,passEmployee_label,35,SpringLayout.WEST,jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH,passEmployee_label,25,SpringLayout.SOUTH,bankEmployee_label);
+        springLayout.putConstraint(SpringLayout.WEST,passEmployee_label,795,SpringLayout.WEST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.NORTH,passEmployee_label,25,SpringLayout.SOUTH,telEmployee_label);
+
+        springLayout.putConstraint(SpringLayout.WEST,backgroundPhotoLabel,-150,SpringLayout.WEST,jPanelMain);
+        springLayout.putConstraint(SpringLayout.NORTH,backgroundPhotoLabel,0,SpringLayout.NORTH,jPanelMain);
     }
 
     private void GUIAddComponentsOnJPanel() {
@@ -611,29 +613,85 @@ public class EmployeeEditDetails extends JFrame {
 
         photoLabelJPG = new ImageIcon(getClass().getResource(NO_PHOTO));
         photoLabel = new JLabel(photoLabelJPG);
-        photoLabel.setPreferredSize(new Dimension(150, 150)); // לשנות שיהיה ריסאייזבאל כמו שמציג את התמונות ברגע שבוחר אותם מהמחשב
+        photoLabel.setPreferredSize(new Dimension(150, 150));
         jPanelMain.add(photoLabel);
+
+        backgroundPhotoTopPanelJPG = new ImageIcon(getClass().getResource(BACK_PHOTO));
+        backgroundPhotoLabel = new JLabel(backgroundPhotoTopPanelJPG);
+        jPanelMain.add(backgroundPhotoLabel);
     }
 
     private void GUISetButtonsComponents() {
 
-        change_photo_button = new JButton("CHANGE IMAGE");
-        cancel_button = new JButton("CANCEL");
-        nameEdit_btton = new JButton("EDIT");
-        telEdit_btton = new JButton("EDIT");
-        typeEdit_btton = new JButton("EDIT");
-        passEdit_btton =  new JButton("EDIT");
-        bankEdit_btton = new JButton("EDIT");
+        backLogoJPG = new ImageIcon(getClass().getResource(BACK_BUTTON));
+        cancel_button = new JButton(backLogoJPG);
+        cancel_button.setBorderPainted(false);
+        cancel_button.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
 
-        ok_button = new JButton("OK");
+        nameEditLogoJPG = new ImageIcon(getClass().getResource(EDIT));
+        nameEdit_btton = new JButton(nameEditLogoJPG);
+        nameEdit_btton.setBorderPainted(true);
+        nameEdit_btton.setOpaque(false);
+        nameEdit_btton.setBackground(Color.white);
+        nameEdit_btton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        nameEdit_btton.setBorder(new LineBorder(Color.red));
+
+        telEditLogoJPG = new ImageIcon(getClass().getResource(EDIT));
+        telEdit_btton = new JButton(telEditLogoJPG);
+        telEdit_btton.setBorderPainted(true);
+        telEdit_btton.setOpaque(false);
+        telEdit_btton.setBackground(Color.white);
+        telEdit_btton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        telEdit_btton.setBorder(new LineBorder(Color.red));
+
+        typeEditLogoJPG = new ImageIcon(getClass().getResource(EDIT));
+        typeEdit_btton = new JButton(typeEditLogoJPG);
+        typeEdit_btton.setBorderPainted(true);
+        typeEdit_btton.setOpaque(false);
+        typeEdit_btton.setBackground(Color.white);
+        typeEdit_btton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        typeEdit_btton.setBorder(new LineBorder(Color.red));
+
+        passEditLogoJPG = new ImageIcon(getClass().getResource(EDIT));
+        passEdit_btton = new JButton(passEditLogoJPG);
+        passEdit_btton.setBorderPainted(true);
+        passEdit_btton.setOpaque(false);
+        passEdit_btton.setBackground(Color.white);
+        passEdit_btton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        passEdit_btton.setBorder(new LineBorder(Color.red));
+
+        bankEditLogoJPG = new ImageIcon(getClass().getResource(EDIT));
+        bankEdit_btton = new JButton(bankEditLogoJPG);
+        bankEdit_btton.setBorderPainted(true);
+        bankEdit_btton.setOpaque(false);
+        bankEdit_btton.setBackground(Color.white);
+        bankEdit_btton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        bankEdit_btton.setBorder(new LineBorder(Color.red));
+
+        bankEditLogoJPG = new ImageIcon(getClass().getResource(EDIT));
+        bankEdit_btton = new JButton(bankEditLogoJPG);
+        bankEdit_btton.setBorderPainted(true);
+        bankEdit_btton.setOpaque(false);
+        bankEdit_btton.setBackground(Color.white);
+        bankEdit_btton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        bankEdit_btton.setBorder(new LineBorder(Color.red));
+
+        changeLogoJPG = new ImageIcon(getClass().getResource(CHANGE_PHOTO));
+        change_photo_button = new JButton(changeLogoJPG);
+        change_photo_button.setBorderPainted(true);
+        change_photo_button.setBackground(Color.white);
+        change_photo_button.setPreferredSize(new Dimension(BUTTON_WIDTH2, BUTTON_HEIGHT));
+        change_photo_button.setBorder(new LineBorder(Color.red));
+
+        updateEmpLogoJPG = new ImageIcon(getClass().getResource(UPDATE_EMPLOYEE));
+        ok_button = new JButton(updateEmpLogoJPG);
+        ok_button.setBorderPainted(true);
+        ok_button.setBackground(Color.black);
+        ok_button.setPreferredSize(new Dimension(BUTTON_WIDTH3, BUTTON_HEIGHT));
+        ok_button.setBorder(new LineBorder(Color.red));
         ok_button.setEnabled(false);
 
-        remove_photo_button = new JButton("REMOVE IMAGE");
-        if(employee.getEmpPhoto().equals("C:/Users/AviHalif/IdeaProjects/Avi/src/images/No_Image_Available.png"))
-            remove_photo_button.setEnabled(false);
-
         jPanelMain.add(change_photo_button);
-        jPanelMain.add(remove_photo_button);
         jPanelMain.add(nameEdit_btton);
         jPanelMain.add(telEdit_btton);
         jPanelMain.add(typeEdit_btton);
@@ -646,17 +704,34 @@ public class EmployeeEditDetails extends JFrame {
 
     private void GUISetLabelsComponents() {
 
-        label_message = new JLabel("Employee details:");
-        idEmployee_label = new JLabel("Employee ID:");
-        snEmployee_label = new JLabel("Employee S/N:");
-        nameEmployee_label = new JLabel("Employee name:");
-        telEmployee_label = new JLabel("Employee tel:");
-        bankEmployee_label = new JLabel("Employee bank:");
-        branchEmployee_label = new JLabel("Employee branch:");
-        passEmployee_label = new JLabel("Employee password:");
-        typeEmployee_label = new JLabel("Employee type:");
+        titlePhotoJPG = new ImageIcon(getClass().getResource(TITLE));
+        titleLabel = new JLabel(titlePhotoJPG);
 
-        jPanelMain.add(label_message);
+        label_id = new ImageIcon(getClass().getResource(LABEL_ID));
+        idEmployee_label = new JLabel(label_id);
+
+        label_name = new ImageIcon(getClass().getResource(LABEL_NAME));
+        nameEmployee_label = new JLabel(label_name);
+
+        label_phone = new ImageIcon(getClass().getResource(LABEL_PHONE));
+        telEmployee_label = new JLabel(label_phone);
+
+        label_type = new ImageIcon(getClass().getResource(LABEL_TYPE));
+        typeEmployee_label = new JLabel(label_type);
+
+        label_sn = new ImageIcon(getClass().getResource(LABEL_SN));
+        snEmployee_label = new JLabel(label_sn);
+
+        label_bank = new ImageIcon(getClass().getResource(LABEL_BANK));
+        bankEmployee_label = new JLabel(label_bank);
+
+        label_branch = new ImageIcon(getClass().getResource(LABEL_BRANCH));
+        branchEmployee_label = new JLabel(label_branch);
+
+        label_pass = new ImageIcon(getClass().getResource(LABEL_PASSWORD));
+        passEmployee_label = new JLabel(label_pass);
+
+        jPanelMain.add(titleLabel);
         jPanelMain.add(idEmployee_label);
         jPanelMain.add(snEmployee_label);
         jPanelMain.add(nameEmployee_label);
@@ -665,44 +740,83 @@ public class EmployeeEditDetails extends JFrame {
         jPanelMain.add(branchEmployee_label);
         jPanelMain.add(passEmployee_label);
         jPanelMain.add(typeEmployee_label);
-
-
-
-
-
-
     }
 
     private void GUISetTextFieldsAndComboComponents() {
 
         idEmployee_data = new JTextField();
+        idEmployee_data.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
+        idEmployee_data.setHorizontalAlignment(JTextField.CENTER);
+        idEmployee_data.setFont(new Font("Urban Sketch", Font.BOLD, 30));
+        idEmployee_data.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.black));
+        idEmployee_data.setForeground (Color.black);
+        idEmployee_data.setOpaque(false);
         idEmployee_data.setEnabled(false);
 
-        nameEmployee_data= new JTextField();
+        nameEmployee_data = new JTextField();
+        nameEmployee_data.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
+        nameEmployee_data.setHorizontalAlignment(JTextField.CENTER);
+        nameEmployee_data.setFont(new Font("Urban Sketch", Font.BOLD, 30));
+        nameEmployee_data.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.black));
+        nameEmployee_data.setForeground (Color.black);
+        nameEmployee_data.setOpaque(false);
         nameEmployee_data.setEnabled(false);
 
         telEmployee_data = new JTextField();
+        telEmployee_data.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
+        telEmployee_data.setHorizontalAlignment(JTextField.CENTER);
+        telEmployee_data.setFont(new Font("Urban Sketch", Font.BOLD, 30));
+        telEmployee_data.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.black));
+        telEmployee_data.setForeground (Color.black);
+        telEmployee_data.setOpaque(false);
         telEmployee_data.setEnabled(false);
 
         bankEmployee_data = new JTextField();
+        bankEmployee_data.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
+        bankEmployee_data.setHorizontalAlignment(JTextField.CENTER);
+        bankEmployee_data.setFont(new Font("Urban Sketch", Font.BOLD, 30));
+        bankEmployee_data.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.black));
+        bankEmployee_data.setForeground (Color.black);
+        bankEmployee_data.setOpaque(false);
         bankEmployee_data.setEnabled(false);
 
         branchEmployee_data = new JTextField();
+        branchEmployee_data.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
+        branchEmployee_data.setHorizontalAlignment(JTextField.CENTER);
+        branchEmployee_data.setFont(new Font("Urban Sketch", Font.BOLD, 30));
+        branchEmployee_data.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.black));
+        branchEmployee_data.setForeground (Color.black);
+        branchEmployee_data.setOpaque(false);
         branchEmployee_data.setEnabled(false);
 
         snEmployee_data = new JTextField();
+        snEmployee_data.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
+        snEmployee_data.setHorizontalAlignment(JTextField.CENTER);
+        snEmployee_data.setFont(new Font("Urban Sketch", Font.BOLD, 30));
+        snEmployee_data.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.black));
+        snEmployee_data.setForeground (Color.black);
+        snEmployee_data.setOpaque(false);
         snEmployee_data.setEnabled(false);
 
-        passEmployee_data = new JPasswordField(15);
+        passEmployee_data = new JPasswordField();
+        passEmployee_data.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
+        passEmployee_data.setHorizontalAlignment(JTextField.CENTER);
+        passEmployee_data.setFont(new Font("Urban Sketch", Font.BOLD, 30));
+        passEmployee_data.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.black));
+        passEmployee_data.setForeground (Color.black);
+        passEmployee_data.setOpaque(false);
         passEmployee_data.setEnabled(false);
-        passEmployee_data.setBackground(Color.BLACK);
 
         comboBoxModel = new DefaultComboBoxModel();
         type_box = new JComboBox(comboBoxModel);
 
+        type_box.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
+        type_box.setFont(new Font("Urban Sketch", Font.BOLD, 30));
+        type_box.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.black));
+        type_box.setOpaque(false);
+
         comboBoxModel.addElement(employee.getEmpType());
         type_box.setEnabled(false);
-
 
         idEmployee_data.setText(employee.getEmpId());
         nameEmployee_data.setText(employee.getEmpName());
@@ -726,7 +840,6 @@ public class EmployeeEditDetails extends JFrame {
     }
 
     private static boolean CheckEmpFields(Employee employee){
-
 
         if (!(employee.getEmpName().length() <= 20 && employee.getEmpName().length() >= 5)) {
 
@@ -874,4 +987,17 @@ public class EmployeeEditDetails extends JFrame {
     public void setBranchName(String branchName) {
         this.branchName = branchName;
     }
+
+    public static void main(String[] args) {
+        EmployeeEditDetails employeeEditDetails = new EmployeeEditDetails("25232342", "dfsfsdf", "44444444","SDFEF","dsfsdf",
+                                                                       "sdfsdf","sdfsdf","/src/images/No_Image_Available.png",
+                                                                     null,null,null,"sdfdsf");
+        employeeEditDetails.setUndecorated(true);
+        employeeEditDetails.DrawEmployeeEditDetails();
+        employeeEditDetails.InitializeActions();
+        employeeEditDetails.setVisible(true);
+        employeeEditDetails.resizePhotoInMenu();
+    }
+
+
 }

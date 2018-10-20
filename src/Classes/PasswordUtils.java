@@ -12,11 +12,8 @@ import java.util.Random;
 public class PasswordUtils {
 
     private static final Random RANDOM = new SecureRandom();
-    private static final String ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    private static final String HASH = "PBKDF2WithHmacSHA1";
-    private static final String MESSAGE = "Error while hashing a password: ";
-    private static final int ITERATIONS = 10000;
-    private static final int KEY_LENGTH = 256;
+    private static final int ITERATIONS = 10000, KEY_LENGTH = 256;
+    private static final String ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", HASH = "PBKDF2WithHmacSHA1", MESSAGE = "Error while hashing a password: ";
 
     public static String getSalt(int length) {
 
@@ -52,15 +49,16 @@ public class PasswordUtils {
         }
     }
     public static String generateSecurePassword(String password, String salt) {
-        String returnValue = null;
+
+        String returnValue;
+
         byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
 
         returnValue = Base64.getEncoder().encodeToString(securePassword);
 
         return returnValue;
     }
-    public static boolean verifyUserPassword(String providedPassword,
-                                             String securedPassword, String salt)
+    public static boolean verifyUserPassword(String providedPassword, String securedPassword, String salt)
     {
         boolean returnValue = false;
 

@@ -7,23 +7,31 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
+import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.util.Collections;
 
 public class EmployeeEdit extends JFrame {
 
-    private Employee employee;
-    private String branchName, id;
+
     private Client client;
-
-    private JSONObject jsonObject;
-
-    private JFrame jFramePrev, twoBackFrame;
+    private Employee employee;
     private JPanel jPanelMain;
-    private JLabel label_message;
+    private String branchName, id;
+    private JSONObject jsonObject;
     private SpringLayout springLayout;
     private JTextField idEmployee_text;
+    private JFrame jFramePrev, twoBackFrame;
     private JButton ok_button, cancel_button;
+    private JLabel backgroundPhotoLabel, titleLabel;
+    private ImageIcon backgroundPhotoTopPanelJPG, titlePhotoJPG, backLogoJPG, okLogoJPG;
+    public static final String BACK_PHOTO = "/src/images/back_edit_id.png", CASTRO_ICON = "/src/images/icon.png", TITLE = "/src/images/please_enter_2.png",
+                               BACK_BUTTON = "/src/images/back.png", OK = "/src/images/ok.png";
+    public static final int PANELֹֹ_WIDTH_ֹSIZE = 800, PANELֹֹ_HEIGHT_ֹSIZE = 400, FRAMEֹֹ_WIDTH_ֹSIZE = 800, FRAMEֹֹ_HEIGHT_ֹSIZE = 400, BUTTON_WIDTH = 100, BUTTON_HEIGHT = 60,
+                            JTEXTFIELD_WIDTH = 250, JTEXTFIELD_HEIGHT = 50;
 
 
     public EmployeeEdit(JFrame oneBackFrame, JFrame twoBackFrame, String branchName){// הגיע לכאן המסך הראשי של האדמין ואת המסך של הניהול עובדים
@@ -126,7 +134,7 @@ public class EmployeeEdit extends JFrame {
         employee.setEmpPhoto((String) jsonObject.get("employee photo"));
         employee.setEmpId(id);
 
-        getJFrame().setVisible(false);// העלמת המסך הקטן של הת.ז
+        getJFrame().setVisible(false);
     }
 
     private void DrawEmployeeEditDetailsMenu() {
@@ -135,10 +143,10 @@ public class EmployeeEdit extends JFrame {
                 employee.getEmpTel(),employee.getEmpBank(),employee.getEmpBranch(),
                 employee.getEmpType(),employee.getEmpPhoto(),
                 jFramePrev,twoBackFrame,getJFrame(),branchName);
+        employeeEditDetails.setUndecorated(true);
         employeeEditDetails.DrawEmployeeEditDetails();
         employeeEditDetails.InitializeActions();
         employeeEditDetails.setVisible(true);
-        employeeEditDetails.setLocationRelativeTo(null);
         employeeEditDetails.resizePhotoInMenu();
     }
 
@@ -164,41 +172,75 @@ public class EmployeeEdit extends JFrame {
         client.getOutputStream().flush();
     }
 
-    protected void DrawEmployeeEdit() { // מסך ראשי של אדמין,המסך עם הטבלה
+    protected void DrawEmployeeEdit() {
 
-        this.setTitle("Employee Editing");
-        this.setSize(300, 200);
-        this.setResizable(false);
+        GUISettingForJFrame();
 
         jPanelMain = new JPanel();
 
         springLayout = new SpringLayout();
         jPanelMain.setLayout(springLayout);
 
-        label_message = new JLabel("Please insert employee ID to edit");
-        idEmployee_text = new JTextField(12);
+        jPanelMain.setPreferredSize(new Dimension(PANELֹֹ_WIDTH_ֹSIZE, PANELֹֹ_HEIGHT_ֹSIZE));
 
-        ok_button = new JButton("OK");
-        cancel_button = new JButton("CANCEL");
+        titlePhotoJPG = new ImageIcon(getClass().getResource(TITLE));
+        titleLabel = new JLabel(titlePhotoJPG);
 
-        jPanelMain.add(label_message);
+        backgroundPhotoTopPanelJPG = new ImageIcon(getClass().getResource(BACK_PHOTO));
+        backgroundPhotoLabel = new JLabel(backgroundPhotoTopPanelJPG);
+
+        backLogoJPG = new ImageIcon(getClass().getResource(BACK_BUTTON));
+        cancel_button = new JButton(backLogoJPG);
+        cancel_button.setBorderPainted(false);
+        cancel_button.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.black, Color.black));
+
+        okLogoJPG = new ImageIcon(getClass().getResource(OK));
+        ok_button = new JButton(okLogoJPG);
+        ok_button.setBorderPainted(true);
+        ok_button.setBackground(Color.white);
+        ok_button.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        ok_button.setBorder(new LineBorder(Color.red));
+
+        idEmployee_text = new JTextField();
+        idEmployee_text.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
+        idEmployee_text.setHorizontalAlignment(JTextField.CENTER);
+        idEmployee_text.setFont(new Font("Urban Sketch", Font.BOLD, 30));
+        idEmployee_text.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.black));
+        idEmployee_text.setForeground (Color.black);
+        idEmployee_text.setOpaque(false);
+
+        GUIPlaceComponentsOnJPanel();
+
+        jPanelMain.add(titleLabel);
         jPanelMain.add(idEmployee_text);
         jPanelMain.add(ok_button);
         jPanelMain.add(cancel_button);
-
-        springLayout.putConstraint(SpringLayout.WEST, label_message, 35, SpringLayout.WEST, jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH, label_message, 25, SpringLayout.NORTH, jPanelMain);
-
-        springLayout.putConstraint(SpringLayout.WEST, idEmployee_text, 70, SpringLayout.WEST, jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH, idEmployee_text, 25, SpringLayout.SOUTH, label_message);
-
-        springLayout.putConstraint(SpringLayout.WEST, ok_button, 55, SpringLayout.WEST, jPanelMain);
-        springLayout.putConstraint(SpringLayout.NORTH, ok_button, 25, SpringLayout.SOUTH, idEmployee_text);
-
-        springLayout.putConstraint(SpringLayout.WEST, cancel_button, 35, SpringLayout.EAST, ok_button);
-        springLayout.putConstraint(SpringLayout.NORTH, cancel_button, 25, SpringLayout.SOUTH, idEmployee_text);
+        jPanelMain.add(backgroundPhotoLabel);
 
         this.setContentPane(jPanelMain);
+    }
+
+    private void GUIPlaceComponentsOnJPanel() {
+
+        springLayout.putConstraint(SpringLayout.WEST, titleLabel, 35, SpringLayout.WEST, jPanelMain);
+        springLayout.putConstraint(SpringLayout.NORTH, titleLabel, 50, SpringLayout.NORTH, jPanelMain);
+
+        springLayout.putConstraint(SpringLayout.WEST, idEmployee_text, 260, SpringLayout.WEST, jPanelMain);
+        springLayout.putConstraint(SpringLayout.NORTH, idEmployee_text, 35, SpringLayout.SOUTH, titleLabel);
+
+        springLayout.putConstraint(SpringLayout.WEST, ok_button, 330, SpringLayout.WEST, jPanelMain);
+        springLayout.putConstraint(SpringLayout.NORTH, ok_button, 50, SpringLayout.SOUTH, idEmployee_text);
+
+        springLayout.putConstraint(SpringLayout.WEST, cancel_button, 0, SpringLayout.WEST, jPanelMain);
+        springLayout.putConstraint(SpringLayout.SOUTH, cancel_button, 0, SpringLayout.SOUTH, jPanelMain);
+    }
+
+    private void GUISettingForJFrame() {
+
+        this.setTitle("CASTRO");
+        this.setIconImages(Collections.singletonList(Toolkit.getDefaultToolkit().getImage(getClass().getResource(CASTRO_ICON))));
+        this.setSize(FRAMEֹֹ_WIDTH_ֹSIZE, FRAMEֹֹ_HEIGHT_ֹSIZE);
+        this.setResizable(false);
     }
 
     public JFrame getJFrame() {
@@ -256,10 +298,10 @@ public class EmployeeEdit extends JFrame {
 
     public static void main(String[] args) {
 
-        EmployeeEdit customers = new EmployeeEdit(null, null, "Tel Aviv"); // שולח למסך הרישום את  המסך הראשי של האדמין ואת המסך של הטבלה
-        customers.DrawEmployeeEdit();
-        customers.InitializeActions();
-        customers.setVisible(true);
-        customers.setLocationRelativeTo(null);
+        EmployeeEdit employeeEdit = new EmployeeEdit(null, null, "Tel Aviv");
+        employeeEdit.setUndecorated(true);
+        employeeEdit.DrawEmployeeEdit();
+        employeeEdit.InitializeActions();
+        employeeEdit.setVisible(true);
     }
 }

@@ -11,16 +11,13 @@ import java.io.IOException;
 
 public class CustomerListManagement extends CustomerList {
 
-    public static final String ADD_CUSTOMER_BUTTON = "/src/images/add_new_cust.png";
-    public static final String UPDATE_CUSTOMER_BUTTON = "/src/images/update_cust.png";
-    public static final int BUTTON_WIDTH = 390;
-    public static final int BUTTON_HEIGHT = 50;
-
-    private JButton jButtonAddCustom, jButtonManageCustom;
     private ImageIcon addLogoJPG, updateLogoJPG;
+    private JButton jButtonAddCustom, jButtonManageCustom;
+    public static final int BUTTON_WIDTH = 390, BUTTON_HEIGHT = 50;
+    public static final String ADD_CUSTOMER_BUTTON = "/src/images/add_new_cust.png", UPDATE_CUSTOMER_BUTTON = "/src/images/update_cust.png";
 
 
-    public CustomerListManagement(JFrame oneBackFrame, String branchName) { // הגיע לכאן(=המסך ניהול עובדים הראשי) המסך הראשי של האדמין
+    public CustomerListManagement(JFrame oneBackFrame, String branchName) {
 
         super(oneBackFrame, branchName);
     }
@@ -79,7 +76,7 @@ public class CustomerListManagement extends CustomerList {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                RegisterCustomer customers = null; // שולח למסך הרישום את המסך הראשי של האדמין ואת המסך של הניהול עובדים
+                RegisterCustomer customers = null;
                 try {
                     customers = new RegisterCustomer(getJFrame(), getjFramePrev(), true, getBranchName());
                 } catch (IOException e1) {
@@ -113,10 +110,10 @@ public class CustomerListManagement extends CustomerList {
 
     public static void main(String[] args) throws IOException, ParseException {
         CustomerListManagement customers = new CustomerListManagement(null, null);
+        customers.setUndecorated(true);
         customers.DrawCustomer();
         customers.InitializeActions();
         customers.setVisible(true);
-        customers.setLocationRelativeTo(null);
     }
 }
 

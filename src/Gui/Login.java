@@ -18,40 +18,22 @@ import java.util.Collections;
 
 public class Login extends JFrame {
 
-    public static final String BACK_BUTTON = "/src/images/back.png";
-    public static final String LOG_IN_BUTTON = "/src/images/logIn.png";
-    public static final String CASTRO_ICON = "/src/images/icon.png";
-    public static final String PHOTO = "/src/images/photo.png";
-    public static final String CASTRO_TAG_LOGIN = "/src/images/tagLogIn.png";
-    public static final String LABEL_PASSWORD = "/src/images/password.png";
-    public static final String LABEL_ID = "/src/images/id_number.png";
-    public static final String BRANCH_NAME = "/src/images/branch.png";
-    public static final String FRAME_NAME = "CASTRO - LOG IN";
-    public static final String DEFAULT_BRANCH_NAME = "Tel Aviv";
-    public static final String BRANCH_NAME1 = "Tel Aviv";
-    public static final String BRANCH_NAME2 = "Jerusalem";
-
-    public static final int FRAMEֹֹ_WIDTH_ֹSIZE = 1279;
-    public static final int FRAMEֹֹ_HEIGHT_ֹSIZE = 565;
-    public static final int FRAMEֹֹ_POSITION_X = 133;
-    public static final int FRAMEֹֹ_POSITION_Y = 250;
-    public static final int JTEXTFIELD_WIDTH = 250;
-    public static final int JTEXTFIELD_HEIGHT = 50;
-
-    private Employee employee;
-    private JSONObject jsonObject;
-
+    private Client client;
     private JFrame prevFrame;
     private JPanel jPanelData;
-    private SpringLayout springLayout;
-    private JLabel jLabelBranch, tagLogInLabel, jLabelId, jLabelPassword, jLabelPhoto;
+    private Employee employee;
+    private JSONObject jsonObject;
     private JTextField jTextFieldId;
+    private SpringLayout springLayout;
     private JPasswordField jTextFieldPass;
     private JComboBox<String> jComboBoxBranch;
     private JButton jButtonLogin, jButtonCancel;
+    private JLabel jLabelBranch, tagLogInLabel, jLabelId, jLabelPassword, jLabelPhoto;
     private ImageIcon tagLogInJPG, label_id, label_password, label_branch, label_photo, logInLogoJPG;
-    private Client client;
-
+    public static final int FRAMEֹֹ_WIDTH_ֹSIZE = 1279, FRAMEֹֹ_HEIGHT_ֹSIZE = 565, FRAMEֹֹ_POSITION_X = 133, FRAMEֹֹ_POSITION_Y = 250, JTEXTFIELD_WIDTH = 250, JTEXTFIELD_HEIGHT = 50;
+    public static final String BACK_BUTTON = "/src/images/back.png", LOG_IN_BUTTON = "/src/images/logIn.png", CASTRO_ICON = "/src/images/icon.png", PHOTO = "/src/images/photo.png",
+                               CASTRO_TAG_LOGIN = "/src/images/tagLogIn.png", LABEL_PASSWORD = "/src/images/password.png", LABEL_ID = "/src/images/id_number.png",
+                               BRANCH_NAME = "/src/images/branch.png", FRAME_NAME = "CASTRO - LOG IN", DEFAULT_BRANCH_NAME = "Tel Aviv", BRANCH_NAME1 = "Tel Aviv", BRANCH_NAME2 = "Jerusalem";
 
 
     public Login(JFrame prevFrame) {
@@ -60,7 +42,6 @@ public class Login extends JFrame {
         SetGUIComponents(prevFrame);
 
         client = new Client();
-
     }
 
     private void SetObjectsComponents() {
@@ -86,11 +67,8 @@ public class Login extends JFrame {
         jLabelBranch = new JLabel(label_branch);
 
         jTextFieldId = new JTextField();
-        jTextFieldId.setText("333333");  ////////// למחוקקקקקקקקקק
 
         jTextFieldPass = new JPasswordField();
-        jTextFieldPass.setText("SSSsss333"); /////////// למחוקקקקקקקקקקקקק
-        employee.setEmpPass("SSSsss333");
 
         jComboBoxBranch = new JComboBox<>(new String[]{BRANCH_NAME1, BRANCH_NAME2});
 

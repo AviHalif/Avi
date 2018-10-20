@@ -19,27 +19,21 @@ import java.util.Properties;
 
 public class RegisterCustomer extends Register {
 
-    public static final String TITLE = "/src/images/customer_register.png";
-
-    private static Logger logger = Logger.getLogger(RegisterCustomer.class.getName());
-
-    private Customer customer;
-    private boolean showCustomersTable;
-    private String empBranchName, propFileName;
-
-    private ImageIcon titlePhotoJPG;
-    private JLabel titleLabel;
-
-    private Properties properties;
-    private InputStream inStream;
 
     private Client client;
-
+    private Customer customer;
+    private JLabel titleLabel;
+    private InputStream inStream;
+    private Properties properties;
     private JSONObject jsonObject;
+    private ImageIcon titlePhotoJPG;
     private ObjectMapper objectMapper;
+    private boolean showCustomersTable;
+    private String empBranchName, propFileName;
+    public static final String TITLE = "/src/images/customer_register.png";
+    private static Logger logger = Logger.getLogger(RegisterCustomer.class.getName());
 
-
-    public RegisterCustomer(JFrame oneBackFrame, JFrame twoBackFrame, boolean showCustomersTable, String empBranchName) throws IOException { // הגיע לכאן המסך הראשי של האדמין ואת המסך של הניהול עובדים
+    public RegisterCustomer(JFrame oneBackFrame, JFrame twoBackFrame, boolean showCustomersTable, String empBranchName) throws IOException {
 
         super(oneBackFrame,twoBackFrame);
 
@@ -113,21 +107,21 @@ public class RegisterCustomer extends Register {
                     customer.setCustName( getFullname_text().getText());
                     customer.setCustTel( getPhone_text().getText());
 
-                    if (!CheckCustomerFields(customer)) { // בדיקת תקינות קלט ת.ז
+                    if (!CheckCustomerFields(customer)) {
                         return;
                     }
 
                     client = new Client();
 
-                    PrepareAndSendJsonDataNewCustomerToServer(); // הכנסת הלקוח החדש למערכת
+                    PrepareAndSendJsonDataNewCustomerToServer();
 
                     String response = GetRegisterCustomerResponseFromServer();
 
-                    if (!response.equals("")) { // לא הצליח לרשום את הלקוח החדש
+                    if (!response.equals("")) {
                         JOptionPane.showMessageDialog(null, response);
                         client.getSslSocket().close();
 
-                    } else { // אם הצליח לרשום את הלקוח החדש
+                    } else {
 
                         JOptionPane.showMessageDialog(null, "Customer ID :" + "was registered successfully");
                         client.getSslSocket().close();
@@ -157,23 +151,23 @@ public class RegisterCustomer extends Register {
 
                     customer.setCustId(getId_text().getText());
 
-                    if(!CheckId(customer.getCustId())) { // בדיקת תקינות קלט ת.ז
+                    if(!CheckId(customer.getCustId())) {
                         return;
                     }
 
                     client = new Client();
 
-                    PrepareAndSendJsonDataIdForCheckingToServer(); // בדיקה האם הת.ז נמצא כבר במערכת
+                    PrepareAndSendJsonDataIdForCheckingToServer();
 
                     String response = GetRegisterCustomerResponseFromServer();
 
-                    if (response.equals("")) { // אם התז כבר נמצא במערכת תציג הודעה ותאפס את השדה טקסט
+                    if (response.equals("")) {
                         client.getSslSocket().close();
                         JOptionPane.showMessageDialog(null, "ID Customer : " + customer.getCustId() + " is already Exist !!!");
                         getCheckButton().setEnabled(false);
                         getId_text().setText("");
 
-                    } else { // אם הת. לא נמצאת בבסיס נתונים עדיין אז תפתח את הנתונים להזנה ותנעל את הת.ז ללא עריכה
+                    } else {
                         client.getSslSocket().close();
                         SetGUIComponentsToEdit();
                     }
@@ -192,7 +186,7 @@ public class RegisterCustomer extends Register {
         getPhone_text().setEnabled(true);
         getFullname_text().setEnabled(true);
 
-        getCheckButton().setVisible(false); // תחליף בין הכפתורים ע"י העלמתם
+        getCheckButton().setVisible(false);
         getRegisterButton().setVisible(true);
         getRegisterButton().setEnabled(true);
     }

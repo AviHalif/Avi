@@ -23,43 +23,28 @@ import java.util.Properties;
 
 public class RegisterEmployee extends Register {
 
-    private static Logger logger = Logger.getLogger(RegisterEmployee.class.getName());
 
-    public static final String HELP_LABEL = "/src/images/ques_mark.png";
-    public static final String NO_PHOTO = "/src/images/No_Image_Available.png";
-    public static final String TITLE = "/src/images/employee_register.png";
-    public static final String BLACK_PHOTO = "/src/images/black_back.png";
-    public static final String LABEL_BRANCH = "/src/images/registry_branch.png";
-    public static final String LABEL_BANK = "/src/images/registry_bank.png";
-    public static final String LABEL_PASS = "/src/images/registry_pass.png";
-    public static final String CHANGE_PHOTO = "/src/images/change_photo.png";
-    public static final String REMOVE_PHOTO = "/src/images/remove_photo.png";
-    public static final String VERIFY_REGISTER = "/src/images/verify_photo.png";
-    public static final int BUTTON_WIDTH2 = 350;
-    public static final int BUTTON_HEIGHT2 = 50;
-    public static final int BUTTON_WIDTH3 = 300;
-    public static final int BUTTON_HEIGHT3 = 50;
-
-    private Employee employee;
-    private String empBranchName, propFileName;
-    private int passLength;
     private char[] pass;
-
-    private Properties properties;
-    private InputStream inStream;
-    private ImageIcon label_branch, label_pass, label_bank;
-    private JLabel jLabelbranch, jLabelpass, jLabelbank;
-
     private Client client;
-
+    private int passLength;
+    private Employee employee;
+    private InputStream inStream;
+    private Properties properties;
     private JSONObject jsonObject;
+    private JButton browse_button;
     private ObjectMapper objectMapper;
-
-    private JLabel helpLabel, photoLabel, titleLabel, blackgroundPhotoLabel;
-    private ImageIcon titlePhotoJPG, helpLabelJPG, photoLabelJPG, blackgroundPhotoJPG, changeLogoJPG, removeLogoJPG, verifyLogoJPG;
+    private JPasswordField password_text;
+    private String empBranchName, propFileName;
+    private JLabel jLabelbranch, jLabelpass, jLabelbank;
     private JTextField branchName_text, bankaccount_text;
-    private JPasswordField password_text, password_authentication_text;
-    private JButton verifyAndRegister, browse_button, remove_photo_button;
+    private ImageIcon label_branch, label_pass, label_bank;
+    public static final int BUTTON_WIDTH3 = 300, BUTTON_HEIGHT3 = 50;
+    private JLabel helpLabel, photoLabel, titleLabel, blackgroundPhotoLabel;
+    private static Logger logger = Logger.getLogger(RegisterEmployee.class.getName());
+    private ImageIcon titlePhotoJPG, helpLabelJPG, photoLabelJPG, blackgroundPhotoJPG, changeLogoJPG;
+    public static final String HELP_LABEL = "/src/images/ques_mark.png", NO_PHOTO = "/src/images/No_Image_Available.png", TITLE = "/src/images/employee_register.png",
+                               BLACK_PHOTO = "/src/images/black_back.png", LABEL_BRANCH = "/src/images/registry_branch.png", LABEL_BANK = "/src/images/registry_bank.png",
+                               LABEL_PASS = "/src/images/registry_pass.png", CHANGE_PHOTO = "/src/images/change_photo.png";
 
 
     public RegisterEmployee(JFrame oneBackFrame, JFrame twoBackFrame, String empBranchName) throws IOException {
@@ -87,15 +72,16 @@ public class RegisterEmployee extends Register {
 
         employee = new Employee();
 
-        employee.setEmpBranch("Tel Aviv");
+        employee.setEmpBranch(empBranchName);
         employee.setEmpType("Seller");
     }
 
     private void SetGUIComponents() {
 
+        getId_text().setBorder(BorderFactory.createLineBorder(Color.red));
+
         GUISettingForJFrame();
     }
-
 
     private void GUISetComponentsOnJPanelDown() {
 
@@ -134,26 +120,7 @@ public class RegisterEmployee extends Register {
         browse_button.setBorder(new LineBorder(Color.red));
         browse_button.setEnabled(false);
 
-        removeLogoJPG = new ImageIcon(getClass().getResource(REMOVE_PHOTO));
-        remove_photo_button = new JButton(removeLogoJPG);
-        remove_photo_button.setBorderPainted(true);
-        remove_photo_button.setBackground(Color.white);
-        remove_photo_button.setPreferredSize(new Dimension(BUTTON_WIDTH3, BUTTON_HEIGHT3));
-        remove_photo_button.setBorder(new LineBorder(Color.red));
-        remove_photo_button.setEnabled(false);
-
-        verifyLogoJPG = new ImageIcon(getClass().getResource(VERIFY_REGISTER));
-        verifyAndRegister = new JButton(verifyLogoJPG);
-        verifyAndRegister.setBorderPainted(true);
-        verifyAndRegister.setBackground(Color.white);
-        verifyAndRegister.setPreferredSize(new Dimension(BUTTON_WIDTH2, BUTTON_HEIGHT2));
-        verifyAndRegister.setBorder(new LineBorder(Color.red));
-        verifyAndRegister.setEnabled(false);
-        verifyAndRegister.setVisible(false);
-
-        getjPanelTopFields().add(verifyAndRegister);
         getjPanelTopFields().add(browse_button);
-        getjPanelTopFields().add(remove_photo_button);
     }
 
     private void GUISetTextFieldsAndComboComponents() {
@@ -179,18 +146,6 @@ public class RegisterEmployee extends Register {
 
         password_text.setEnabled(false);
 
-
-        password_authentication_text = new JPasswordField();
-        password_authentication_text.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
-        password_authentication_text.setHorizontalAlignment(JTextField.CENTER);
-        password_authentication_text.setFont(new Font("Urban Sketch", Font.BOLD, 30));
-        password_authentication_text.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.white, Color.black));
-        password_authentication_text.setForeground (Color.black);
-        password_authentication_text.setOpaque(false);
-
-        password_authentication_text.setVisible(false);
-
-
         branchName_text = new JTextField(empBranchName);
         branchName_text.setPreferredSize(new Dimension(JTEXTFIELD_WIDTH,JTEXTFIELD_HEIGHT));
         branchName_text.setHorizontalAlignment(JTextField.CENTER);
@@ -211,7 +166,6 @@ public class RegisterEmployee extends Register {
         getjPanelTopFields().add(bankaccount_text);
         getjPanelTopFields().add(branchName_text);
         getjPanelTopFields().add(password_text);
-        getjPanelTopFields().add(password_authentication_text);
     }
 
     private void GUISetToolKitsComponents() {
@@ -220,12 +174,12 @@ public class RegisterEmployee extends Register {
         helpLabel = new JLabel(helpLabelJPG);
         helpLabel.setPreferredSize(new Dimension(120, 120));
         getjPanelTopFields().add(helpLabel);
-        helpLabel.setToolTipText("Please insert at least one char A-Z, a-z and 0-9 !!!");
+        helpLabel.setToolTipText("Please insert at least 9-12 chars include one char A-Z, a-z and 0-9 !!!");
 
         photoLabelJPG = new ImageIcon(getClass().getResource(NO_PHOTO));
         photoLabel = new JLabel(photoLabelJPG);
-        photoLabel.setPreferredSize(new Dimension(200, 250)); // לשנות שיהיה ריסאייזבאל כמו שמציג את התמונות ברגע שבוחר אותם מהמחשב
-        employee.setEmpPhoto("C:/Users/AviHalif/IdeaProjects/Avi/src/images/No_Image_Available.png"); // כאן חייב להזין את הנתיב המלא של בחירת התמונה
+        photoLabel.setPreferredSize(new Dimension(200, 250));
+        employee.setEmpPhoto("C:/Users/AviHalif/IdeaProjects/Avi/src/images/No_Image_Available.png");
     }
 
     private void GUISettingForJFrame() {
@@ -249,7 +203,7 @@ public class RegisterEmployee extends Register {
         getSpringLayoutPanels().putConstraint(SpringLayout.NORTH,titleLabel,5,SpringLayout.NORTH,getjPanelMain());
 
         getSpringLayoutFields().putConstraint(SpringLayout.WEST,blackgroundPhotoLabel,5,SpringLayout.EAST,getFullname_text());
-        getSpringLayoutFields().putConstraint(SpringLayout.SOUTH,blackgroundPhotoLabel,230,SpringLayout.SOUTH,getjPanelTopFields());
+        getSpringLayoutFields().putConstraint(SpringLayout.SOUTH,blackgroundPhotoLabel,190,SpringLayout.SOUTH,getjPanelTopFields());
 
         SetObjectsComponents();
 
@@ -284,23 +238,14 @@ public class RegisterEmployee extends Register {
         getSpringLayoutFields().putConstraint(SpringLayout.WEST, password_text, 5, SpringLayout.EAST, jLabelpass);
         getSpringLayoutFields().putConstraint(SpringLayout.NORTH, password_text, 48, SpringLayout.SOUTH, branchName_text);
 
-        getSpringLayoutFields().putConstraint(SpringLayout.WEST, password_authentication_text, 5, SpringLayout.EAST, jLabelpass);
-        getSpringLayoutFields().putConstraint(SpringLayout.NORTH, password_authentication_text, 48, SpringLayout.SOUTH, password_text);
-
         getSpringLayoutFields().putConstraint(SpringLayout.EAST, helpLabel, 10, SpringLayout.WEST, password_text);
         getSpringLayoutFields().putConstraint(SpringLayout.NORTH, helpLabel, 110, SpringLayout.SOUTH, branchName_text);
 
         getSpringLayoutFields().putConstraint(SpringLayout.WEST, photoLabel, 5, SpringLayout.WEST, getjPanelTopFields());
-        getSpringLayoutFields().putConstraint(SpringLayout.NORTH, photoLabel, 0, SpringLayout.SOUTH, getCheckButton());
-
-        getSpringLayoutFields().putConstraint(SpringLayout.EAST, verifyAndRegister, 25, SpringLayout.EAST, blackgroundPhotoLabel);
-        getSpringLayoutFields().putConstraint(SpringLayout.NORTH, verifyAndRegister, 480, SpringLayout.NORTH, getjPanelTopFields());
+        getSpringLayoutFields().putConstraint(SpringLayout.NORTH, photoLabel, 30, SpringLayout.NORTH, getCheckButton());
 
         getSpringLayoutFields().putConstraint(SpringLayout.EAST, browse_button, 350, SpringLayout.EAST, blackgroundPhotoLabel);
         getSpringLayoutFields().putConstraint(SpringLayout.NORTH, browse_button, 480, SpringLayout.NORTH, getjPanelTopFields());
-
-        getSpringLayoutFields().putConstraint(SpringLayout.EAST, remove_photo_button, 350, SpringLayout.EAST, blackgroundPhotoLabel);
-        getSpringLayoutFields().putConstraint(SpringLayout.NORTH, remove_photo_button, 550, SpringLayout.NORTH, getjPanelTopFields());
     }
 
     protected void InitializeActions() {
@@ -321,7 +266,7 @@ public class RegisterEmployee extends Register {
                     File selectedFile = fileChooser.getSelectedFile();
                     String path = selectedFile.getAbsolutePath();
 
-                    if(MaxSizeImage(path)) { // אם עברנו את הגוsל המירבי של תמונה
+                    if(MaxSizeImage(path)) {
 
                         photoLabel.setVisible(false);
 
@@ -336,31 +281,7 @@ public class RegisterEmployee extends Register {
                 else if(result == JFileChooser.CANCEL_OPTION){
                     System.out.println("No Data");
                 }
-
-                if(!employee.getEmpPhoto().equals("C:/Users/AviHalif/IdeaProjects/Avi/src/images/No_Image_Available.png"))
-                    remove_photo_button.setEnabled(true);
             }
-        });
-
-        remove_photo_button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                photoLabel.setVisible(false);
-
-                photoLabelJPG = new ImageIcon(getClass().getResource(NO_PHOTO));
-                photoLabel = new JLabel(photoLabelJPG);
-                photoLabel.setPreferredSize(new Dimension(200, 250)); // לשנות שיהיה ריסאייזבאל כמו שמציג את התמונות ברגע שבוחר אותם מהמחשב
-
-                employee.setEmpPhoto("C:/Users/AviHalif/IdeaProjects/Avi/src/images/No_Image_Available.png"); // כאן חייב להזין את הנתיב המלא של בחירת התמונה
-
-                getSpringLayoutFields().putConstraint(SpringLayout.WEST, photoLabel, 5, SpringLayout.WEST, getjPanelTopFields());
-                getSpringLayoutFields().putConstraint(SpringLayout.NORTH, photoLabel, 0, SpringLayout.SOUTH, getCheckButton());
-
-                photoLabel.setVisible(true);
-                remove_photo_button.setEnabled(false);
-            }
-
         });
 
         getType_box().addActionListener(new ActionListener() {
@@ -374,12 +295,17 @@ public class RegisterEmployee extends Register {
             @Override
             public void focusGained(FocusEvent e) {
 
+                password_text.setBorder(BorderFactory.createLineBorder(Color.red));
+
             }
 
             @Override
             public void focusLost(FocusEvent e) {
+
+                password_text.setBorder(BorderFactory.createLineBorder(Color.black));
+
                 passLength = password_text.getPassword().length;
-                pass = password_text.getPassword(); // שומר את הסיסמא המקורית כצארים
+                pass = password_text.getPassword();
 
                 // Generate Salt. The generated value stored in DB.
                 String salt = PasswordUtils.getSalt(30);
@@ -391,14 +317,11 @@ public class RegisterEmployee extends Register {
             }
         });
 
-        verifyAndRegister.addActionListener(new ActionListener() {
+        getRegisterButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 try {
-
-                    if (IsAuthenticationPassword()) { // בדוק האם הסיסמא שהמשתמש הזין שוב תקינה
-
                         EnableAllFields();
 
                         if(!CheckEmpFields(employee,passLength,pass)){
@@ -407,7 +330,7 @@ public class RegisterEmployee extends Register {
 
                         client = new Client();
 
-                        PrepareAndSendJsonDataNewEmployeeToServer(); // הכנסת העובד החדש למערכת
+                        PrepareAndSendJsonDataNewEmployeeToServer();
 
                         String response = GetEmployeeRegisterResponseFromServer();
 
@@ -430,36 +353,9 @@ public class RegisterEmployee extends Register {
                             logger.info("Registered successfully - Employee ID : " + employee.getEmpId());
                             client.getSslSocket().close();
                             DrawUpdateEmployeeList();
-                        }
-
-                    } else { // אם הסיסמא שהמשתמש הזין שוב לא אותה סיסמא
-
-                        JOptionPane.showMessageDialog(null, "No matching between the passwords! Enter your password again! ");
-                        ChangeGUIComponents();
                     }
                 } catch (Exception ex) {
                     System.out.print(ex);
-                }
-            }
-        });
-
-        getRegisterButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                try {
-
-                    InsertAllFieldsToEmployeeObject();
-
-                    if (!CheckEmpFields(employee, passLength, pass)) {
-                        return;
-                    }
-                    JOptionPane.showMessageDialog(null, "PASSWORD VERIFICATION : Please enter your password again");
-
-                    password_authentication_text.setVisible(true);
-                    getRegisterButton().setVisible(false);
-                    verifyAndRegister.setVisible(false);
-                } catch (Exception ex) {
                 }
             }
         });
@@ -472,24 +368,24 @@ public class RegisterEmployee extends Register {
 
                     employee.setEmpId(getId_text().getText());
 
-                    if(!CheckId(employee.getEmpId())) { // בדיקת תקינות קלט ת.ז
+                    if(!CheckId(employee.getEmpId())) {
                         return;
                     }
 
                     client = new Client();
 
-                    PrepareAndSendJsonDataIdForCheckingToServer(); // בדיקה האם הת.ז נמצא כבר במערכת
+                    PrepareAndSendJsonDataIdForCheckingToServer();
 
                     String response = GetResponseFromServer();
 
 
-                    if (!(response.equals(""))) { // אם התז כבר נמצא במערכת תציג הודעה ותאפס את השדה טקסט
+                    if (!(response.equals(""))) {
                         JOptionPane.showMessageDialog(null, response);
                         getCheckButton().setEnabled(false);
                         getId_text().setText("");
 
 
-                    } else { // אם הת. לא נמצאת בבסיס נתונים עדיין אז תפתח את הנתונים להזנה ותנעל את הת.ז ללא עריכה
+                    } else {
 
                         ChangeGUIComponentsForInsertData();
                     }
@@ -517,10 +413,7 @@ public class RegisterEmployee extends Register {
                 bankaccount_text.setBorder(BorderFactory.createLineBorder(Color.black));
 
             }
-
-
         });
-
     }
 
     private void ChangeGUIComponentsForInsertData() {
@@ -534,27 +427,10 @@ public class RegisterEmployee extends Register {
         bankaccount_text.setEnabled(true);
         password_text.setEnabled(true);
 
-        getCheckButton().setVisible(false); // תחליף בין הכפתורים ע"י העלמתם
+        getCheckButton().setVisible(false);
+        getCheckButton().setEnabled(false);
         getRegisterButton().setVisible(true);
-    }
-
-    private void InsertAllFieldsToEmployeeObject() {
-
-        employee.setEmpTel(getPhone());
-        employee.setEmpName(getFullName());
-        employee.setEmpId(getId());
-        employee.setEmpBank(bankaccount_text.getText());
-        employee.setEmpType((String) getType_box().getSelectedItem());
-        employee.setEmpBranch(empBranchName);
-    }
-
-    private void ChangeGUIComponents() {
-
-        password_text.setText("");
-        password_authentication_text.setText("");
-        password_authentication_text.setVisible(false);
-        verifyAndRegister.setVisible(false);
-        getRegisterButton().setVisible(true);
+        getRegisterButton().setEnabled(true);
     }
 
     private void DrawUpdateEmployeeList() throws IOException, ParseException {
@@ -564,10 +440,10 @@ public class RegisterEmployee extends Register {
         getjFramePrev().setVisible(false);
 
         EmployeeListManagement EmployeeListManagement = new EmployeeListManagement(getTwoBackFrame(), empBranchName);
+        EmployeeListManagement.setUndecorated(true);
         EmployeeListManagement.DrawEmployee();
         EmployeeListManagement.InitializeActions();
         EmployeeListManagement.setVisible(true);
-        EmployeeListManagement.setLocationRelativeTo(null);
     }
 
     private void EnableAllFields() {
@@ -604,15 +480,6 @@ public class RegisterEmployee extends Register {
                 temp = true;
 
             return temp;
-    }
-
-    private Boolean IsAuthenticationPassword() {
-
-        String repeat_input_pass = new String(password_text.getPassword());
-
-        if((repeat_input_pass).equals(new String(password_authentication_text.getPassword())))
-            return true;
-        return false;
     }
 
     private String GetEmployeeRegisterResponseFromServer() throws IOException {
@@ -704,65 +571,85 @@ public class RegisterEmployee extends Register {
             return false;
     }
 
-    private static boolean CheckEmpFields(Employee employee,int passLength,char[] pass){
+    private boolean CheckEmpFields(Employee employee,int passLength,char[] pass){
 
         if (!(employee.getEmpId().length() <= 9 && employee.getEmpId().length()>=1)) {
 
             JOptionPane.showMessageDialog(null, "ID: Your Id length is incorrect");
+            getId_text().setBorder(BorderFactory.createLineBorder(Color.red));
+
             return false;
         }
 
         if (!(employee.getEmpId().matches("[0-9]+"))) {
 
             JOptionPane.showMessageDialog(null, "ID: Please insert only digits");
+            getId_text().setBorder(BorderFactory.createLineBorder(Color.red));
+
             return false;
         }
 
         if (!(employee.getEmpName().length() <= 20 && employee.getEmpName().length() >= 5)) {
 
             JOptionPane.showMessageDialog(null, "Full Name: Legal length name  is between 5 to 20 letters");
+            getFullname_text().setBorder(BorderFactory.createLineBorder(Color.red));
+
             return false;
         }
 
         if (!(onlyLettersSpaces(employee.getEmpName()))) {
 
             JOptionPane.showMessageDialog(null, "Full Name: Please insert only Letters and Spaces");
+            getFullname_text().setBorder(BorderFactory.createLineBorder(Color.red));
+
             return false;
         }
 
         if (!(employee.getEmpTel().length() <= 10 && employee.getEmpTel().length() >= 9)) {
 
             JOptionPane.showMessageDialog(null, "Phone: Your phone number length is incorrect");
+            getPhone_text().setBorder(BorderFactory.createLineBorder(Color.red));
+
             return false;
         }
 
         if (!(employee.getEmpTel().matches("[0-9]+"))) {
 
             JOptionPane.showMessageDialog(null, "Phone: Please enter only digits");
+            getPhone_text().setBorder(BorderFactory.createLineBorder(Color.red));
+
             return false;
         }
 
         if (!(employee.getEmpBank().length() <= 10 && employee.getEmpBank().length() >=5)) {
 
             JOptionPane.showMessageDialog(null, "Bank Account: Your account number length is incorrect");
+            bankaccount_text.setBorder(BorderFactory.createLineBorder(Color.red));
+
             return false;
         }
 
         if (!(employee.getEmpBank().matches("[0-9]+"))) {
 
             JOptionPane.showMessageDialog(null, "Bank Account: Please insert only digits");
+            bankaccount_text.setBorder(BorderFactory.createLineBorder(Color.red));
+
             return false;
         }
 
         if (!(passLength >=8 && passLength <=12)) {
 
             JOptionPane.showMessageDialog(null, "Password: Your password length is incorrect");
+            password_text.setBorder(BorderFactory.createLineBorder(Color.red));
+
             return false;
         }
 
         if (!(PassCheck(pass))) {
 
             JOptionPane.showMessageDialog(null, "Password: you're password is incorrect");
+            password_text.setBorder(BorderFactory.createLineBorder(Color.red));
+
             return false;
         }
 
@@ -771,7 +658,7 @@ public class RegisterEmployee extends Register {
 
     public static void main(String[] args) throws IOException {
 
-        RegisterEmployee employee = new RegisterEmployee(null, null,"Tel Aviv"); // שולח למסך הרישום את המסך הראשי של האדמין ואת המסך של הניהול עובדים
+        RegisterEmployee employee = new RegisterEmployee(null, null,"Tel Aviv");
         employee.DrawRegister();
         employee.InitializeActions();
         employee.setVisible(true);

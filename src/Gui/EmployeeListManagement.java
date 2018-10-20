@@ -11,16 +11,13 @@ import java.io.IOException;
 
 public class EmployeeListManagement extends EmployeeList {
 
-    public static final String ADD_EMPLOYEE_BUTTON = "/src/images/add_new_emp.png";
-    public static final String UPDATE_EMPLOYEE_BUTTON = "/src/images/update_emp.png";
-    public static final int BUTTON_WIDTH = 390;
-    public static final int BUTTON_HEIGHT = 50;
-
-
-    private JButton jButtonAddEmployee, jButtonManageEmployee;
     private ImageIcon addLogoJPG, updateLogoJPG;
+    private JButton jButtonAddEmployee, jButtonManageEmployee;
+    public static final int BUTTON_WIDTH = 390, BUTTON_HEIGHT = 50;
+    public static final String ADD_EMPLOYEE_BUTTON = "/src/images/add_new_emp.png", UPDATE_EMPLOYEE_BUTTON = "/src/images/update_emp.png";
 
-    public EmployeeListManagement(JFrame oneBackFrame, String branchName) { // הגיע לכאן(=המסך ניהול עובדים הראשי) המסך הראשי של האדמין
+
+    public EmployeeListManagement(JFrame oneBackFrame, String branchName) {
 
         super(oneBackFrame, branchName);
     }
@@ -45,7 +42,6 @@ public class EmployeeListManagement extends EmployeeList {
         getjPanelMain().add(jButtonManageEmployee);
     }
 
-
     private void GUIPlaceComponentsOnJPanel() {
 
         getSpringLayout().putConstraint(SpringLayout.WEST, jButtonAddEmployee, 350, SpringLayout.WEST, getjPanelMain());
@@ -53,7 +49,6 @@ public class EmployeeListManagement extends EmployeeList {
         getSpringLayout().putConstraint(SpringLayout.WEST, jButtonManageEmployee, 50, SpringLayout.EAST, jButtonAddEmployee);
         getSpringLayout().putConstraint(SpringLayout.NORTH, jButtonManageEmployee, -90, SpringLayout.SOUTH, getjPanelMain());
     }
-
 
     private void SetButtonsOnPanel() {
 
@@ -72,7 +67,6 @@ public class EmployeeListManagement extends EmployeeList {
         jButtonManageEmployee.setBorder(new LineBorder(Color.red));
     }
 
-
     private void GUISettingForJFrame() {
 
         setTitle("EmployeesList Management");
@@ -87,7 +81,7 @@ public class EmployeeListManagement extends EmployeeList {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                RegisterEmployee employee = null; // שולח למסך הרישום את המסך הראשי של האדמין ואת המסך של הניהול עובדים
+                RegisterEmployee employee = null;
                 try {
                     employee = new RegisterEmployee(getJFrame(), getjFramePrev(), getBranchName());
                     employee.setUndecorated(true);

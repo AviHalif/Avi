@@ -2,15 +2,15 @@ import Classes.Customer;
 import Classes.Employee;
 import Classes.Item;
 import Classes.PasswordUtils;
-import Gui.RegisterEmployee;
 import com.sun.net.ssl.internal.ssl.Provider;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.apache.poi.util.IOUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
@@ -23,8 +23,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
 
-
 class Server implements Runnable  {
+
+    private static Logger logger = Logger.getLogger(Server.class.getName());
+    private static Connection conn;
+    private Properties properties;
+    private InputStream inStream;
+    private String propFileName;
+    private SSLSocket sslServerSocket;
+    private DataInputStream inputStream;
+    private DataOutputStream outputStream;
+    private JSONObject jsonObject;
+
+    public String mysql_url, mysql_user, mysql_password,mysql_class;
 
     //The Port number through which this server will accept client connections
     public static final int PORT = 35786;
@@ -34,32 +45,26 @@ class Server implements Runnable  {
     public static final String KEYSTORE_PASSWORD_FILE = "java13579";
     public static final String HANDSHAKE_DEBUG = "javax.net.debug";
     public static final String DEFINITION_HANDSHAKE_DEBUG = "all";
-    public static final String MYSQL_CLASS = "com.mysql.jdbc.Driver";
 
-    public String mysql_url, mysql_user, mysql_password, propFileName;
-    private static Connection conn;
-
-    private Properties properties;
-    private InputStream inStream;
-
-    private SSLSocket sslServerSocket;
-    private DataInputStream inputStream;
-    private DataOutputStream outputStream;
-    private JSONObject jsonObject;
 
     public Server(SSLSocket sslServerSocket) throws IOException {
 
         DefineLogAndConfig();
 
+        System.out.println ("Accepted from " + sslServerSocket.getInetAddress().getHostAddress());
+
         mysql_url = properties.getProperty("DBUrl");
         mysql_user = properties.getProperty("DBUser");
         mysql_password = properties.getProperty("DBPassword");
+        mysql_class = properties.getProperty("Class.forName");
 
         try {
-            Class.forName(MYSQL_CLASS);
+            Class.forName(mysql_class);
             conn = DriverManager.getConnection(mysql_url, mysql_user, mysql_password);
 
             this.sslServerSocket = sslServerSocket;
+
+            DefineCommunicationBuffer();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -67,17 +72,18 @@ class Server implements Runnable  {
     }
 
     public void run() {
-
         try {
-
-            DefineCommunicationBuffer();
 
             String serverOperation = ReadAndParseData();
 
             ChooseServerOperation(serverOperation);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e);
+        }
+
+        finally {
+            System.out.println("Disconected");
         }
     }
 
@@ -85,30 +91,38 @@ class Server implements Runnable  {
 
         properties = new Properties();
         propFileName = "config.properties";
-        inStream = RegisterEmployee.class.getClassLoader().getResourceAsStream(propFileName);
+        inStream = Server.class.getClassLoader().getResourceAsStream(propFileName);
         properties.load(inStream);
+
+        String log4jConfigFile = System.getProperty("user.dir")+ File.separator+"src"+ File.separator + "log4j.properties";
+        PropertyConfigurator.configure(log4jConfigFile);
     }
 
     private void ChooseServerOperation(String serverOperation) {
 
         switch (serverOperation) {
 
+            case "CheckOnlineUsers":{
+                OnlineUsersResponse();
+                break;
+            }
+
             case "Log in": {
                 LogInEmployee(jsonObject, outputStream);
                 break;
             }
 
-            case "Register": {
+            case "Register": { // Register new employee
                 RegisterEmployee(jsonObject, outputStream);
                 break;
             }
 
-            case "Storage": {
+            case "Storage": { // Return the storage of a specific branch
                 StorageResponse(jsonObject, outputStream);
                 break;
             }
 
-            case "Customer List": {
+            case "Customer List": { // Return all the customers list
                 CustomerListResponse(outputStream);
                 break;
             }
@@ -118,7 +132,7 @@ class Server implements Runnable  {
                 break;
             }
 
-            case "Customer register": {
+            case "Customer register": { // Register new customer
                 RegisterCustomer(jsonObject, outputStream);
                 break;
             }
@@ -133,7 +147,7 @@ class Server implements Runnable  {
                 break;
             }
 
-            case "EmployeeList": {
+            case "EmployeeList": {  // Return all the employee list
                 EmployeeListResponse(jsonObject, outputStream);
                 break;
             }
@@ -144,7 +158,7 @@ class Server implements Runnable  {
             }
 
             case "UpdateEmployee": { // Change the values of a specific employee in the DB
-                UpdateEmployee(jsonObject, outputStream);
+                UpdateEmployee(jsonObject);
                 break;
             }
 
@@ -164,16 +178,16 @@ class Server implements Runnable  {
             }
 
             case "All Photos": {
-                ReturnAllKindsOfItemsPhotos();
+                ReturnPhotosLocation();
                 break;
             }
 
-            case "Report": {
+            case "Report": { // Return a relevant parameters for report
                 ReportResponse();
                 break;
             }
 
-            case "All Items Names": {
+            case "All Items Names": { // Return all the items list
                 ReturnAllNamesOfItems();
                 break;
             }
@@ -185,7 +199,42 @@ class Server implements Runnable  {
         }
     }
 
-    private void UpdateEmployee(JSONObject jsonObject, DataOutputStream outputStream) {
+    private void ReturnPhotosLocation() {
+        try {
+            Statement statement = conn.createStatement();
+
+            String query = String.format("select item_path from store.all_items");
+            ResultSet allKindOfItems = statement.executeQuery(query);
+
+            JSONArray jsonArray = new JSONArray();
+
+            outputStream.writeUTF(ResultSetJson(allKindOfItems,jsonArray) + "\n");
+            outputStream.flush();
+            statement.close();
+
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
+    private void OnlineUsersResponse(){
+        try {
+            String empId = (String) jsonObject.get("Me");
+            Statement statement = conn.createStatement();
+            String query = String.format("select emp_name,emp_sn from store.employee where emp_status = 'IN' and emp_id<>'%s'",empId);
+            ResultSet resultSet = statement.executeQuery(query);
+
+            JSONArray jsonArray = new JSONArray();
+            outputStream.writeUTF(ResultSetJson(resultSet,jsonArray).toString()+"\n");
+            outputStream.flush();
+
+            statement.close();
+        }
+        catch (Exception ex){
+        }
+    }
+
+    private void UpdateEmployee(JSONObject jsonObject ) {
 
         try {
 
@@ -218,34 +267,35 @@ class Server implements Runnable  {
                 preparedStmt = MySqlQueryToUpdatePssToo(conn,employee);
             }
 
-            try {
-                preparedStmt.execute();
-            } catch (Exception ex) {
-                if (ex.toString().contains("PRIMARY")) {
-                    // response = "Employee already exists";/////////////////////////////
-                }
-            }
+            preparedStmt.execute();
+
             preparedStmt.close();
 
             SendUpdateEmployeeResponseToClient(response);
 
         } catch (Exception ex) {
-            System.out.print(ex);
+            logger.error(ex);
         }
     }
 
-    private void SendUpdateEmployeeResponseToClient(String response) throws IOException {
+    private void SendUpdateEmployeeResponseToClient(String response) {
 
-        JSONObject jsonObjectResponse = new JSONObject();
-        jsonObjectResponse.put("Failed", response);
-        outputStream.writeUTF(jsonObjectResponse.toString() + "\n");
-        outputStream.flush();
+        try {
+            JSONObject jsonObjectResponse = new JSONObject();
+            jsonObjectResponse.put("Failed", response);
+            outputStream.writeUTF(jsonObjectResponse.toString() + "\n");
+            outputStream.flush();
+        }
+        catch (Exception ex){
+            logger.error(ex);
+        }
     }
 
     private PreparedStatement MySqlQueryToUpdatePssToo(Connection conn, Employee employee) throws SQLException {
 
         String query = "update store.employee set emp_name = ?, emp_tel = ?, emp_type = ?, emp_bank = ?, emp_securePass = ?, emp_passSalt = ? where emp_id = ?";
         PreparedStatement preparedStmt = conn.prepareStatement(query);
+
         preparedStmt.setString(1, employee.getEmpName());
         preparedStmt.setString(2, employee.getEmpTel());
         preparedStmt.setString(3, employee.getEmpType());
@@ -270,7 +320,7 @@ class Server implements Runnable  {
         return preparedStmt;
     }
 
-    private PreparedStatement MySqlQueryToUpdateWithoutPass(Connection conn, Employee employee) throws SQLException, FileNotFoundException {
+    private PreparedStatement MySqlQueryToUpdateWithoutPass(Connection conn, Employee employee) throws SQLException {
 
         String query = "update store.employee set emp_name = ?, emp_tel = ?, emp_type = ?, emp_bank = ?, emp_photo = ? where emp_id = ?";
         PreparedStatement preparedStmt = conn.prepareStatement(query);
@@ -278,15 +328,20 @@ class Server implements Runnable  {
         preparedStmt.setString(2, employee.getEmpTel());
         preparedStmt.setString(3, employee.getEmpType());
         preparedStmt.setString(4, employee.getEmpBank());
-        // חלץ את נתיב התמונה בנפרד
-        InputStream inputStream = new FileInputStream(new File(employee.getEmpPhoto()));
-        preparedStmt.setBlob(5, inputStream);
+        try {
+            InputStream inputStream = new FileInputStream(new File(employee.getEmpPhoto()));
+            preparedStmt.setBlob(5, inputStream);
+        }
+        catch (Exception ex){
+            logger.error(ex);
+        }
+
         preparedStmt.setString(6, employee.getEmpId());
 
         return preparedStmt;
     }
 
-    private PreparedStatement MySqlQueryToUpdatePssAndPhotoBoth(Connection conn, Employee employee) throws SQLException, FileNotFoundException {
+    private PreparedStatement MySqlQueryToUpdatePssAndPhotoBoth(Connection conn, Employee employee) throws SQLException {
 
         String query = "update store.employee set emp_name = ?, emp_tel = ?, emp_type = ?, emp_bank = ?, emp_securePass = ?, emp_passSalt = ?, emp_photo = ? where emp_id = ?";
         PreparedStatement preparedStmt = conn.prepareStatement(query);
@@ -296,8 +351,14 @@ class Server implements Runnable  {
         preparedStmt.setString(4, employee.getEmpBank());
         preparedStmt.setString(5, employee.getEmpPass());
         preparedStmt.setString(6, employee.getEmpPassSalt());
-        // חלץ את נתיב התמונה בנפרד
-        InputStream inputStream = new FileInputStream(new File(employee.getEmpPhoto()));
+
+        try {
+            InputStream inputStream = new FileInputStream(new File(employee.getEmpPhoto()));
+        }
+        catch (Exception ex){
+            logger.error(ex);
+        }
+
         preparedStmt.setBlob(7, inputStream);
         preparedStmt.setString(8, employee.getEmpId());
 
@@ -316,7 +377,6 @@ class Server implements Runnable  {
 
             if(employee.getEmpStatus().equals("OUT")) {
 
-                // כעת אפשר להכניס את נתיב התמונה לגייסון כי הוא סטרינגי
                 InsertAllEditEmployeeParametersToJesonAndSendToClient(employee, response);
             }
             else{
@@ -327,90 +387,93 @@ class Server implements Runnable  {
                 outputStream.writeUTF(jsonObjectResponse.toString() + "\n");
                 outputStream.flush();
             }
-        } catch (Exception ex) {
-
+        }
+        catch (Exception ex) {
+            logger.error(ex);
         }
     }
 
-    private void InsertAllEditEmployeeParametersToJesonAndSendToClient(Employee employee, String response) throws IOException {
+    private void InsertAllEditEmployeeParametersToJesonAndSendToClient(Employee employee, String response) {
 
-        JSONObject jsonObjectResponse = new JSONObject();
-        jsonObjectResponse.put("Failed", response);
-        jsonObjectResponse.put("employee sn", employee.getEmpSn());
-        jsonObjectResponse.put("employee name", employee.getEmpName());
-        jsonObjectResponse.put("employee tel", employee.getEmpTel());
-        jsonObjectResponse.put("employee bank", employee.getEmpBank());
-        jsonObjectResponse.put("employee branch", employee.getEmpBranch());
-        jsonObjectResponse.put("employee type", employee.getEmpType());
-        jsonObjectResponse.put("employee photo", employee.getEmpPhoto());
+        try {
+            JSONObject jsonObjectResponse = new JSONObject();
+            jsonObjectResponse.put("Failed", response);
+            jsonObjectResponse.put("employee sn", employee.getEmpSn());
+            jsonObjectResponse.put("employee name", employee.getEmpName());
+            jsonObjectResponse.put("employee tel", employee.getEmpTel());
+            jsonObjectResponse.put("employee bank", employee.getEmpBank());
+            jsonObjectResponse.put("employee branch", employee.getEmpBranch());
+            jsonObjectResponse.put("employee type", employee.getEmpType());
+            jsonObjectResponse.put("employee photo", employee.getEmpPhoto());
 
-        outputStream.writeUTF(jsonObjectResponse.toString() + "\n");
-        outputStream.flush();
+            outputStream.writeUTF(jsonObjectResponse.toString() + "\n");
+            outputStream.flush();
+        }
+        catch (Exception ex){
+            logger.error(ex);
+        }
     }
 
-    private String ConvertPhotoBeforeInsertToJson(ResultSet resultSet) throws SQLException, IOException {
+    private String ConvertPhotoBeforeInsertToJson(ResultSet resultSet) {
 
         Base64 codec = new Base64();
-        String photo64;
+        String photo64 = "";
 
-        InputStream photois = resultSet.getBinaryStream("emp_photo"); // למשוך את נתיב התמונה מהריזאלט סט
-        byte[] bytes = IOUtils.toByteArray(photois);  // להפוך לבתים
-        photo64 = codec.encodeBase64String(bytes); // מבתים לסטרינג 64 כדי שאוכל להכניס לגייסון אותם אחרת בparse בקליינט יהיה חריגה
+        try {
+            InputStream photois = resultSet.getBinaryStream("emp_photo");
+            byte[] bytes = IOUtils.toByteArray(photois);
+            photo64 = codec.encodeBase64String(bytes);
 
-        return photo64;
+            return photo64;
+        }
+        catch (Exception ex){
+            logger.error(ex);
+        }
+
+        return  photo64;
     }
 
-    private String MySqlDefinitionAndQueryForEditEmployee(Employee employee) throws ClassNotFoundException, SQLException, IOException {
+    private String MySqlDefinitionAndQueryForEditEmployee(Employee employee) {
 
         String response = "";
 
-        Statement statement = conn.createStatement();
-        String query = String.format("select emp_sn,emp_name,emp_tel,emp_bank,emp_branch,emp_type,emp_photo,emp_status from store.employee where emp_id='%s' and emp_branch='%s'", employee.getEmpId(),employee.getEmpBranch());
-        ResultSet resultSet = statement.executeQuery(query);
+        try {
+            Statement statement = conn.createStatement();
+            String query = String.format("select emp_sn,emp_name,emp_tel,emp_bank,emp_branch,emp_type,emp_photo,emp_status from store.employee where emp_id='%s' and emp_branch='%s'", employee.getEmpId(), employee.getEmpBranch());
+            ResultSet resultSet = statement.executeQuery(query);
 
-        if (resultSet.next()) {
+            if (resultSet.next()) {
 
-            GetDataFromResultSetToEmployeeObject(employee, resultSet);
+                GetDataFromResultSetToEmployeeObject(employee, resultSet);
+                employee.setEmpPhoto(ConvertPhotoBeforeInsertToJson(resultSet));
 
-            // המרה של הנתיב של הפוטו לפני שייכנס לגייסון כדי שבהמרה עם הפארסר בצד השני הוא ימיר אותו טוב
-            employee.setEmpPhoto(ConvertPhotoBeforeInsertToJson(resultSet));
+            } else {
+                response = "Customer ID: " + employee.getEmpId() + " is not found !!!";
+            }
 
-        } else {
-            response = "Customer ID: " + employee.getEmpId() + " is not found !!!";
+            statement.close();
+
+            return response;
         }
-
-        statement.close();
-
+        catch (Exception ex){
+            logger.error(ex);
+        }
         return response;
     }
 
-    private void GetDataFromResultSetToEmployeeObject(Employee employee,ResultSet resultSet) throws SQLException {
-
-        employee.setEmpSn(resultSet.getString("emp_sn"));
-        employee.setEmpName(resultSet.getString("emp_name"));
-        employee.setEmpTel(resultSet.getString("emp_tel"));
-        employee.setEmpBank(resultSet.getString("emp_bank"));
-        employee.setEmpBranch(resultSet.getString("emp_branch"));
-        employee.setEmpType(resultSet.getString("emp_type"));
-        employee.setEmpStatus(resultSet.getString("emp_status"));
-    }
-
-    private void ReturnAllKindsOfItemsPhotos() {
+    private void GetDataFromResultSetToEmployeeObject(Employee employee,ResultSet resultSet) {
 
         try {
-
-            Statement statement = conn.createStatement();
-
-            ResultSet allPhotosOfItems = QueryToDbForAllPhotosOfItems(statement);
-
-
-            if (allPhotosOfItems.next()) {
-
-                SendAllKindOfItemsPhotosToClient(allPhotosOfItems, outputStream, statement);
-            }
-
-        } catch (Exception e) {
-            System.out.println(e);
+            employee.setEmpSn(resultSet.getString("emp_sn"));
+            employee.setEmpName(resultSet.getString("emp_name"));
+            employee.setEmpTel(resultSet.getString("emp_tel"));
+            employee.setEmpBank(resultSet.getString("emp_bank"));
+            employee.setEmpBranch(resultSet.getString("emp_branch"));
+            employee.setEmpType(resultSet.getString("emp_type"));
+            employee.setEmpStatus(resultSet.getString("emp_status"));
+        }
+        catch (Exception ex){
+            logger.error(ex);
         }
     }
 
@@ -418,22 +481,21 @@ class Server implements Runnable  {
 
         try {
 
-            Statement statement = conn.createStatement();
-
-            ResultSet allKindOfItemsFromDB = QueryToDbForAllKindOfItems(jsonObject,statement);
+            ResultSet allKindOfItemsFromDB = QueryToDbForAllKindOfItems();
 
             if (allKindOfItemsFromDB.next()) {
 
-            allKindOfItemsFromDB.beforeFirst(); // להחזיר להתחלה את התשובה מהבסיס נתונים
-                //converter of ResultSet into JSONArray : all the specific branch storage
-            JSONArray jsonArrayResponse = ConvertResultSetToJsonArray(allKindOfItemsFromDB);
+                allKindOfItemsFromDB.beforeFirst();
 
-            SendAllKindOfItemsToClient(jsonArrayResponse, outputStream, statement);
+                //converter of ResultSet into JSONArray : all the specific branch storage
+                JSONArray jsonArrayResponse = ConvertResultSetToJsonArray(allKindOfItemsFromDB);
+
+                SendAllKindOfItemsToClient(jsonArrayResponse, outputStream);
 
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            logger.error(e);
         }
     }
 
@@ -441,113 +503,48 @@ class Server implements Runnable  {
 
         try {
 
-            Statement statement = conn.createStatement();
-
-            ResultSet allKindOfItemsFromDB = QueryToDbForAllNamesOfItems(jsonObject,statement);
+            ResultSet allKindOfItemsFromDB = QueryToDbForAllNamesOfItems();
 
             if (allKindOfItemsFromDB.next()) {
 
-                allKindOfItemsFromDB.beforeFirst(); // להחזיר להתחלה את התשובה מהבסיס נתונים
+                allKindOfItemsFromDB.beforeFirst();
+
                 //converter of ResultSet into JSONArray : all the specific branch storage
                 JSONArray jsonArrayResponse = ConvertResultSetToJsonArray(allKindOfItemsFromDB);
 
-                SendAllKindOfItemsToClient(jsonArrayResponse, outputStream, statement);
-
+                SendAllKindOfItemsToClient(jsonArrayResponse, outputStream);
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            logger.error(e);
 
         }
     }
 
-    private void SendAllKindOfItemsPhotosToClient(ResultSet allPhotosOfItems, DataOutputStream outputStream, Statement statement) throws IOException, SQLException, ClassNotFoundException {
+    private void SendAllKindOfItemsToClient(JSONArray jsonArrayResponse, DataOutputStream outputStream){
 
-        int numberOfPhotos = GetTheNumberOfPhotos(allPhotosOfItems);
+        try {
+            outputStream.writeUTF(jsonArrayResponse.toString() + "\n");
+            outputStream.flush();
 
-        // מהבסיס נתונים נמשך כריזאלט סט ואת המערך הזה עכשיו צריך להמיר בו כל תמונה כדי שיהיה אפשר להכניס אותו לגייסון
-        String[] photo64 = new String[numberOfPhotos];
-
-        ConvertResultSetToString(allPhotosOfItems, numberOfPhotos, photo64);
-
-            // כעת אפשר להכניס את המערך תמונות לגייסון כי הוא סטרינגי
-        PrepareThePhotoJsonObjectAndSendToClient(photo64, numberOfPhotos);
-
-        statement.close();
-    }
-
-    private void PrepareThePhotoJsonObjectAndSendToClient(String[] photo64, int numberOfPhotos) throws IOException {
-
-        JSONObject jsonObject = new JSONObject();
-
-        int j = 1;
-
-        for(int i=0; i < numberOfPhotos; i++){
-
-            jsonObject.put(Integer.toString(j), photo64[i]);
-            j++;
         }
-
-        jsonObject.put("Photos", numberOfPhotos);
-
-        outputStream.writeUTF(jsonObject.toString() + "\n");
-        outputStream.flush();
-    }
-
-    private void ConvertResultSetToString(ResultSet allPhotosOfItems ,int numberOfPhotos, String[] photo64) throws IOException, SQLException {
-
-        Base64 codec = new Base64();
-        int i = 0;
-
-        while(allPhotosOfItems.next()){
-            InputStream photois = allPhotosOfItems.getBinaryStream("item_photo"); // למשוך את נתיב התמונה מהריזאלט סט
-            byte[] bytes = IOUtils.toByteArray(photois);  // להפוך לבתים
-            photo64[i++] = codec.encodeBase64String(bytes); // מבתים לסטרינג 64 כדי שאוכל להכניס לגייסון אותם אחרת בparse בקליינט יהיה חריגה
+        catch (Exception ex){
+            logger.error(ex);
         }
     }
 
-    private int GetTheNumberOfPhotos(ResultSet allPhotosOfItems) throws SQLException {
+    private ResultSet QueryToDbForAllKindOfItems() throws SQLException {
 
-        // get num of photos
-        int numberOfPhotos = 0;
-        if (allPhotosOfItems != null) {
-            allPhotosOfItems.beforeFirst();
-            allPhotosOfItems.last();
-            numberOfPhotos = allPhotosOfItems.getRow();
-        }
-
-        allPhotosOfItems.beforeFirst(); // תחזיר את ריזאלטסט להתחלה שלו
-        return numberOfPhotos;
-    }
-
-    private ResultSet QueryToDbForAllPhotosOfItems(Statement statement) throws SQLException {
-
-        String query = String.format("select item_photo from store.all_items");
-        ResultSet allKindOfItems = statement.executeQuery(query);
-
-        return allKindOfItems;
-    }
-
-    private void SendAllKindOfItemsToClient(JSONArray jsonArrayResponse, DataOutputStream outputStream, Statement statement) throws IOException, SQLException {
-
-        outputStream.writeUTF(jsonArrayResponse.toString() + "\n");
-        outputStream.flush();
-
-        statement.close();
-    }
-
-    private ResultSet QueryToDbForAllKindOfItems(JSONObject jsonObject, Statement statement) throws ClassNotFoundException, SQLException {
-
-        statement = conn.createStatement();
+        Statement statement = conn.createStatement();
         String query = String.format("select item_name,item_number,item_price from store.all_items");
         ResultSet allKindOfItems = statement.executeQuery(query);
 
         return allKindOfItems;
     }
 
-    private ResultSet QueryToDbForAllNamesOfItems(JSONObject jsonObject, Statement statement) throws ClassNotFoundException, SQLException {
+    private ResultSet QueryToDbForAllNamesOfItems() throws SQLException {
 
-        statement = conn.createStatement();
+        Statement statement = conn.createStatement();
         String query = String.format("select item_name from store.all_items");
         ResultSet allKindOfItems = statement.executeQuery(query);
 
@@ -579,8 +576,9 @@ class Server implements Runnable  {
             jsonObjectResponse.put("Failed", response);
             outputStream.writeUTF(jsonObjectResponse.toString() + "\n");
             outputStream.flush();
-        } catch (Exception ex) {
-
+        }
+        catch (Exception ex) {
+            logger.error(ex);
         }
     }
 
@@ -592,7 +590,9 @@ class Server implements Runnable  {
 
             MySqlDefinitionAndQueryToLogOut(emp_id);
 
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
+            logger.error(ex);
         }
     }
 
@@ -604,9 +604,10 @@ class Server implements Runnable  {
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setString(1, emp_id);
             preparedStmt.execute();
-        } catch (Exception ex) {
-
-       }
+        }
+        catch (Exception ex) {
+            logger.error(ex);
+        }
     }
 
     private void ReportResponse() {
@@ -618,37 +619,47 @@ class Server implements Runnable  {
 
             MySqlDefinitionAndQueryForItemsReportDetails(branch,type);
 
-        } catch (Exception ex) {
-
+        }
+        catch (Exception ex) {
+            logger.error(ex);
         }
     }
 
-    private void PrepareAndSendJsonReportDataToClient(ResultSet resultSet) throws Exception {
+    private void PrepareAndSendJsonReportDataToClient(ResultSet resultSet) {
 
-        JSONArray jsonArrayResponse = ConvertResultSetToJsonArray(resultSet);
+        try{
+            JSONArray jsonArrayResponse = ConvertResultSetToJsonArray(resultSet);
 
-        outputStream.writeUTF(jsonArrayResponse.toString()+"\n");
+            outputStream.writeUTF(jsonArrayResponse.toString()+"\n");
 
-        outputStream.flush();
+            outputStream.flush();
+        }
+        catch (Exception ex){
+            logger.error(ex);
+        }
     }
 
-    private void MySqlDefinitionAndQueryForItemsReportDetails(String branch, String type) throws Exception {
+    private void MySqlDefinitionAndQueryForItemsReportDetails(String branch, String type)   {
 
-        Statement statement = conn.createStatement();
-        String query ;
+        try {
+            Statement statement = conn.createStatement();
+            String query;
 
-        if(type.equals("all")) {
-            query = String.format("select cust_id,item_part_number,item_type,item_size,item_price,sell_time from store.sells where substr(sell_time,1,10) = substr(now(),1,10) and branch_name='%s' ",branch);
+            if (type.equals("all")) {
+                query = String.format("select cust_id,item_part_number,item_type,item_size,item_price,sell_time from store.sells where substr(sell_time,1,10) = substr(now(),1,10) and branch_name='%s' ", branch);
+            } else {
+                query = String.format("select cust_id,item_part_number,item_type,item_size,item_price,sell_time from store.sells where substr(sell_time,1,10) = substr(now(),1,10) and branch_name='%s' and item_type in(%s)", branch, type);
+            }
+
+            ResultSet resultSet = statement.executeQuery(query);
+
+            PrepareAndSendJsonReportDataToClient(resultSet);
+
+            statement.close();
         }
-        else{
-            query = String.format("select cust_id,item_part_number,item_type,item_size,item_price,sell_time from store.sells where substr(sell_time,1,10) = substr(now(),1,10) and branch_name='%s' and item_type in(%s)",branch,type);
+        catch (Exception ex){
+            logger.error(ex);
         }
-
-        ResultSet resultSet = statement.executeQuery(query);
-
-        PrepareAndSendJsonReportDataToClient(resultSet);
-
-        statement.close();
     }
 
     private void SellItem() {
@@ -682,39 +693,43 @@ class Server implements Runnable  {
             outputStream.writeUTF(jsonObjectResponse.toString() + "\n");
             outputStream.flush();
         } catch (Exception ex) {
-            System.out.print(ex);
+            logger.error(ex);
         }
     }
 
-    private String MySqlDefinitionSellItem(Item item, String customerId) throws ClassNotFoundException, SQLException {
+    private String MySqlDefinitionSellItem(Item item, String customerId) {
 
         String response = "";
 
-        String query = "update store.storage set item_amount = ? where item_part_number = ? and item_size = ? and item_branch = ?";
-        PreparedStatement preparedStmt = conn.prepareStatement(query);
+        try{
+            String query = "update store.storage set item_amount = ? where item_part_number = ? and item_size = ? and item_branch = ?";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
 
-        // המרה לאינט ואחכ לסטרינג
-        Integer intNewValue = Integer.parseInt(item.getItemAmount());
-        intNewValue--;
-        String strNewValue = String.valueOf(intNewValue);
+            // המרה לאינט ואחכ לסטרינג
+            Integer intNewValue = Integer.parseInt(item.getItemAmount());
+            intNewValue--;
+            String strNewValue = String.valueOf(intNewValue);
 
-        preparedStmt.setString(1, strNewValue);
-        preparedStmt.setString(2, item.getItemPartNumber());
-        preparedStmt.setString(3, item.getItemSize());
-        preparedStmt.setString(4, item.getItemBranch());
-
-        try {
+            preparedStmt.setString(1, strNewValue);
+            preparedStmt.setString(2, item.getItemPartNumber());
+            preparedStmt.setString(3, item.getItemSize());
+            preparedStmt.setString(4, item.getItemBranch());
 
             preparedStmt.execute();
             UpdateSellsTable(item, customerId); // פונקצית עזר לעדכון כל מכירה שהיתה
 
-        } catch (Exception ex) {
+            preparedStmt.close();
 
-            if (ex.toString().contains("PRIMARY")) { ///////////////////////////////
+            return response;
+        }
+        catch (Exception ex) {
+
+            if (ex.toString().contains("PRIMARY")) {
                 response = "Error to purchase this item!!!";
             }
+            else
+                logger.error(ex);
         }
-        preparedStmt.close();
 
         return response;
     }
@@ -729,16 +744,21 @@ class Server implements Runnable  {
 
     }
 
-    private void CheckItemAmountFromDB(Item item) throws SQLException, ClassNotFoundException {
+    private void CheckItemAmountFromDB(Item item) {
 
-        Statement statement = conn.createStatement();
-        String query = String.format("select item_amount from store.storage where item_part_number='%s' and item_size='%s' and item_branch='%s'", item.getItemPartNumber(),item.getItemSize(),item.getItemBranch());
-        ResultSet resultSet = statement.executeQuery(query);
-        if(resultSet.next()) {
-            String itemAmount = resultSet.getString("item_amount");
-            item.setItemAmount(itemAmount);
+        try {
+            Statement statement = conn.createStatement();
+            String query = String.format("select item_amount from store.storage where item_part_number='%s' and item_size='%s' and item_branch='%s'", item.getItemPartNumber(), item.getItemSize(), item.getItemBranch());
+            ResultSet resultSet = statement.executeQuery(query);
+            if (resultSet.next()) {
+                String itemAmount = resultSet.getString("item_amount");
+                item.setItemAmount(itemAmount);
+            }
+            statement.close();
         }
-        statement.close();
+        catch (Exception ex){
+            logger.error(ex);
+        }
     }
 
     private void UpdateSellsTable(Item item,String customerId) {
@@ -753,16 +773,16 @@ class Server implements Runnable  {
                 preparedStatement.execute();
             } catch (Exception ex) {
                 if (ex.toString().contains("PRIMARY")) {
-                    /////////////////////////////////////////////////////////
                 }
             }
             outputStream.flush();
-        } catch (Exception ex) {/////////////////////////////////
-            System.out.print(ex);
+        }
+        catch (Exception ex) {
+            logger.error(ex);
         }
     }
 
-    private PreparedStatement MySqlDefinitionUpdateSellsTable(Item item, String customerId, String DateAndTime) throws SQLException, ClassNotFoundException {
+    private PreparedStatement MySqlDefinitionUpdateSellsTable(Item item, String customerId, String DateAndTime) throws SQLException {
 
         PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO store.sells values(?,?,?,?,?,?,?)");
         preparedStatement.setString(1, item.getItemType());
@@ -788,18 +808,16 @@ class Server implements Runnable  {
     private void CheckIfItemInStorage( ) {
         try {
 
-            Statement statement = null;
-
             Item item = new Item();
 
             String employee_type = GetResponseItemFromClient(item);
 
-            String response = MySqlDefinitionAndItemQuery(item,statement,employee_type);
+            String response = MySqlDefinitionAndItemQuery(item, employee_type);
 
-            PrepareAndSendJsonDataItemToClient(response,item,statement);
+            PrepareAndSendJsonDataItemToClient(response,item);
 
         } catch (Exception ex) {
-///////////////////////////////////////
+            logger.error(ex);
         }
     }
 
@@ -814,26 +832,30 @@ class Server implements Runnable  {
         return employee_type;
     }
 
-    private void PrepareAndSendJsonDataItemToClient(String response, Item item, Statement statement) throws IOException, SQLException {
+    private void PrepareAndSendJsonDataItemToClient(String response, Item item) {
 
-        JSONObject jsonObjectResponse = new JSONObject();
-        jsonObjectResponse.put("Failed", response);
-        jsonObjectResponse.put("item type", item.getItemType());
-        jsonObjectResponse.put("item size", item.getItemSize());
-        jsonObjectResponse.put("item branch", item.getItemBranch());
-        jsonObjectResponse.put("item amount", item.getItemAmount());
-        jsonObjectResponse.put("item part number", item.getItemPartNumber());
-        jsonObjectResponse.put("item unit price", item.getItemUnitPrice());
+        try {
+            JSONObject jsonObjectResponse = new JSONObject();
+            jsonObjectResponse.put("Failed", response);
+            jsonObjectResponse.put("item type", item.getItemType());
+            jsonObjectResponse.put("item size", item.getItemSize());
+            jsonObjectResponse.put("item branch", item.getItemBranch());
+            jsonObjectResponse.put("item amount", item.getItemAmount());
+            jsonObjectResponse.put("item part number", item.getItemPartNumber());
+            jsonObjectResponse.put("item unit price", item.getItemUnitPrice());
 
-        outputStream.writeUTF(jsonObjectResponse.toString() + "\n");
-        outputStream.flush();
+            outputStream.writeUTF(jsonObjectResponse.toString() + "\n");
+            outputStream.flush();
 
-        statement.close();
+        }
+        catch (Exception ex){
+            logger.error(ex);
+        }
     }
 
-    private String MySqlDefinitionAndItemQuery(Item item, Statement statement, String employee_type) throws ClassNotFoundException, SQLException {
+    private String MySqlDefinitionAndItemQuery(Item item, String employee_type) throws  SQLException {
 
-        statement = conn.createStatement();
+        Statement statement = conn.createStatement();
 
         String query = String.format("select item_type,item_size,item_branch,item_amount,item_price,item_part_number from store.storage where item_part_number='%s' and item_size='%s' and item_branch='%s' and item_type='%s'", item.getItemPartNumber(),item.getItemSize(),item.getItemBranch(),item.getItemType());
 
@@ -846,59 +868,82 @@ class Server implements Runnable  {
         return response;
     }
 
-    private String CheckIfItemInDB(Item item, ResultSet responseFromDB, String employee_type) throws SQLException {
+    private String CheckIfItemInDB(Item item, ResultSet responseFromDB, String employee_type)  {
 
         String response = "";
 
-        if (responseFromDB.next()) {
+        try {
+            if (responseFromDB.next()) {
 
-            response = InsertOtherParametersFromDBToItem(item,responseFromDB,employee_type);
-        }
-
-        else
-            response = "No item in your branch!!!";
-
-        return response;
-    }
-
-    private String InsertOtherParametersFromDBToItem(Item item, ResultSet responseFromDB, String employee_type) throws SQLException {
-
-        String response = "";
-
-        item.setItemType(responseFromDB.getString("item_type"));
-        item.setItemSize(responseFromDB.getString("item_size"));
-        item.setItemBranch(responseFromDB.getString("item_branch"));
-        item.setItemAmount(responseFromDB.getString("item_amount"));
-        item.setItemUnitPrice(responseFromDB.getString("item_price"));
-        item.setItemPartNumber(responseFromDB.getString("item_part_number"));
-
-        if(item.getItemAmount().equals("0")) {
-
-            if (!(employee_type.equals("Shift Manager")))
-                response = "Out of storage!!! Ask your shift manager to renew branch storage";
+                response = InsertOtherParametersFromDBToItem(item, responseFromDB, employee_type);
+            }
             else
-                response = "Out of storage!!! Renew this item: " + item.getItemType() + ", " + "Size: " + item.getItemSize();
+                response = "No item in your branch!!!";
         }
+        catch (Exception ex){
+            logger.error(ex);
+        }
+
         return response;
     }
 
-    private String ReadAndParseData() throws IOException, ParseException {
+    private String InsertOtherParametersFromDBToItem(Item item, ResultSet responseFromDB, String employee_type) {
 
-        String receivedMessage = inputStream.readUTF();
-        JSONParser jsonParser = new JSONParser();
-        jsonObject = (JSONObject) jsonParser.parse(receivedMessage);
+        String response = "";
 
-        String serverOperation = (String) jsonObject.get("GuiName");
+        try {
+            item.setItemType(responseFromDB.getString("item_type"));
+            item.setItemSize(responseFromDB.getString("item_size"));
+            item.setItemBranch(responseFromDB.getString("item_branch"));
+            item.setItemAmount(responseFromDB.getString("item_amount"));
+            item.setItemUnitPrice(responseFromDB.getString("item_price"));
+            item.setItemPartNumber(responseFromDB.getString("item_part_number"));
 
+            if (item.getItemAmount().equals("0")) {
+
+                if (!(employee_type.equals("Shift Manager")))
+                    response = "Out of storage!!! Ask your shift manager to renew branch storage";
+                else
+                    response = "Out of storage!!! Renew this item: " + item.getItemType() + ", " + "Size: " + item.getItemSize();
+            }
+        }
+        catch (Exception ex){
+            logger.error(ex);
+        }
+
+        return response;
+    }
+
+    private String ReadAndParseData() {
+
+        String serverOperation = "";
+
+        try {
+            String receivedMessage = inputStream.readUTF();
+            JSONParser jsonParser = new JSONParser();
+            jsonObject = (JSONObject) jsonParser.parse(receivedMessage);
+
+            serverOperation = (String) jsonObject.get("GuiName");
+
+            return serverOperation;
+        }
+        catch (Exception ex){
+            logger.error(ex);
+        }
         return serverOperation;
     }
 
-    private void DefineCommunicationBuffer() throws IOException {
+    private void DefineCommunicationBuffer()  {
 
-        //Create InputStream to receive messages send by the client
-        inputStream = new DataInputStream(sslServerSocket.getInputStream());
-        //Create OutputStream to send message to client
-        outputStream = new DataOutputStream(sslServerSocket.getOutputStream());
+        try {
+            //Create InputStream to receive messages send by the client
+            inputStream = new DataInputStream(sslServerSocket.getInputStream());
+            //Create OutputStream to send message to client
+            outputStream = new DataOutputStream(sslServerSocket.getOutputStream());
+        }
+        catch (Exception ex){
+            logger.error(ex);
+        }
 
     }
 
@@ -919,7 +964,7 @@ class Server implements Runnable  {
 
             statement.close();
         } catch (Exception e) {
-            System.out.println(e);
+            logger.error(e);
 
         }
     }
@@ -927,23 +972,28 @@ class Server implements Runnable  {
     private static void UpdateCustomer(DataOutputStream outputStream, JSONObject jsonObject) {
 
         try {
-                String custStr = (String) jsonObject.get("customer");
+            String custStr = (String) jsonObject.get("customer");
 
-                String responseFromDB = QueryUpdateCustomerAccordingToID(custStr);
+            String responseFromDB = QueryUpdateCustomerAccordingToID(custStr);
 
-                SendUpdateCustomerAnswerToClient(outputStream,responseFromDB);
+            SendUpdateCustomerAnswerToClient(outputStream,responseFromDB);
 
         } catch (Exception ex) {
-
+            logger.error(ex);
         }
     }
 
-    private static void SendUpdateCustomerAnswerToClient(DataOutputStream outputStream, String responseFromDB) throws IOException {
+    private static void SendUpdateCustomerAnswerToClient(DataOutputStream outputStream, String responseFromDB)  {
 
-        JSONObject jsonObjectResponse = new JSONObject();
-        jsonObjectResponse.put("Failed", responseFromDB);
-        outputStream.writeUTF(jsonObjectResponse.toString() + "\n");
-        outputStream.flush();
+        try {
+            JSONObject jsonObjectResponse = new JSONObject();
+            jsonObjectResponse.put("Failed", responseFromDB);
+            outputStream.writeUTF(jsonObjectResponse.toString() + "\n");
+            outputStream.flush();
+        }
+        catch (Exception ex){
+            logger.error(ex);
+        }
     }
 
     private static String QueryUpdateCustomerAccordingToID(String custStr){
@@ -951,22 +1001,24 @@ class Server implements Runnable  {
         String response = "";
 
         try {
-                ObjectMapper objectMapper = new ObjectMapper();
-                Customer customer = objectMapper.readValue(custStr, Customer.class);
+            ObjectMapper objectMapper = new ObjectMapper();
+            Customer customer = objectMapper.readValue(custStr, Customer.class);
 
-                String query = "update store.customer set cust_name = ?, cust_tel = ?, cust_type = ? where cust_id = ?";
-                PreparedStatement preparedStmt = conn.prepareStatement(query);
-                preparedStmt.setString(1, customer.getCustName());
-                preparedStmt.setString(2, customer.getCustTel());
-                preparedStmt.setString(3, customer.getCustType());
-                preparedStmt.setString(4, customer.getCustId());
+            String query = "update store.customer set cust_name = ?, cust_tel = ?, cust_type = ? where cust_id = ?";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.setString(1, customer.getCustName());
+            preparedStmt.setString(2, customer.getCustTel());
+            preparedStmt.setString(3, customer.getCustType());
+            preparedStmt.setString(4, customer.getCustId());
 
-                preparedStmt.execute();
+            preparedStmt.execute();
 
         } catch (Exception ex) {
             if (ex.toString().contains("PRIMARY")) {
-                // response = "Customer already exists";/////////////////////////////
+                response = "Customer already exists";
             }
+            else
+                logger.error(ex);
         }
         return response;
     }
@@ -984,40 +1036,50 @@ class Server implements Runnable  {
             SendIsClientInDBAnswerToClient(outputStream,responseFromDB,customer);
 
         } catch (Exception ex) {
-
+            logger.error(ex);
         }
     }
 
-    private static void SendIsClientInDBAnswerToClient(DataOutputStream outputStream,String response, Customer customer) throws IOException {
+    private static void SendIsClientInDBAnswerToClient(DataOutputStream outputStream,String response, Customer customer)  {
 
-        JSONObject jsonObjectResponse = new JSONObject();
-        jsonObjectResponse.put("Failed", response);
-        jsonObjectResponse.put("customer id", customer.getCustId());
-        jsonObjectResponse.put("customer name", customer.getCustName());
-        jsonObjectResponse.put("customer tel", customer.getCustTel());
-        jsonObjectResponse.put("customer type", customer.getCustType());
+        try {
+            JSONObject jsonObjectResponse = new JSONObject();
+            jsonObjectResponse.put("Failed", response);
+            jsonObjectResponse.put("customer id", customer.getCustId());
+            jsonObjectResponse.put("customer name", customer.getCustName());
+            jsonObjectResponse.put("customer tel", customer.getCustTel());
+            jsonObjectResponse.put("customer type", customer.getCustType());
 
-        outputStream.writeUTF(jsonObjectResponse.toString() + "\n");
-        outputStream.flush();
+            outputStream.writeUTF(jsonObjectResponse.toString() + "\n");
+            outputStream.flush();
+        }
+        catch (Exception ex){
+            logger.error(ex);
+        }
     }
 
-    private static String QueryIsCustomerExsistFromDBAccordingToID(Customer customer) throws ClassNotFoundException, SQLException {
+    private static String QueryIsCustomerExsistFromDBAccordingToID(Customer customer)  {
 
         String response = "";
 
-        Statement statement = conn.createStatement();
-        String query = String.format("select cust_id,cust_name,cust_tel,cust_type from store.customer where cust_id='%s'", customer.getCustId());
-        ResultSet responseFromDB = statement.executeQuery(query);
+        try {
+            Statement statement = conn.createStatement();
+            String query = String.format("select cust_id,cust_name,cust_tel,cust_type from store.customer where cust_id='%s'", customer.getCustId());
+            ResultSet responseFromDB = statement.executeQuery(query);
 
-        if (responseFromDB.next()) {
-            customer.setCustName(responseFromDB.getString("cust_name"));
-            customer.setCustTel(responseFromDB.getString("cust_tel"));
-            customer.setCustType(responseFromDB.getString("cust_type"));
-        } else {
-            response = "Customer ID: " + customer.getCustId() + " is not found !!!";
+            if (responseFromDB.next()) {
+                customer.setCustName(responseFromDB.getString("cust_name"));
+                customer.setCustTel(responseFromDB.getString("cust_tel"));
+                customer.setCustType(responseFromDB.getString("cust_type"));
+            } else {
+                response = "Customer ID: " + customer.getCustId() + " is not found !!!";
+            }
+
+            statement.close();
         }
-
-        statement.close();
+        catch (Exception ex){
+            logger.error(ex);
+        }
 
         return response;
     }
@@ -1026,32 +1088,34 @@ class Server implements Runnable  {
 
         try {
 
-            Statement statement = null;
-
-            ResultSet customersListFromDB = QueryCustomersListFromDBAccordingToBranchName(statement);
+            ResultSet customersListFromDB = QueryCustomersListFromDBAccordingToBranchName();
 
             //converter of ResultSet into JSONArray : all the specific branch storage
             JSONArray jsonArrayResponse = ConvertResultSetToJsonArray(customersListFromDB);  // private function
 
-            SendTheCustomersListToClient(jsonArrayResponse,outputStream,statement);
+            SendTheCustomersListToClient(jsonArrayResponse,outputStream);
 
-             } catch (Exception e) {
-            System.out.println(e);
+        } catch (Exception e) {
+            logger.error(e);
         }
 
     }
 
-    private static void SendTheCustomersListToClient(JSONArray jsonArrayResponse,DataOutputStream outputStream,Statement statement) throws IOException, SQLException {
+    private static void SendTheCustomersListToClient(JSONArray jsonArrayResponse,DataOutputStream outputStream) {
 
+        try {
             outputStream.writeUTF(jsonArrayResponse.toString() + "\n");
             outputStream.flush();
 
-            statement.close();
-            }
+        }
+        catch (Exception ex){
+            logger.error(ex);
+        }
+    }
 
-    private static ResultSet QueryCustomersListFromDBAccordingToBranchName(Statement statement) throws ClassNotFoundException, SQLException {
+    private static ResultSet QueryCustomersListFromDBAccordingToBranchName() throws SQLException {
 
-        statement = conn.createStatement();
+        Statement statement = conn.createStatement();
         String query = "select * from store.Customer";
         ResultSet customersListFromDB = statement.executeQuery(query);
 
@@ -1067,39 +1131,50 @@ class Server implements Runnable  {
             SendClientRegisterResponseToClient(responseFromDB,outputStream);
 
         } catch (Exception ex) {
-            System.out.print(ex);
+            logger.error(ex);
         }
     }
 
-    private static void SendClientRegisterResponseToClient(String responseFromDB, DataOutputStream outputStream) throws IOException {
+    private static void SendClientRegisterResponseToClient(String responseFromDB, DataOutputStream outputStream) {
 
-        JSONObject jsonObjectResponse = new JSONObject();
-        jsonObjectResponse.put("Failed", responseFromDB);
-        outputStream.writeUTF(jsonObjectResponse.toString() + "\n");
-        outputStream.flush();
+        try {
+            JSONObject jsonObjectResponse = new JSONObject();
+            jsonObjectResponse.put("Failed", responseFromDB);
+            outputStream.writeUTF(jsonObjectResponse.toString() + "\n");
+            outputStream.flush();
+        }
+        catch (Exception ex){
+            logger.error(ex);
+        }
     }
 
-    private static String QueryRegisterCustomerFromDB(JSONObject jsonObject) throws ClassNotFoundException, SQLException, IOException {
+    private static String QueryRegisterCustomerFromDB(JSONObject jsonObject)  {
 
         String response = "";
         String custStr = (String) jsonObject.get("customer");
         ObjectMapper objectMapper = new ObjectMapper();
-        Customer customer = objectMapper.readValue(custStr, Customer.class);
-
-        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO store.customer values(?,?,?,?)");
-        preparedStatement.setString(1, customer.getCustId());
-        preparedStatement.setString(2, customer.getCustName());
-        preparedStatement.setString(3, customer.getCustTel());
-        preparedStatement.setString(4, customer.getCustType());
+        Customer customer  = new Customer();
 
         try {
+            customer = objectMapper.readValue(custStr, Customer.class);
+            PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO store.customer values(?,?,?,?)");
+            preparedStatement.setString(1, customer.getCustId());
+            preparedStatement.setString(2, customer.getCustName());
+            preparedStatement.setString(3, customer.getCustTel());
+            preparedStatement.setString(4, customer.getCustType());
+
             preparedStatement.execute();
-        } catch (Exception ex) {
+
+            preparedStatement.close();
+        }
+
+        catch (Exception ex) {
             if (ex.toString().contains("PRIMARY")) {
                 response = "Error !!! Unsuccess to register new customer ID: " + customer.getCustId();
             }
+            else
+                logger.error(ex);
         }
-        preparedStatement.close();
 
         return response;
     }
@@ -1108,34 +1183,36 @@ class Server implements Runnable  {
 
         try {
 
-            Statement statement = null;
-
-            ResultSet branchStorageFromDB = QueryStorageFromDBAccordingToBranchName(jsonObject,statement);
+            ResultSet branchStorageFromDB = QueryStorageFromDBAccordingToBranchName(jsonObject);
 
             //converter of ResultSet into JSONArray : all the specific branch storage
             JSONArray jsonArrayResponse = ConvertResultSetToJsonArray(branchStorageFromDB);
 
-            SendTheStorageToClient(jsonArrayResponse,outputStream,statement);
+            SendTheStorageToClient(jsonArrayResponse,outputStream);
 
         } catch (Exception e) {
-            System.out.println(e);
+            logger.error(e);
 
         }
 
     }
 
-    private static void SendTheStorageToClient(JSONArray jsonArrayResponse,DataOutputStream outputStream,Statement statement) throws IOException, SQLException {
+    private static void SendTheStorageToClient(JSONArray jsonArrayResponse,DataOutputStream outputStream){
 
-        outputStream.writeUTF(jsonArrayResponse.toString() + "\n");
-        outputStream.flush();
+        try {
+            outputStream.writeUTF(jsonArrayResponse.toString() + "\n");
+            outputStream.flush();
 
-        statement.close();
+        }
+        catch (Exception ex){
+            logger.error(ex);
+        }
     }
 
-    private static ResultSet QueryStorageFromDBAccordingToBranchName(JSONObject jsonObject, Statement statement) throws ClassNotFoundException, SQLException {
+    private static ResultSet QueryStorageFromDBAccordingToBranchName(JSONObject jsonObject) throws SQLException {
 
         String branchNum = (String) jsonObject.get("branch");
-        statement = conn.createStatement();
+        Statement statement = conn.createStatement();
         String query = String.format("select item_type, item_size, item_amount, item_part_number from store.Storage where item_branch='%s' ", branchNum);
         ResultSet branchStorageFromDB = statement.executeQuery(query);
 
@@ -1155,160 +1232,198 @@ class Server implements Runnable  {
             SendRegisterEmployeeResponseToClient(employee,response,outputStream);
 
         } catch (Exception ex) {
-            System.out.print(ex);
+            logger.error(ex);
         }
     }
 
-    private static String MySqlDefinitionAndEmployeeSnQuery(Employee employee) throws SQLException, ClassNotFoundException, IOException {
+    private static String MySqlDefinitionAndEmployeeSnQuery(Employee employee) {
 
-        Statement statement = conn.createStatement();
-        String query = "select max(emp_sn) as empSn from store.employee";
+        String response ="";
 
-        ResultSet resultSet = statement.executeQuery(query);
+        try {
+            Statement statement = conn.createStatement();
+            String query = "select max(emp_sn) as empSn from store.employee";
 
-        if (resultSet.next()) {
+            ResultSet resultSet = statement.executeQuery(query);
 
-            InsertTheNewSnEmployee(resultSet, employee);
+            if (resultSet.next()) {
+
+                InsertTheNewSnEmployee(resultSet, employee);
+            }
+            resultSet.close();
+
+            response = PrepareMySqlQueryToInsertTheNewEmployeeToDB(conn, employee);
+
+            return response;
         }
-        resultSet.close();
-
-        String response = PrepareMySqlQueryToInsertTheNewEmployeeToDB(conn, employee);
-
+        catch (Exception ex){
+            logger.error(ex);
+        }
         return response;
     }
 
-    private static void SendRegisterEmployeeResponseToClient(Employee employee, String response, DataOutputStream outputStream) throws IOException {
+    private static void SendRegisterEmployeeResponseToClient(Employee employee, String response, DataOutputStream outputStream)  {
 
-        JSONObject jsonObjectResponse = new JSONObject();
-        jsonObjectResponse.put("Failed", response);
-        jsonObjectResponse.put("emp sn", employee.getEmpSn());
-        outputStream.writeUTF(jsonObjectResponse.toString() + "\n");
-        outputStream.flush();
+        try {
+            JSONObject jsonObjectResponse = new JSONObject();
+            jsonObjectResponse.put("Failed", response);
+            jsonObjectResponse.put("emp sn", employee.getEmpSn());
+            outputStream.writeUTF(jsonObjectResponse.toString() + "\n");
+            outputStream.flush();
+        }
+        catch (Exception ex){
+            logger.error(ex);
+        }
     }
 
-    private static String PrepareMySqlQueryToInsertTheNewEmployeeToDB(Connection conn, Employee employee) throws SQLException, FileNotFoundException {
+    private static String PrepareMySqlQueryToInsertTheNewEmployeeToDB(Connection conn, Employee employee) {
 
         String response = "";
 
-        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO store.employee values(?,?,?,?,?,?,?,?,?,?,?)");
-        preparedStatement.setString(1, employee.getEmpSn());
-        preparedStatement.setString(2, employee.getEmpName());
-        preparedStatement.setString(3, employee.getEmpId());
-        preparedStatement.setString(4, employee.getEmpTel());
-        preparedStatement.setString(5, employee.getEmpBank());
-        preparedStatement.setString(6, employee.getEmpBranch());
-        preparedStatement.setString(7, employee.getEmpType());
-        preparedStatement.setString(8, employee.getEmpPass());
-        preparedStatement.setString(9, employee.getEmpPassSalt());
-        preparedStatement.setString(10, employee.getEmpStatus());
-
-        InputStream inputStream = new FileInputStream(new File(employee.getEmpPhoto()));
-
-        preparedStatement.setBlob(11,inputStream);
         try {
+            PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO store.employee values(?,?,?,?,?,?,?,?,?,?,?)");
+            preparedStatement.setString(1, employee.getEmpSn());
+            preparedStatement.setString(2, employee.getEmpName());
+            preparedStatement.setString(3, employee.getEmpId());
+            preparedStatement.setString(4, employee.getEmpTel());
+            preparedStatement.setString(5, employee.getEmpBank());
+            preparedStatement.setString(6, employee.getEmpBranch());
+            preparedStatement.setString(7, employee.getEmpType());
+            preparedStatement.setString(8, employee.getEmpPass());
+            preparedStatement.setString(9, employee.getEmpPassSalt());
+            preparedStatement.setString(10, employee.getEmpStatus());
+
+            InputStream inputStream = new FileInputStream(new File(employee.getEmpPhoto()));
+
+            preparedStatement.setBlob(11, inputStream);
+
+
             preparedStatement.execute();
-        } catch (Exception ex) {
+
+            preparedStatement.close();
+        }
+
+        catch (Exception ex) {
             if (ex.toString().contains("PRIMARY")) {
                 response = "Employee already exists";
             }
+            else
+                logger.error(ex);
         }
-        preparedStatement.close();
-
         return response;
     }
 
-    private static void InsertTheNewSnEmployee(ResultSet resultSet, Employee employee) throws SQLException {
+    private static void InsertTheNewSnEmployee(ResultSet resultSet, Employee employee) {
 
-        String maxSn = resultSet.getString("empSn");
-        int max = Integer.parseInt(maxSn) + 1;
-        maxSn = "" + max;
-        employee.setEmpSn(maxSn);
+        try {
+            String maxSn = resultSet.getString("empSn");
+            int max = Integer.parseInt(maxSn) + 1;
+            maxSn = "" + max;
+            employee.setEmpSn(maxSn);
+        }
+        catch (Exception ex){
+            logger.error(ex);
+        }
     }
 
     private static void LogInEmployee(JSONObject jsonObject, DataOutputStream outputStream) {
         try {
 
-            Statement statement = null;
-
             Employee employee = GetLogInResponseFromClient(jsonObject);
 
-            String response = MySqlDefinitionAndQueryForLogIn(employee,statement);
+            String response = MySqlDefinitionAndQueryForLogIn(employee);
 
-            PrepareAndSendJsonDataToClient(response,employee,outputStream,statement);
+            PrepareAndSendJsonDataToClient(response,employee,outputStream);
 
         } catch (Exception ex) {
-
+            logger.error(ex);
         }
     }
 
-    private static void PrepareAndSendJsonDataToClient(String response,Employee employee,DataOutputStream outputStream,Statement statement) throws IOException, SQLException {
-        JSONObject jsonObjectResponse = new JSONObject();
-        jsonObjectResponse.put("Failed", response);
-        jsonObjectResponse.put("employee type", employee.getEmpType());
-        jsonObjectResponse.put("employee name", employee.getEmpName());
-        jsonObjectResponse.put("employee sn", employee.getEmpSn());
-        jsonObjectResponse.put("employee bank", employee.getEmpBank());
-        jsonObjectResponse.put("employee tel", employee.getEmpTel());
-        jsonObjectResponse.put("employee photo", employee.getEmpPhoto());
+    private static void PrepareAndSendJsonDataToClient(String response,Employee employee,DataOutputStream outputStream) {
+        try {
+            JSONObject jsonObjectResponse = new JSONObject();
+            jsonObjectResponse.put("Failed", response);
+            jsonObjectResponse.put("employee type", employee.getEmpType());
+            jsonObjectResponse.put("employee name", employee.getEmpName());
+            jsonObjectResponse.put("employee sn", employee.getEmpSn());
+            jsonObjectResponse.put("employee bank", employee.getEmpBank());
+            jsonObjectResponse.put("employee tel", employee.getEmpTel());
+            jsonObjectResponse.put("employee photo", employee.getEmpPhoto());
 
-        outputStream.writeUTF(jsonObjectResponse.toString() + "\n");
-        outputStream.flush();
-
-        statement.close();
+            outputStream.writeUTF(jsonObjectResponse.toString() + "\n");
+            outputStream.flush();
+        }
+        catch (Exception ex){
+            logger.error(ex);
+        }
     }
 
-    private static String MySqlDefinitionAndQueryForLogIn(Employee employee,Statement statement) throws ClassNotFoundException, SQLException, IOException {
+    private static String MySqlDefinitionAndQueryForLogIn(Employee employee)  {
 
-        statement = conn.createStatement();
+        String response="";
 
-        String query = String.format("select emp_type,emp_name,emp_sn,emp_bank,emp_tel,emp_securePass,emp_passSalt,emp_status,emp_photo from store.employee where emp_id='%s' and emp_branch='%s'", employee.getEmpId(),employee.getEmpBranch());
+        try {
+            Statement statement = conn.createStatement();
 
-        ResultSet responseFromDB = statement.executeQuery(query);
+            String query = String.format("select emp_type,emp_name,emp_sn,emp_bank,emp_tel,emp_securePass,emp_passSalt,emp_status,emp_photo from store.employee where emp_id='%s' and emp_branch='%s'", employee.getEmpId(), employee.getEmpBranch());
 
-        String response = CheckIfEmployeeIdPlusBranchExistInDB(employee,responseFromDB);
+            ResultSet responseFromDB = statement.executeQuery(query);
 
-        statement.close();
+            response = CheckIfEmployeeIdPlusBranchExistInDB(employee, responseFromDB);
 
+            statement.close();
+        }
+        catch (Exception ex){
+            logger.error(ex);
+        }
         return response;
     }
 
-    private static String CheckIfEmployeeIdPlusBranchExistInDB(Employee employee,ResultSet responseFromDB) throws SQLException, IOException {
+    private static String CheckIfEmployeeIdPlusBranchExistInDB(Employee employee,ResultSet responseFromDB) {
 
         String response = "";
 
-        if (responseFromDB.next()) {
+        try {
+            if (responseFromDB.next()) {
 
-            String emp_status = responseFromDB.getString("emp_status");
+                String emp_status = responseFromDB.getString("emp_status");
 
-            PreparePhotoToEmployeeObject(employee, responseFromDB);
+                PreparePhotoToEmployeeObject(employee, responseFromDB);
 
-            if(!IsUserAlreadyConnectFromOtherComputer(emp_status)) {
+                if (!IsUserAlreadyConnectFromOtherComputer(emp_status)) {
 
-                String inputPasswordFromUser = employee.getEmpPass();
-                response = CheckIfInputPasswordIsOk(inputPasswordFromUser, responseFromDB, employee);
+                    String inputPasswordFromUser = employee.getEmpPass();
+                    response = CheckIfInputPasswordIsOk(inputPasswordFromUser, responseFromDB, employee);
+                } else {
+                    response = "EMPLOYEE ID: " + employee.getEmpId() + " - Can not connect. There is already connected somewhere else !!!";
                 }
-            else{
-                response =  "EMPLOYEE ID: " + employee.getEmpId() + " - Can not connect. There is already connected somewhere else !!!";
-                }
+            } else {
+                response = "Your Employee ID ,Password or Branch name is incorrect !!!";
             }
+        }
 
-        else{
-            response = "Your Employee ID ,Password or Branch name is incorrect !!!";
+        catch (Exception ex){
+            logger.error(ex);
         }
         return response;
     }
 
-    private static void PreparePhotoToEmployeeObject(Employee employee,ResultSet responseFromDB) throws SQLException, IOException {
+    private static void PreparePhotoToEmployeeObject(Employee employee,ResultSet responseFromDB) {
 
-        // חילוץ הבלוב של התמונה מהריסאלטסט והפיכתו לסטרינג והכנסה לאמפלויי
-        Base64 codec = new Base64();
-        String photo64;
+        try {
+            Base64 codec = new Base64();
+            String photo64;
 
-        InputStream photois = responseFromDB.getBinaryStream("emp_photo");
-        byte[] bytes = IOUtils.toByteArray(photois);
-        photo64 = codec.encodeBase64String(bytes);
+            InputStream photois = responseFromDB.getBinaryStream("emp_photo");
+            byte[] bytes = IOUtils.toByteArray(photois);
+            photo64 = codec.encodeBase64String(bytes);
 
-        employee.setEmpPhoto(photo64);
+            employee.setEmpPhoto(photo64);
+        }
+        catch (Exception ex){
+            logger.error(ex);
+        }
     }
 
     private static boolean IsUserAlreadyConnectFromOtherComputer(String employee_status) {
@@ -1318,21 +1433,25 @@ class Server implements Runnable  {
         return false;
     }
 
-    private static String CheckIfInputPasswordIsOk(String inputPasswordFromUser,ResultSet responseFromDB,Employee employee) throws SQLException {
+    private static String CheckIfInputPasswordIsOk(String inputPasswordFromUser,ResultSet responseFromDB,Employee employee)  {
 
-            String response = "";
+        String response = "";
 
+        try {
             employee.setEmpPass(responseFromDB.getString("emp_securePass"));
             employee.setEmpPassSalt(responseFromDB.getString("emp_passSalt"));
 
             boolean passwordMatch = PasswordUtils.verifyUserPassword(inputPasswordFromUser, employee.getEmpPass(), employee.getEmpPassSalt());
 
-            if(passwordMatch) {
+            if (passwordMatch) {
                 InsertOtherParametersFromDBToEmployee(employee, responseFromDB);
                 ChangeStatusOfEmployeeToIN(employee.getEmpId());
-            }
-            else
+            } else
                 response = "Your Employee ID ,Password or Branch name is incorrect !!!";
+        }
+        catch (Exception ex){
+            logger.error(ex);
+        }
         return response;
     }
 
@@ -1345,17 +1464,22 @@ class Server implements Runnable  {
             preparedStmt.execute();
 
         } catch (Exception ex) {
-
+            logger.error(ex);
         }
     }
 
-    private static void InsertOtherParametersFromDBToEmployee(Employee employee, ResultSet responseFromDB) throws SQLException {
+    private static void InsertOtherParametersFromDBToEmployee(Employee employee, ResultSet responseFromDB)  {
 
-        employee.setEmpType(responseFromDB.getString("emp_type"));
-        employee.setEmpName(responseFromDB.getString("emp_name"));
-        employee.setEmpSn(responseFromDB.getString("emp_sn"));
-        employee.setEmpBank(responseFromDB.getString("emp_bank"));
-        employee.setEmpTel(responseFromDB.getString("emp_tel"));
+        try {
+            employee.setEmpType(responseFromDB.getString("emp_type"));
+            employee.setEmpName(responseFromDB.getString("emp_name"));
+            employee.setEmpSn(responseFromDB.getString("emp_sn"));
+            employee.setEmpBank(responseFromDB.getString("emp_bank"));
+            employee.setEmpTel(responseFromDB.getString("emp_tel"));
+        }
+        catch (Exception ex){
+            logger.error(ex);
+        }
     }
 
     private static Employee GetLogInResponseFromClient(JSONObject jsonObject) {
@@ -1370,24 +1494,30 @@ class Server implements Runnable  {
 
     }
 
-    public static JSONArray ConvertResultSetToJsonArray(ResultSet resultSet) throws Exception {
+    public static JSONArray ConvertResultSetToJsonArray(ResultSet resultSet)  {
 
         // Every item open num of rows in the JSONArray according to num of columns
 
         JSONArray jsonArray = new JSONArray();
 
-        while (resultSet.next()) {
+        try {
+            while (resultSet.next()) {
 
-            int total_rows = resultSet.getMetaData().getColumnCount();
+                int total_rows = resultSet.getMetaData().getColumnCount();
 
-            JSONObject obj = new JSONObject();
+                JSONObject obj = new JSONObject();
 
-            for (int i = 0; i < total_rows; i++) {
+                for (int i = 0; i < total_rows; i++) {
 
-                obj.put(resultSet.getMetaData().getColumnLabel(i + 1).toLowerCase(), resultSet.getObject(i + 1));
-                jsonArray.add(obj);
+                    obj.put(resultSet.getMetaData().getColumnLabel(i + 1).toLowerCase(), resultSet.getObject(i + 1));
+                    jsonArray.add(obj);
+                }
             }
         }
+        catch (Exception ex){
+            logger.error(ex);
+        }
+
         return jsonArray;
     }
 
@@ -1397,6 +1527,29 @@ class Server implements Runnable  {
 
         return emp_id;
 
+    }
+
+    private static JSONArray ResultSetJson(ResultSet resultSet, JSONArray jsonArray) {
+
+        try {
+
+            while (resultSet.next()) {
+
+                int total_rows = resultSet.getMetaData().getColumnCount();
+
+                for (int i = 0; i < total_rows; i++) {
+
+                    JSONObject obj = new JSONObject();
+                    obj.put(resultSet.getMetaData().getColumnLabel(i + 1).toLowerCase(), resultSet.getObject(i + 1));
+                    jsonArray.add(obj);
+                }
+            }
+        }
+        catch (Exception ex){
+            //logger.error(ex);
+        }
+
+        return jsonArray;
     }
 
     public static void main(String[] args) throws Exception {
@@ -1410,7 +1563,7 @@ class Server implements Runnable  {
         //specifying the password of the keystore file
         System.setProperty(KEYSTORE_PASSWORD, KEYSTORE_PASSWORD_FILE);
         //This optional and it is just to show the dump of the details of the handshake process
-        System.setProperty(HANDSHAKE_DEBUG, DEFINITION_HANDSHAKE_DEBUG);
+        //System.setProperty(HANDSHAKE_DEBUG, DEFINITION_HANDSHAKE_DEBUG);
 
         //SSLServerSocketFactory establishes the ssl context and and creates SSLServerSocket
         SSLServerSocketFactory sslServerSocketfactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
@@ -1423,7 +1576,9 @@ class Server implements Runnable  {
             SSLSocket sslSocket = (SSLSocket) sslServerSocket.accept();
 
             Server server = new Server(sslSocket);
+
             Thread serverThread = new Thread(server);
+
             serverThread.start();
         }
     }

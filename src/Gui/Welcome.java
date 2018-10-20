@@ -7,29 +7,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collections;
 
-public class Welcome extends JFrame { //extends Application {
+public class Welcome extends JFrame {
 
-    public static final String FRAME_NAME = "CASTRO - WELCOME";
-    public static final String OPEN_PHOTO = "/src/images/openphoto.png";
-    public static final String BUTTON_ENTER_LOGO = "/src/images/enterLogo.png";
-    public static final String CASTRO_LOGO = "/src/images/castroLogoJPG.png";
-    public static final String CREATORS_LOGO = "/src/images/Creators.png";
-    public static final String CASTRO_ICON = "/src/images/icon.png";
-    public static final String JOPTIONPANE_MESSAGE = "Are you sure you want to close the terminal?";
-    public static final String JOPTIONPANE_TITLE = "CASTRO - CLOSE TERMINAL";
-    public static final int DELAY_TIME  = 30;
-    public static final int ENTER_BUTTON_WIDTH = 500;
-    public static final int ENTER_BUTTON_HEIGHT = 75;
 
-    private int colorIdx = 255;
     private Timer timer;
-    private Dimension screenSize;
-
     private JPanel jPanelData;
+    private int colorIdx = 255;
+    private JButton jButtonEnter;
+    private Dimension screenSize;
     private SpringLayout springLayout;
     private JLabel castroLogoLabel, creatorsLogoLabel, openPhotoLabel;
     private ImageIcon castroLogoJPG, enterLogoJPG, creatorsLogoJPG, openPhotoJPG;
-    private JButton jButtonEnter;
+    public static final int DELAY_TIME  = 30, ENTER_BUTTON_WIDTH = 500, ENTER_BUTTON_HEIGHT = 75;
+    public static final String FRAME_NAME = "CASTRO - WELCOME", OPEN_PHOTO = "/src/images/openphoto.png", BUTTON_ENTER_LOGO = "/src/images/enterLogo.png",
+                               CASTRO_LOGO = "/src/images/castroLogoJPG.png", CREATORS_LOGO = "/src/images/Creators.png", CASTRO_ICON = "/src/images/icon.png",
+                               JOPTIONPANE_MESSAGE = "Are you sure you want to close the terminal?", JOPTIONPANE_TITLE = "CASTRO - CLOSE TERMINAL";
 
 
     public Welcome(){
@@ -180,6 +172,5 @@ public class Welcome extends JFrame { //extends Application {
         welcomeWin.DrawWelcome();
         welcomeWin.setVisible(true);
         welcomeWin.setLocationRelativeTo(null);
-        //launch(args);
     }
 }

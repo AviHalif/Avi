@@ -1,15 +1,11 @@
 package Classes;
 
-//public abstract class Customer {
-
     public class Customer {
 
     private String custName;
     private String custId;
     private String custTel;
     private String custType;
-
-    //public abstract String PriceAfterDiscount(String itemOriginalPrice);
 
     public Customer(String custId, String custName, String custTel, String custType) {
         this.custName = custName;

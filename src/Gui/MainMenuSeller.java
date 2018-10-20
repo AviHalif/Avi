@@ -17,40 +17,27 @@ import java.util.Collections;
 
 public class MainMenuSeller extends JFrame {
 
-    public static final String LOG_OUT_BUTTON = "/src/images/LOGOUT.png";
-    public static final String BACK_PHOTO = "/src/images/back_photo.png";
-    public static final String BACK_LEFT_PHOTO = "/src/images/back_photo_left.png";
-    public static final String FRAME_NAME = "CASTRO - MAIN MENU";
-    public static final String LABEL_SN = "/src/images/employee_sn.png";
-    public static final String LABEL_NAME = "/src/images/employee_name.png";
-    public static final String LABEL_TYPE = "/src/images/employee_type.png";
-    public static final String LABEL_BRANCH = "/src/images/employee_branch.png";
-    public static final String BUTTON_STORAGE = "/src/images/view_branch_storage.png";
-    public static final String CASTRO_ICON = "/src/images/icon.png";
-    public static final String CASTRO_LOGO = "/src/images/title_castro.png";
-    public static final String BUTTON_CHAT = "/src/images/chat.png";
-    public static final String JOPTIONPANE_MESSAGE = "Are you sure you want to sign out?";
-    public static final String JOPTIONPANE_TITLE = "CASTRO - SIGN OUT";
-    public static final String NO_PHOTO = "/src/images/No_Image_Available.png";
-    public static final int BUTTON_WIDTH = 403;
-    public static final int BUTTON_HEIGHT = 80;
-    public static final int LEFT_PANELֹֹ_WIDTH_ֹSIZE = 740;
-    public static final int LEFT_PANELֹֹ_HEIGHT_ֹSIZE = 800;
-    public static final int UP_PANELֹֹ_HEIGHT_ֹSIZE = 195;
 
-    private Employee employee;
-    private byte[] decoded;
     private Client client;
-
+    private byte[] decoded;
+    private Employee employee;
+    private Dimension screenSize;
     private JSONObject jsonObject;
-
+    private ImageIcon castroLogoJPG;
+    private JButton jButtonStorage, jButtonSignOut;
     private JPanel jPanelMain, jPanelMid, jPanelUp;
     private SpringLayout springLayout,springLayoutUpPanel, springLayoutPanels;
-    private JLabel photoLabel, jLabelUserNum, jLabelUserName, jLabelBranchName, jLabelUserType, castroLogoLabel, jLabeName, jLabelSn, jLabelType, jLabelBranch, jLabelBackPhoto, jLabelBackLeftPhoto;
-    private ImageIcon photoLabelJPG, label_name, label_sn, label_type, label_branch, storageLogoJPG, chatLogoJPG, signOutLogoJPG, backPhoto, backLeftPhoto;
-    private JButton jButtonStorage, jButtonChat, jButtonSignOut;
-    private Dimension screenSize;
-    private ImageIcon castroLogoJPG;
+    private ImageIcon photoLabelJPG, label_name, label_sn, label_type, label_branch, storageLogoJPG, signOutLogoJPG, backPhoto, backLeftPhoto;
+    public static final int BUTTON_WIDTH = 403, BUTTON_HEIGHT = 80, LEFT_PANELֹֹ_WIDTH_ֹSIZE = 740, LEFT_PANELֹֹ_HEIGHT_ֹSIZE = 800, UP_PANELֹֹ_HEIGHT_ֹSIZE = 195;
+    private JLabel photoLabel, jLabelUserNum, jLabelUserName, jLabelBranchName, jLabelUserType, castroLogoLabel, jLabeName, jLabelSn, jLabelType, jLabelBranch,
+                   jLabelBackPhoto, jLabelBackLeftPhoto;
+    public static final String LOG_OUT_BUTTON = "/src/images/LOGOUT.png", BACK_PHOTO = "/src/images/back_photo.png", BACK_LEFT_PHOTO = "/src/images/back_photo_left.png",
+                               FRAME_NAME = "CASTRO - MAIN MENU", LABEL_SN = "/src/images/employee_sn.png", LABEL_NAME = "/src/images/employee_name.png",
+                               LABEL_TYPE = "/src/images/employee_type.png", LABEL_BRANCH = "/src/images/employee_branch.png", BUTTON_STORAGE = "/src/images/view_branch_storage.png",
+                               CASTRO_ICON = "/src/images/icon.png", CASTRO_LOGO = "/src/images/title_castro.png", JOPTIONPANE_MESSAGE = "Are you sure you want to sign out?",
+                               JOPTIONPANE_TITLE = "CASTRO - SIGN OUT", NO_PHOTO = "/src/images/No_Image_Available.png";
+
+
 
     public MainMenuSeller(Employee employee) {
 
@@ -72,9 +59,9 @@ public class MainMenuSeller extends JFrame {
         jPanelMain = new JPanel();
         jPanelMain.setBackground(Color.white);
         jPanelMid = new JPanel();
-        jPanelMid.setBackground(Color.black); // green
+        jPanelMid.setBackground(Color.black);
         jPanelUp = new JPanel();
-        jPanelUp.setBackground(Color.lightGray); // lightGray
+        jPanelUp.setBackground(Color.lightGray);
 
         springLayout = new SpringLayout();
         springLayoutPanels = new SpringLayout();
@@ -82,7 +69,6 @@ public class MainMenuSeller extends JFrame {
 
         jPanelMid.setPreferredSize(new Dimension(LEFT_PANELֹֹ_WIDTH_ֹSIZE, LEFT_PANELֹֹ_HEIGHT_ֹSIZE));
         jPanelUp.setPreferredSize(new Dimension(screenSize.width, UP_PANELֹֹ_HEIGHT_ֹSIZE));
-
 
         backLeftPhoto = new ImageIcon(getClass().getResource(BACK_LEFT_PHOTO));
         jLabelBackLeftPhoto = new JLabel(backLeftPhoto);
@@ -102,7 +88,7 @@ public class MainMenuSeller extends JFrame {
 
         photoLabelJPG = new ImageIcon(getClass().getResource(NO_PHOTO));
         photoLabel = new JLabel(photoLabelJPG);
-        photoLabel.setPreferredSize(new Dimension(270, 300)); // לשנות שיהיה ריסאייזבאל כמו שמציג את התמונות ברגע שבוחר אותם מהמחשב
+        photoLabel.setPreferredSize(new Dimension(250, 300));
         jPanelMid.add(photoLabel);
     }
 
@@ -114,14 +100,6 @@ public class MainMenuSeller extends JFrame {
         jButtonStorage.setBackground(Color.BLACK);
         jButtonStorage.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         jButtonStorage.setBorder(new LineBorder(Color.red));
-
-        chatLogoJPG = new ImageIcon(getClass().getResource(BUTTON_CHAT));
-        jButtonChat = new JButton(chatLogoJPG);
-        jButtonChat.setBorderPainted(true);
-        jButtonChat.setBackground(Color.white);
-        jButtonChat.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        jButtonChat.setBorder(new LineBorder(Color.red));
-
 
         signOutLogoJPG = new ImageIcon(getClass().getResource(LOG_OUT_BUTTON));
         jButtonSignOut = new JButton(signOutLogoJPG);
@@ -182,7 +160,6 @@ public class MainMenuSeller extends JFrame {
 
     private void ConvertThePhotoFormatFromTheDB() {
 
-        // המרה של מה שהגיע בתוך אמפלויי.פוטו שהוא איזה שהוא המרה של מה שאוחסן בבסיס נתונים כבלוב וכעת יש להמירו לפני הצגה על הלייבל
         String encodedPhotos;
         Base64 codec = new Base64();
         encodedPhotos = employee.getEmpPhoto();
@@ -274,13 +251,10 @@ public class MainMenuSeller extends JFrame {
 
         springLayout.putConstraint(SpringLayout.WEST, jButtonStorage, 30, SpringLayout.EAST, photoLabel);
         springLayout.putConstraint(SpringLayout.NORTH, jButtonStorage, 50, SpringLayout.NORTH, jPanelMid);
-        springLayout.putConstraint(SpringLayout.WEST, jButtonChat, 30, SpringLayout.EAST, photoLabel);
-        springLayout.putConstraint(SpringLayout.NORTH, jButtonChat, 50, SpringLayout.SOUTH, jButtonStorage);
     }
 
     private void GUIPlaceLabels() {
 
-        // מיקום התמונה
         PlaceTheEmployeePhoto();
 
         springLayout.putConstraint(SpringLayout.WEST, jLabeName, 10, SpringLayout.WEST, jPanelMid);
@@ -314,6 +288,7 @@ public class MainMenuSeller extends JFrame {
 
         jPanelMid.add(jLabeName);
         jPanelMid.add(jLabelUserName);
+        jPanelMid.add(jLabelUserName);
 
         jPanelMid.add(jLabelSn);
         jPanelMid.add(jLabelUserNum);
@@ -325,14 +300,12 @@ public class MainMenuSeller extends JFrame {
         jPanelMid.add(jLabelBranchName);
 
         jPanelMid.add(jButtonStorage);
-        jPanelMid.add(jButtonChat);
 
         jPanelMain.add(jButtonSignOut);
 
         jPanelMain.add(jPanelMid);
         jPanelMain.add(jPanelUp);
     }
-
 
     private void GUISettingForJFrame() {
 
@@ -343,11 +316,6 @@ public class MainMenuSeller extends JFrame {
 
         setContentPane(jPanelMain);
     }
-
-
-
-
-
 
     private  void askUserBeforeCloseWindow(JFrame currentFrame){
 
@@ -403,10 +371,6 @@ public class MainMenuSeller extends JFrame {
         return jLabelBackPhoto;
     }
 
-    public JButton getjButtonSignOut() {
-        return jButtonSignOut;
-    }
-
     public SpringLayout getSpringLayoutPanels() {
         return springLayoutPanels;
     }
@@ -438,7 +402,7 @@ public class MainMenuSeller extends JFrame {
     public static void main(String[] args) {
 
         Employee employee = new Employee("0123456789", "sdfsd", "sdfsdf", "sdfsdf",
-                "sdfsdf", "sdfsdf", "sdfsf", "sdfsdf");
+                                         "sdfsdf", "sdfsdf", "sdfsf", "sdfsdf");
         MainMenuSeller mainMenu = new MainMenuSeller(employee);
         mainMenu.DrawMainMenu();
         mainMenu.InitializeActions();

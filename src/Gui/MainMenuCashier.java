@@ -12,19 +12,13 @@ import java.io.IOException;
 
 public class MainMenuCashier extends MainMenuSeller {
 
-    public static final String BUTTON_CUSTOMERS = "/src/images/customers.png";
-    public static final String BUTTON_SELL_ITEM = "/src/images/sell_item.png";
-    public static final int CUSTOMER_BUTTON_WIDTH = 350;
-    public static final int CUSTOMER_BUTTON_HEIGHT = 80;
-    public static final int SELL_BUTTON_WIDTH = 280;
-    public static final int SELL_BUTTON_HEIGHT = 80;
-    public static final int MID_PANELֹֹ_WIDTH_ֹSIZE = 420;
-    public static final int MID_PANELֹֹ_HEIGHT_ֹSIZE = 400;
-
     private JPanel jPanelLeft;
     private SpringLayout springLayout;
     private JButton jButtonCustomer, jButtonSell;
     private ImageIcon customerLogoJPG, sellLogoJPG;
+    public static final String BUTTON_CUSTOMERS = "/src/images/customers.png", BUTTON_SELL_ITEM = "/src/images/sell_item.png";
+    public static final int CUSTOMER_BUTTON_WIDTH = 350, CUSTOMER_BUTTON_HEIGHT = 80, SELL_BUTTON_WIDTH = 280, SELL_BUTTON_HEIGHT = 80, MID_PANELֹֹ_WIDTH_ֹSIZE = 420,
+                            MID_PANELֹֹ_HEIGHT_ֹSIZE = 400;
 
 
     public MainMenuCashier(Employee employee) {
@@ -56,7 +50,7 @@ public class MainMenuCashier extends MainMenuSeller {
             }
         });
 
-        if(!(this instanceof MainMenuAdmin)) { // תתייחס לפונקציה הזאת רק אם אתה לא ממופע של אדמין כי עבור אדמין יש לו כבר פונקציה שממשת מופע עבור אותו כפתור
+        if(!(this instanceof MainMenuAdmin)) {
 
             getJButtonCustomer().addActionListener(new ActionListener() {
                 @Override
@@ -170,7 +164,7 @@ public class MainMenuCashier extends MainMenuSeller {
     public static void main(String[] args) {
 
         Employee employee = new Employee("0123456789", "sdfsd", "sdfsdf", "sdfsdf",
-                "sdfsdf", "sdfsdf", "sdfsf", "sdfsdf");
+                                         "sdfsdf", "sdfsdf", "sdfsf", "sdfsdf");
 
         MainMenuCashier mainMenuCashier = new MainMenuCashier(employee);
         mainMenuCashier.DrawMainMenu();

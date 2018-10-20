@@ -22,38 +22,25 @@ import java.util.Vector;
 
 public class CustomerList extends JFrame{
 
-    public static final String BACK_PHOTO = "/src/images/weloveour.png";
-    public static final String BACK_BUTTON = "/src/images/back.png";
-    public static final String TITLE = "/src/images/customers_title.png";
-    public static final int TABLE_COLUMN_SIZE = 600;
-    public static final int ROW_HEIGHT = 50;
-    public static final int  NUM_OF_COLUMNS = 4;
-    public static final int TABLE_PANELֹֹ_WIDTH_ֹSIZE = 1100;
-    public static final int TABLE_PANELֹֹ_HEIGHT_ֹSIZE = 350;
-    public static final int TABLEֹֹ_WIDTH_ֹSIZE = 1000;
-    public static final int TABLEֹֹ_HEIGHT_ֹSIZE = 330;
-    public static final int FRAMEֹֹ_POSITION_X = 7;
-    public static final int FRAMEֹֹ_POSITION_Y = 230;
-    public static final int FRAMEֹֹ_WIDTH_ֹSIZE = 1520;
-    public static final int FRAMEֹֹ_HEIGHT_ֹSIZE = 630;
-
-    private String branchName;
     private Client client;
-
-    private JSONObject jsonObject;
-    private JSONArray jsonObjectResponseArray;
-    private JSONParser jsonParser;
-
-    private JFrame jFramePrev;
-    private JPanel jPanelMain, jPanelTable;
-    private SpringLayout springLayout;
     private JTable table;
-    private JLabel backgroundPhotoLabel, titleLabel;
+    private JFrame jFramePrev;
+    private String branchName;
     private JButton jButtonBack;
+    private JSONParser jsonParser;
+    private JSONObject jsonObject;
+    private SpringLayout springLayout;
+    private JPanel jPanelMain, jPanelTable;
+    private JSONArray jsonObjectResponseArray;
+    private JLabel backgroundPhotoLabel, titleLabel;
     private ImageIcon backgroundPhotoJPG, backLogoJPG, titlePhotoJPG;
+    public static final String BACK_PHOTO = "/src/images/weloveour.png", BACK_BUTTON = "/src/images/back.png", TITLE = "/src/images/customers_title.png";
+    public static final int TABLE_COLUMN_SIZE = 600, ROW_HEIGHT = 50, NUM_OF_COLUMNS = 4, TABLE_PANELֹֹ_WIDTH_ֹSIZE = 1100, TABLE_PANELֹֹ_HEIGHT_ֹSIZE = 350,
+                            TABLEֹֹ_WIDTH_ֹSIZE = 1000, TABLEֹֹ_HEIGHT_ֹSIZE = 330, FRAMEֹֹ_POSITION_X = 7, FRAMEֹֹ_POSITION_Y = 230, FRAMEֹֹ_WIDTH_ֹSIZE = 1520,
+                            FRAMEֹֹ_HEIGHT_ֹSIZE = 630;
 
 
-    public CustomerList(JFrame oneBackFrame, String branchName)  { //  הגיע לכאן(=המסך ניהול עובדים הראשי) המסך הראשי של האדמין או הקופאי
+    public CustomerList(JFrame oneBackFrame, String branchName)  {
 
         SetObjectsComponents(branchName);
         SetGUIComponents(oneBackFrame);
@@ -140,7 +127,9 @@ public class CustomerList extends JFrame{
         columnNames.add("Customer Type");
 
         // Insert the Strings list into the table with the columns name
+
         table = new JTable(dataList, columnNames){
+
             @Override // Set values position in the center of the columns
             public Component prepareRenderer(TableCellRenderer renderer, int row,
                                              int col) {
@@ -200,7 +189,6 @@ public class CustomerList extends JFrame{
         jPanelMain.add(jButtonBack);
         jPanelMain.add(jPanelTable);
         jPanelMain.add(backgroundPhotoLabel);
-
     }
 
     protected void GUISettingForJFrame() {
@@ -225,7 +213,6 @@ public class CustomerList extends JFrame{
             }
         });
 
-
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent windowEvent) {
@@ -249,6 +236,7 @@ public class CustomerList extends JFrame{
     private Vector<Vector<String>> SeparateJsonArrayToSinglesAndConvertToStrings() {
 
         // Separate JsonArray to singles Jsons, convert to Strings and insert into the list
+
         Vector<Vector<String>> dataList = new Vector<>();
 
         int jsonArraySize = jsonObjectResponseArray.size();
@@ -282,10 +270,6 @@ public class CustomerList extends JFrame{
 
         client.getOutputStream().writeUTF(jsonObject.toString() + "\n");
         client.getOutputStream().flush();
-    }
-
-    public JPanel getjPanelTable() {
-        return jPanelTable;
     }
 
     public SpringLayout getSpringLayout() {
